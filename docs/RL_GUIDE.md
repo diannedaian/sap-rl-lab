@@ -155,3 +155,10 @@ The pure engine is CPU work. Initial PPO runs should work on a laptop; a GPU may
 not help much while simulation is the bottleneck. Larger leagues and attention
 models may justify a GPU later. Profile environment steps per second before
 renting hardware.
+
+For the first cluster experiment, use eight subprocess environments and one
+bounded 500,000-step seed. The run manifest records package versions, platform,
+source commit, complete hyperparameters, and catalog ID. Evaluation reports
+return variance, truncation rate, episode length, and win/draw/loss rates—not
+just a single training-reward number. Expand to multiple seeds only after this
+integration run demonstrates both learning and sensible hardware utilization.

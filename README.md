@@ -96,6 +96,7 @@ the same seed and action sequence still produce byte-for-byte equivalent data.
 - [Reproducible sanity baselines](docs/BASELINE_RESULTS.md)
 - [Turtle Pack accuracy policy](docs/DATA_ACCURACY.md)
 - [Roadmap to all 60 pets](docs/ROADMAP.md)
+- [Portable Slurm workflow](cluster/README.md)
 
 ## Attribution
 
