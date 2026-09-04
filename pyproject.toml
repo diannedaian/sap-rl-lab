@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sap-rl-lab"
+version = "0.1.0"
+description = "A tested, educational reinforcement-learning sandbox inspired by the Turtle Pack auto-battler."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "diannedaian" }]
+dependencies = []
+
+[project.optional-dependencies]
+rl = [
+  "numpy>=1.24,<3",
+  "gymnasium>=1.0,<2",
+  "stable-baselines3>=2.4,<3",
+  "sb3-contrib>=2.4,<3",
+]
+dev = ["pytest>=8,<10", "ruff>=0.9,<1"]
+
+[project.scripts]
+sap-rl = "sap_rl_lab.cli:main"
+
+[tool.setuptools.package-data]
+sap_rl_lab = ["catalogs/*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B"]
