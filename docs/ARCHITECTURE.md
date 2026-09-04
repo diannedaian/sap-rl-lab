@@ -29,6 +29,7 @@ change battle mechanics.
 | `env.py` | Convert complete state into bounded `float32` observations. |
 | `baselines.py` | Random and scripted policies used as executable controls. |
 | `opponents.py` | Serializable round-indexed snapshot leagues and provider mixtures. |
+| `replay.py` | Versioned JSON episode recording and deterministic drift checks. |
 | `training.py` | Train and evaluate Maskable PPO without owning game rules. |
 
 ## Engine invariants
@@ -45,6 +46,8 @@ change battle mechanics.
    actions or future transitions.
 8. Battle calculations happen on copies, so battle-only changes do not leak
    into the persistent team.
+9. A saved episode can be rerun action-for-action and must reproduce every
+   transition, battle trace, and final state.
 
 ## Scaling from 8 to 60 pets
 

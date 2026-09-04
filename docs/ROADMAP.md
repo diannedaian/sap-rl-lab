@@ -10,6 +10,7 @@
 - Incremental battle rewards and correct truncation distinction
 - Faint, summon, random buff/damage, buy/sell, and summon triggers
 - Human-readable battle traces
+- Versioned JSON episode recording and deterministic replay verification
 - Random and spend-gold baselines
 - Serializable round-indexed opponent snapshots and weighted provider mixtures
 - Gymnasium and Maskable PPO entrypoints

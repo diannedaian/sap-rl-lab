@@ -74,6 +74,10 @@ without changing the engine API.
 The fixed action vocabulary contains 71 actions. Only legal actions are exposed
 through the mask, and an illegal action raises before changing state.
 
+Complete episodes can be saved as versioned JSON with action names, rewards,
+battle traces, configuration, and final state. Replaying the file verifies that
+the same seed and action sequence still produce byte-for-byte equivalent data.
+
 ## Design documents
 
 - [Architecture](docs/ARCHITECTURE.md)
