@@ -71,6 +71,11 @@ Use the tier-1 catalog and a mixture of weak seeded opponents. Train roughly
 100,000 steps as a smoke test. Success means the policy beats random and its
 learning curve rises; it does not mean the game is solved.
 
+The repository can generate deterministic, round-indexed leagues from the
+readable spend-gold policy. Use disjoint seed ranges for training and evaluation
+and pass their paths to the training commands; never evaluate on the league used
+to collect experience.
+
 ### Stage C — robust baseline
 
 Train five seeds for 1–5 million steps each. Evaluate every checkpoint against
@@ -150,4 +155,3 @@ The pure engine is CPU work. Initial PPO runs should work on a laptop; a GPU may
 not help much while simulation is the bottleneck. Larger leagues and attention
 models may justify a GPU later. Profile environment steps per second before
 renting hardware.
-

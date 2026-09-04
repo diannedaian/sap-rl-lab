@@ -4,19 +4,32 @@ from __future__ import annotations
 
 import argparse
 import json
+from pathlib import Path
 
 from .baselines import RandomPolicy, SpendGoldPolicy, play_episode
 from .engine import AutoBattler
+from .opponents import SnapshotLeague, build_spend_gold_league
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("command", choices=["inspect", "random", "greedy"])
+    parser.add_argument("command", choices=["inspect", "random", "greedy", "build-league"])
     parser.add_argument("--episodes", type=int, default=10)
     parser.add_argument("--seed", type=int, default=7)
+    parser.add_argument("--opponent-league")
+    parser.add_argument("--output", default="data/leagues/spend_gold.json")
     args = parser.parse_args()
 
-    engine = AutoBattler()
+    if args.command == "build-league":
+        output = Path(args.output)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        league = build_spend_gold_league(args.episodes, args.seed)
+        league.save(output)
+        print(json.dumps({"output": str(output), "snapshots": len(league)}, indent=2))
+        return
+
+    provider = SnapshotLeague.load(args.opponent_league) if args.opponent_league else None
+    engine = AutoBattler(opponent_provider=provider)
     if args.command == "inspect":
         engine.reset(seed=args.seed)
         print(

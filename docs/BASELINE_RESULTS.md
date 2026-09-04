@@ -25,3 +25,19 @@ A 2,048-step Maskable PPO run has also been completed as an integration test:
 the model trained, checkpointed, reloaded, and evaluated. Its 0/20 success rate
 is expected at that tiny budget and is intentionally not presented as a learned
 result.
+
+## Held-out scripted league
+
+The more useful curriculum check builds 202 training snapshots from seeds 0–19
+and 204 evaluation snapshots from seeds 10000–10019. Policies are then tested
+for 100 episodes on seeds 20000–20099 against only the evaluation snapshots.
+
+| Policy | Mean return | Mean wins | Ten-win runs | Truncations |
+|---|---:|---:|---:|---:|
+| Uniform random legal action | -4.76 | 0.04 | 0 / 100 | 9 / 100 |
+| Spend-gold heuristic | 2.40 | 6.29 | 51 / 100 | 0 / 100 |
+
+This is a healthier learning target: it retains a clear gap between random and
+competent play without letting the heuristic win automatically. The same
+league-loading path has been exercised by a Maskable PPO train/save/load/eval
+smoke run.

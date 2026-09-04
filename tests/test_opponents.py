@@ -5,7 +5,7 @@ from pathlib import Path
 
 from sap_rl_lab.catalog import load_catalog
 from sap_rl_lab.domain import GameConfig, Pet
-from sap_rl_lab.opponents import SnapshotLeague
+from sap_rl_lab.opponents import SnapshotLeague, build_spend_gold_league
 
 
 class OpponentLeagueTests(unittest.TestCase):
@@ -34,7 +34,15 @@ class OpponentLeagueTests(unittest.TestCase):
             restored = SnapshotLeague.load(path)
             team = restored(2, random.Random(2), self.catalog, self.config)
         self.assertEqual(len(restored), 1)
+        self.assertIsNone(restored.catalog_id)
         self.assertEqual(team[0], Pet("cricket", 3, 4, experience=3, perk="honey"))
+
+    def test_build_scripted_league_has_round_buckets_and_catalog(self):
+        league = build_spend_gold_league(episodes=2, seed=10)
+        self.assertEqual(league.catalog_id, self.catalog.catalog_id)
+        self.assertGreaterEqual(len(league), 10)
+        first_round = league(1, random.Random(3), self.catalog, self.config)
+        self.assertTrue(first_round)
 
 
 if __name__ == "__main__":

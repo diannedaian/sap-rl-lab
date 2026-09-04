@@ -49,6 +49,16 @@ python -m sap_rl_lab.training train --timesteps 100000 --environments 4
 python -m sap_rl_lab.training evaluate runs/ppo/final_model.zip --episodes 100
 ```
 
+Build separate scripted training and evaluation leagues, then opt into one:
+
+```bash
+sap-rl build-league --episodes 100 --seed 0 --output data/leagues/train.json
+sap-rl build-league --episodes 100 --seed 10000 --output data/leagues/eval.json
+python -m sap_rl_lab.training train --opponent-league data/leagues/train.json
+python -m sap_rl_lab.training evaluate runs/ppo/final_model.zip \
+  --opponent-league data/leagues/eval.json
+```
+
 The first run is a smoke test, not evidence of a strong agent. A meaningful
 claim requires multiple training seeds and held-out opponent pools.
 

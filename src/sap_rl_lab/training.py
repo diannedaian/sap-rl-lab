@@ -21,6 +21,7 @@ class TrainingConfig:
     gamma: float = 1.0
     gae_lambda: float = 0.95
     output_dir: str = "runs/ppo"
+    opponent_league: str = ""
 
 
 def train(config: TrainingConfig) -> Path:
@@ -38,6 +39,11 @@ def train(config: TrainingConfig) -> Path:
         raise RuntimeError('Install RL dependencies with: pip install -e ".[rl]"') from exc
 
     from .env import SapAutoBattlerEnv
+    from .opponents import SnapshotLeague
+
+    opponent_provider = (
+        SnapshotLeague.load(config.opponent_league) if config.opponent_league else None
+    )
 
     (output / "config.json").write_text(
         json.dumps(asdict(config), indent=2, sort_keys=True) + "\n", encoding="utf-8"
@@ -45,7 +51,7 @@ def train(config: TrainingConfig) -> Path:
 
     def make_env(rank: int):
         def factory() -> SapAutoBattlerEnv:
-            env = SapAutoBattlerEnv()
+            env = SapAutoBattlerEnv(opponent_provider=opponent_provider)
             env.reset(seed=config.seed + rank)
             return env
 
@@ -75,7 +81,12 @@ def train(config: TrainingConfig) -> Path:
     return model_path.with_suffix(".zip")
 
 
-def evaluate_model(model_path: str, episodes: int = 100, seed: int = 10_000) -> Dict[str, Any]:
+def evaluate_model(
+    model_path: str,
+    episodes: int = 100,
+    seed: int = 10_000,
+    opponent_league: str = "",
+) -> Dict[str, Any]:
     model_parent = Path(model_path).expanduser().resolve().parent
     matplotlib_cache = model_parent / "matplotlib-cache"
     matplotlib_cache.mkdir(exist_ok=True)
@@ -88,8 +99,10 @@ def evaluate_model(model_path: str, episodes: int = 100, seed: int = 10_000) -> 
         raise RuntimeError('Install RL dependencies with: pip install -e ".[rl]"') from exc
 
     from .env import SapAutoBattlerEnv
+    from .opponents import SnapshotLeague
 
-    env = SapAutoBattlerEnv()
+    opponent_provider = SnapshotLeague.load(opponent_league) if opponent_league else None
+    env = SapAutoBattlerEnv(opponent_provider=opponent_provider)
     model = MaskablePPO.load(model_path)
     returns: List[float] = []
     wins: List[int] = []
@@ -113,6 +126,7 @@ def evaluate_model(model_path: str, episodes: int = 100, seed: int = 10_000) -> 
         "mean_wins": float(np.mean(wins)),
         "success_rate": successes / episodes,
         "seed_start": seed,
+        "opponent_league": opponent_league or None,
     }
 
 
@@ -124,10 +138,12 @@ def _parser() -> argparse.ArgumentParser:
     train_parser.add_argument("--seed", type=int, default=7)
     train_parser.add_argument("--environments", type=int, default=4)
     train_parser.add_argument("--output-dir", default="runs/ppo")
+    train_parser.add_argument("--opponent-league", default="")
     eval_parser = subparsers.add_parser("evaluate")
     eval_parser.add_argument("model")
     eval_parser.add_argument("--episodes", type=int, default=100)
     eval_parser.add_argument("--seed", type=int, default=10_000)
+    eval_parser.add_argument("--opponent-league", default="")
     return parser
 
 
@@ -140,11 +156,17 @@ def main() -> None:
                 seed=args.seed,
                 environments=args.environments,
                 output_dir=args.output_dir,
+                opponent_league=args.opponent_league,
             )
         )
         print(path)
     else:
-        print(json.dumps(evaluate_model(args.model, args.episodes, args.seed), indent=2))
+        print(
+            json.dumps(
+                evaluate_model(args.model, args.episodes, args.seed, args.opponent_league),
+                indent=2,
+            )
+        )
 
 
 if __name__ == "__main__":

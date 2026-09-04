@@ -60,8 +60,13 @@ class SnapshotLeague:
     provider supplies the opponent. Returned pets are always fresh objects.
     """
 
-    def __init__(self, fallback: OpponentProvider = default_opponent) -> None:
+    def __init__(
+        self,
+        fallback: OpponentProvider = default_opponent,
+        catalog_id: Optional[str] = None,
+    ) -> None:
         self.fallback = fallback
+        self.catalog_id = catalog_id
         self._by_turn: Dict[int, List[TeamSnapshot]] = {}
 
     def add(self, turn: int, team: Sequence[Pet], label: str = "snapshot") -> None:
@@ -76,6 +81,10 @@ class SnapshotLeague:
     def __call__(
         self, turn: int, rng: random.Random, catalog: Catalog, config: GameConfig
     ) -> Sequence[Pet]:
+        if self.catalog_id is not None and self.catalog_id != catalog.catalog_id:
+            raise ValueError(
+                f"Opponent league needs catalog {self.catalog_id}, got {catalog.catalog_id}"
+            )
         eligible = [saved_turn for saved_turn in self._by_turn if saved_turn <= turn]
         if not eligible:
             return self.fallback(turn, rng, catalog, config)
@@ -92,18 +101,54 @@ class SnapshotLeague:
             for turn in sorted(self._by_turn)
             for snapshot in self._by_turn[turn]
         ]
-        Path(path).write_text(json.dumps({"snapshots": snapshots}, indent=2) + "\n")
+        payload = {
+            "schema_version": 1,
+            "catalog_id": self.catalog_id,
+            "snapshots": snapshots,
+        }
+        Path(path).write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
 
     @classmethod
     def load(
         cls, path: str | Path, fallback: OpponentProvider = default_opponent
     ) -> SnapshotLeague:
         data = json.loads(Path(path).read_text(encoding="utf-8"))
-        league = cls(fallback=fallback)
+        if int(data.get("schema_version", 1)) != 1:
+            raise ValueError(f"Unsupported league schema: {data['schema_version']}")
+        league = cls(fallback=fallback, catalog_id=data.get("catalog_id"))
         for item in data["snapshots"]:
             pets = [PetSnapshot(**pet).to_pet() for pet in item["pets"]]
             league.add(int(item["turn"]), pets, str(item["label"]))
         return league
+
+
+def build_spend_gold_league(episodes: int, seed: int = 0) -> SnapshotLeague:
+    """Capture round-indexed teams produced by the readable heuristic policy."""
+
+    if episodes < 1:
+        raise ValueError("episodes must be positive")
+
+    from .actions import ActionKind
+    from .baselines import SpendGoldPolicy
+    from .engine import AutoBattler
+
+    engine = AutoBattler()
+    policy = SpendGoldPolicy()
+    league = SnapshotLeague(catalog_id=engine.catalog.catalog_id)
+    for episode in range(episodes):
+        episode_seed = seed + episode
+        policy_rng = random.Random(episode_seed + 1_000_003)
+        engine.reset(seed=episode_seed)
+        while not (engine.state.terminated or engine.state.truncated):
+            action = policy.choose(engine, policy_rng)
+            if action.kind is ActionKind.END_TURN:
+                league.add(
+                    engine.state.turn,
+                    engine.state.team,
+                    label=f"spend-gold-seed-{episode_seed}",
+                )
+            engine.step(action)
+    return league
 
 
 class OpponentMixture:
