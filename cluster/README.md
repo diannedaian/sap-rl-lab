@@ -9,6 +9,10 @@ Run `setup_cpu.sbatch` first. It creates an isolated virtual environment, runs
 all tests, and records the random and scripted controls. Submit only one job at
 a time and inspect its log before continuing.
 
+Run `check_gpu.sbatch` before training when the environment or driver changes.
+It requests one GPU for five minutes and verifies driver visibility, PyTorch
+CUDA support, device identity, and an actual tensor operation.
+
 `train_v100.sbatch` requests one V100 for at most two hours. It creates a
 job-ID-specific run directory, generates disjoint training and evaluation
 leagues, trains one 500,000-step Maskable PPO seed with eight subprocess
