@@ -58,6 +58,38 @@ class EnvironmentTests(unittest.TestCase):
             self.assertEqual(info["game_reward"], raw_reward)
             self.assertEqual(raw.engine.state.to_dict(), shaped.engine.state.to_dict())
 
+    def test_vector_autoresets_remain_reproducible_across_episodes(self):
+        import numpy as np
+        from stable_baselines3.common.vec_env import DummyVecEnv
+
+        from sap_rl_lab.domain import GameConfig
+        from sap_rl_lab.env import SapAutoBattlerEnv
+
+        def make():
+            return SapAutoBattlerEnv(config=GameConfig(max_actions_per_turn=1))
+
+        a, b = DummyVecEnv([make, make]), DummyVecEnv([make, make])
+        a.seed(173)
+        b.seed(173)
+        a.reset()
+        b.reset()
+        seeds = []
+        for _ in range(8):
+            actions = [env.engine.legal_action_ids()[1] for env in a.envs]
+            obs_a, rewards_a, dones_a, _ = a.step(actions)
+            obs_b, rewards_b, dones_b, _ = b.step(actions)
+            self.assertTrue(all(dones_a))
+            np.testing.assert_equal(rewards_a, rewards_b)
+            np.testing.assert_equal(dones_a, dones_b)
+            for key in obs_a:
+                np.testing.assert_equal(obs_a[key], obs_b[key])
+            self.assertEqual(a.reset_infos, b.reset_infos)
+            seeds.append(a.reset_infos[0]["seed"])
+            self.assertNotEqual(a.reset_infos[0]["seed"], a.reset_infos[1]["seed"])
+        self.assertEqual(len(seeds), len(set(seeds)))
+        a.close()
+        b.close()
+
 
 if __name__ == "__main__":
     unittest.main()

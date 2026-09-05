@@ -2,6 +2,15 @@
 
 ## Evidence and hypothesis
 
+The pilot also exposed an automatic-reset seeding bug: after the first episode,
+Gym's `reset(seed=None)` reached the pure engine as `random.Random(None)`, drawing
+system entropy and defeating the configured training seed. Automatic resets now
+derive episode seeds from each environment's persistent seeded Gym RNG. Explicit
+evaluation seeds keep their original meaning. Vector-autoreset regression tests
+verify distinct, reproducible episode streams. The preliminary unseeded
+comparison was interrupted and excluded; the final comparison uses the fix in
+both arms.
+
 The saved first policy was replayed locally on exactly the original 500 seeds
 and held-out pool. All summary metrics matched the original GPU evaluation.
 Detailed action logging showed 10,491 adjacent swaps out of 38,111 decisions

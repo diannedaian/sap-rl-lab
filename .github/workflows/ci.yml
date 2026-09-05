@@ -28,4 +28,4 @@ jobs:
         with:
           python-version: "3.11"
       - run: python -m pip install -e ".[rl,dev]"
-      - run: python -m pytest tests/test_env.py
+      - run: python -m pytest tests/test_env.py tests/test_training.py tests/test_evaluation.py

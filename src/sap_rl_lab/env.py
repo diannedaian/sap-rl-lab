@@ -71,9 +71,14 @@ class SapAutoBattlerEnv(gym.Env):
         self, *, seed: Optional[int] = None, options: Optional[dict] = None
     ) -> tuple[Dict[str, np.ndarray], Dict[str, Any]]:
         super().reset(seed=seed)
-        self.engine.reset(seed=seed)
+        # VecEnv autoresets call reset(seed=None). Passing None into the pure
+        # engine would reseed Python's RNG from system entropy on EVERY episode,
+        # defeating the training seed after the first episode. Draw subsequent
+        # episode seeds from this environment's persistent seeded Gym RNG.
+        episode_seed = seed if seed is not None else int(self.np_random.integers(0, 2**63 - 1))
+        self.engine.reset(seed=episode_seed)
         return self._observation(), {
-            "seed": seed,
+            "seed": episode_seed,
             "catalog_id": self.engine.catalog.catalog_id,
         }
 
