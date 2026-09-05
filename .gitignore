@@ -10,4 +10,5 @@ build/
 *.egg-info/
 runs/
 models/
+cluster_results/
 cluster/local_*.env

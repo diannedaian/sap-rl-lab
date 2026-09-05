@@ -41,3 +41,32 @@ This is a healthier learning target: it retains a clear gap between random and
 competent play without letting the heuristic win automatically. The same
 league-loading path has been exercised by a Maskable PPO train/save/load/eval
 smoke run.
+
+## First full Maskable PPO experiment
+
+A single Maskable PPO policy was trained for 500,000 requested decisions with
+eight subprocess environments and seed 17. PPO completed its final rollout at
+503,808 decisions. The training and evaluation leagues were generated from
+disjoint seed ranges, and the learned policy was evaluated deterministically on
+500 episode seeds beginning at 20000.
+
+For a fair comparison, all three policies below used that experiment's exact
+held-out league and episode seeds.
+
+| Policy | Mean return | Mean wins | Ten-win runs | Truncations |
+|---|---:|---:|---:|---:|
+| Uniform random legal action | -4.832 | 0.038 | 0 / 500 | 36 / 500 |
+| Spend-gold heuristic | 2.978 | 6.58 | 278 / 500 | 0 / 500 |
+| Maskable PPO | **3.826** | **7.23** | **295 / 500** | 17 / 500 |
+
+PPO won 3,615 of 6,022 individual battles (60.03%), drew 722, and lost 1,685.
+Its training monitor contains 8,888 completed episodes: mean return rose from
+-4.79 over the first 100 to +2.59 over the last 100, while mean episode length
+rose from 49.54 to 78.88 actions.
+
+This is evidence that the agent learned a strategy which generalizes beyond its
+training snapshots. It is not yet evidence that PPO reliably beats the
+heuristic: the 59.0% versus 55.6% success-rate difference comes from one
+training seed, and the corresponding binomial confidence intervals overlap.
+The next defensible experiment is an identical multi-seed run with aggregate
+confidence intervals.
