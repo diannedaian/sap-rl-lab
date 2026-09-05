@@ -78,6 +78,10 @@ class TrainingConfigTests(unittest.TestCase):
             manifest = json.loads((out / "run_manifest.json").read_text())
             self.assertEqual(manifest["initial_model_sha256"], before)
             history = json.loads((out / "validation_history.json").read_text())
+            self.assertEqual(len(list(out.glob("validation_[0-9]*.json"))), len(history))
+            for entry in history:
+                saved = json.loads((out / entry["evaluation_file"]).read_text())
+                self.assertEqual(saved["success_rate"], entry["success_rate"])
             # The initial model is evaluated before learning and participates in
             # selection; the saved winner must reproduce its recorded score.
             self.assertEqual(history[0]["timesteps"], 0)

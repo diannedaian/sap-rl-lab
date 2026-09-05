@@ -192,6 +192,11 @@ def train(config: TrainingConfig) -> Path:
                 opponent_league=config.validation_league,
             )
             result["timesteps"] = self.num_timesteps
+            # The final PPO update can follow a periodic evaluation at the same
+            # decision count. Preserve both records even when their steps match.
+            result["evaluation_file"] = (
+                f"validation_{self.num_timesteps}_eval{len(self.history):03d}.json"
+            )
             score = (result["success_rate"], result["mean_return"])
             result["selected"] = score > self.best_score
             if result["selected"]:
@@ -204,7 +209,7 @@ def train(config: TrainingConfig) -> Path:
                     if k not in {"episode_results", "failure_examples"}
                 }
             )
-            (output / f"validation_{self.num_timesteps}.json").write_text(
+            (output / result["evaluation_file"]).write_text(
                 json.dumps(result, indent=2) + "\n", encoding="utf-8"
             )
             (output / "validation_history.json").write_text(
