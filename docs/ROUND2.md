@@ -1,5 +1,54 @@
 # Second experiment: inefficient shop loops
 
+## Completed result
+
+The corrected experiment completed six runs, each with 1,003,520 additional
+decisions (one full rollout beyond the requested 1 million). Training plus
+validation took 811 seconds total on the local CPU. Each validation-selected
+policy was then tested on 1,000 fresh episode seeds against the reserved test
+league. Original PPO and both scripted controls used that same test protocol.
+
+| Policy | 10-win success | Mean wins | Mean return | Cutoffs |
+|---|---:|---:|---:|---:|
+| Original saved PPO | 54.5% | 6.715 | 3.107 | 2.9% |
+| Spend-gold heuristic | 47.8% | 5.862 | 1.968 | 0.0% |
+| Random legal actions | 0.0% | 0.033 | -4.806 | 9.7% |
+| Longer training, seed 17 | 91.1% | 9.330 | 7.575 | 1.8% |
+| Longer training, seed 23 | 91.7% | 9.403 | 7.568 | 0.7% |
+| Longer training, seed 41 | 86.9% | 9.103 | 7.090 | 4.2% |
+| Added penalties, seed 17 | 90.7% | 9.292 | 7.388 | 0.5% |
+| Added penalties, seed 23 | 89.4% | 9.177 | 7.176 | 0.4% |
+| Added penalties, seed 41 | 87.8% | 9.092 | 6.955 | 0.8% |
+
+The three-seed mean success was **89.9% for longer training** and **89.3% with
+the added penalties**. All three episode-paired bootstrap intervals for the
+success-rate difference between arms include zero. The penalties reduced mean
+cutoffs from 2.23% to 0.57%, but did not consistently reduce action count or
+improve raw return. They remain opt-in experimental settings, not the default.
+
+The practical recommendation is the unshaped continuation workflow with fixed
+autoreset seeding and validation selection. Among its three runs, seed 23 has
+the highest validation score (92.5%, at 900,000 additional decisions); that
+saved checkpoint scores 91.7% on the fresh test. The last checkpoint was not
+automatically selected. The original policy's 54.5% here differs from its
+earlier 59.0% because this is a new opponent pool and new episode seeds.
+
+![Validation curves and fresh test results](assets/round2/comparison.png)
+
+[Download the plotted metrics](assets/round2/comparison.csv) or
+[the vector figure](assets/round2/comparison.svg).
+
+This measures improvement from a shared initialization against unseen snapshots
+of the same scripted opponent family. It does not demonstrate skill against
+human players, all Turtle Pack mechanics, unseen opponent strategies, or
+independent training from scratch.
+
+Verification included 34 passing tests, an exact repeat of 8,192-step training
+(all 12 weight tensors and 108 completed episode reward/length pairs matched),
+and an audit of all 9,000 test-episode rows, six selected model hashes, equal
+budgets, source revision, and distinct training/validation/test file hashes.
+The experiment source revision is `2ea44615d3a24b023575a498f987ea9604a356f1`.
+
 ## Evidence and hypothesis
 
 The pilot also exposed an automatic-reset seeding bug: after the first episode,
@@ -95,3 +144,15 @@ Pass an existing personal Python environment as `SAP_RL_PYTHON` and the first-ru
 directory as `SAP_RL_BASE_RUN`. No dependency installation or shared software
 changes are required. Use a fresh versioned checkout for the source and supply
 site-specific routing privately at submission.
+
+For the tested local configuration, add `--device cpu --vector-backend dummy`.
+The tensor operations use one CPU thread. The measured throughput belongs to
+this configuration and hardware; it is not a controlled CPU-versus-GPU hardware
+comparison. The cluster connection was unavailable, so this completed round
+used no cluster allocation.
+
+To regenerate the figure after installing the optional `plots` extra:
+
+```bash
+python scripts/plot_round2.py OUTPUT NEW_FIGURE_DIRECTORY
+```

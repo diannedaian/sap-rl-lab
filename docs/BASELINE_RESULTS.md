@@ -70,3 +70,9 @@ heuristic: the 59.0% versus 55.6% success-rate difference comes from one
 training seed, and the corresponding binomial confidence intervals overlap.
 The next defensible experiment is an identical multi-seed run with aggregate
 confidence intervals.
+
+That follow-up is now recorded in [the second experiment](ROUND2.md): three
+continuation seeds reached 86.9–91.7% success on a fresh test pool, compared with
+54.5% for the original policy evaluated on that same pool. The report includes
+the seeding fix, validation selection, and an optional reward-shaping experiment
+that reduced cutoffs but did not improve average success.

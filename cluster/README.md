@@ -30,3 +30,11 @@ architectures even when the driver can see the device. The versioned
 `cuda126_v1` workflow creates a separate environment using PyTorch's CUDA 12.6
 wheel, asserts that `sm_70` kernels are present, and only then tests or trains on
 a V100. It never modifies the default environment.
+
+## Paired continuation experiment
+
+`round2.sbatch` uses an existing personal environment and a saved first-run
+model. It runs the two objectives sequentially for three continuation seeds,
+with independent validation and final test pools. It defaults to CPU; supply
+`SAP_RL_DEVICE=cuda` and request a GPU explicitly to test GPU execution. See
+[the full protocol and completed local results](../docs/ROUND2.md).

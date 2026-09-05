@@ -90,6 +90,27 @@ class EnvironmentTests(unittest.TestCase):
         a.close()
         b.close()
 
+    def test_turn_limit_forfeit_retains_last_battle_reward(self):
+        from sap_rl_lab.actions import ActionKind
+        from sap_rl_lab.domain import GameConfig
+        from sap_rl_lab.env import SapAutoBattlerEnv
+
+        env = SapAutoBattlerEnv(
+            config=GameConfig(max_turns=1),
+            opponent_provider=lambda *args: [],
+            action_cost=0.005,
+            forfeit_on_limit=True,
+        )
+        env.reset(seed=1)
+        buy = next(a for a in env.engine.legal_actions() if a.kind is ActionKind.BUY_PET)
+        env.step(env.engine.codec.encode(buy))
+        _, reward, terminated, truncated, info = env.step(0)
+        self.assertEqual(info["reason"], "turn_limit")
+        self.assertEqual(info["game_reward"], 1)
+        self.assertAlmostEqual(reward, 1 - 5 - 0.005)
+        self.assertTrue(terminated)
+        self.assertFalse(truncated)
+
 
 if __name__ == "__main__":
     unittest.main()

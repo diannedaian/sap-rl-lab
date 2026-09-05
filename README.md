@@ -94,6 +94,7 @@ the same seed and action sequence still produce byte-for-byte equivalent data.
 - [What was retained or replaced](docs/MIGRATION_PLAN.md)
 - [RL training guide](docs/RL_GUIDE.md)
 - [Reproducible baselines and first PPO result](docs/BASELINE_RESULTS.md)
+- [Second experiment: shop loops and reproducible continuation](docs/ROUND2.md)
 - [Turtle Pack accuracy policy](docs/DATA_ACCURACY.md)
 - [Roadmap to all 60 pets](docs/ROADMAP.md)
 - [Portable Slurm workflow](cluster/README.md)

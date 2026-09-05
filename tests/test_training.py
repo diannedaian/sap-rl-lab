@@ -26,6 +26,15 @@ class TrainingConfigTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "vector_backend"):
             TrainingConfig(vector_backend="threads").validate()
 
+    def test_duplicated_training_pool_is_rejected_as_validation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            first, second = root / "train.json", root / "renamed_copy.json"
+            first.write_text('{"snapshots": []}')
+            second.write_bytes(first.read_bytes())
+            with self.assertRaisesRegex(ValueError, "validation league must differ"):
+                TrainingConfig(opponent_league=str(first), validation_league=str(second)).validate()
+
     @unittest.skipUnless(importlib.util.find_spec("sb3_contrib"), "RL extra is not installed")
     def test_continuation_validation_save_load_and_original_weights_are_preserved(self):
         from sb3_contrib import MaskablePPO
