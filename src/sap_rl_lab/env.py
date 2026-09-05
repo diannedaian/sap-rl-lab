@@ -29,10 +29,16 @@ class SapAutoBattlerEnv(gym.Env):
         config: Optional[GameConfig] = None,
         opponent_provider: Optional[OpponentProvider] = None,
         render_mode: Optional[str] = None,
+        action_cost: float = 0.0,
+        forfeit_on_limit: bool = False,
     ) -> None:
         super().__init__()
         self.engine = AutoBattler(catalog or load_catalog(), config, opponent_provider)
         self.render_mode = render_mode
+        if action_cost < 0:
+            raise ValueError("action_cost must be nonnegative")
+        self.action_cost = action_cost
+        self.forfeit_on_limit = forfeit_on_limit
         self.action_space = spaces.Discrete(self.engine.codec.size)
 
         pet_count = len(self.engine.catalog.pets)
@@ -94,11 +100,25 @@ class SapAutoBattlerEnv(gym.Env):
                 "lives": self.engine.state.lives,
             }
         )
+        # Optional training objective. Evaluation defaults preserve the original
+        # game rewards, action mask, and cutoffs for an unchanged benchmark.
+        reward = transition.reward - self.action_cost
+        terminated, truncated = transition.terminated, transition.truncated
+        info["game_reward"] = transition.reward
+        if truncated and self.forfeit_on_limit:
+            # A deliberate safety-limit failure forfeits remaining lives. It is
+            # an absorbing failure for training: no optimistic value bootstrap.
+            # Replace the existing -1 shop penalty, but retain a final battle's
+            # reward at a turn limit. Quitting cannot avoid future battle losses.
+            penalty_already_paid = 1.0 if info.get("reason") == "shop_action_limit" else 0.0
+            reward += penalty_already_paid - self.engine.state.lives
+            terminated, truncated = True, False
+            info["training_forfeit"] = True
         return (
             self._observation(),
-            transition.reward,
-            transition.terminated,
-            transition.truncated,
+            reward,
+            terminated,
+            truncated,
             info,
         )
 

@@ -28,12 +28,34 @@ class TrainingConfig:
     vector_backend: str = "dummy"
     device: str = "auto"
     source_commit: str = ""
+    initialize_from: str = ""
+    action_cost: float = 0.0
+    forfeit_on_limit: bool = False
+    entropy_coefficient: float = 0.0
+    torch_threads: int = 1
+    validation_league: str = ""
+    validation_episodes: int = 200
+    validation_seed: int = 30000
+    evaluation_interval: int = 100_000
 
     def validate(self) -> None:
         if self.timesteps < 1 or self.environments < 1 or self.rollout_steps < 1:
             raise ValueError("timesteps, environments, and rollout_steps must be positive")
         if self.batch_size < 1:
             raise ValueError("batch_size must be positive")
+        if self.action_cost < 0 or self.entropy_coefficient < 0:
+            raise ValueError("action_cost and entropy_coefficient must be nonnegative")
+        if not 0 < self.learning_rate or not 0 <= self.gamma <= 1 or not 0 <= self.gae_lambda <= 1:
+            raise ValueError("invalid learning_rate, gamma, or gae_lambda")
+        if min(self.torch_threads, self.validation_episodes, self.evaluation_interval) < 1:
+            raise ValueError(
+                "threads, validation episodes, and evaluation interval must be positive"
+            )
+        if self.validation_league and self.opponent_league:
+            from .evaluation import file_digest
+
+            if file_digest(self.validation_league) == file_digest(self.opponent_league):
+                raise ValueError("validation league must differ from the training league")
         if self.vector_backend not in {"dummy", "subproc"}:
             raise ValueError("vector_backend must be 'dummy' or 'subproc'")
         rollout_size = self.rollout_steps * self.environments
@@ -54,25 +76,40 @@ def _installed_version(package: str) -> str:
 def train(config: TrainingConfig) -> Path:
     config.validate()
     output = Path(config.output_dir)
-    output.mkdir(parents=True, exist_ok=True)
+    output.mkdir(parents=True, exist_ok=False)
     matplotlib_cache = output / "matplotlib-cache"
     matplotlib_cache.mkdir(exist_ok=True)
     os.environ.setdefault("MPLCONFIGDIR", str(matplotlib_cache))
 
     try:
+        import torch
         from sb3_contrib import MaskablePPO
-        from stable_baselines3.common.callbacks import CheckpointCallback
+        from stable_baselines3.common.callbacks import BaseCallback, CheckpointCallback
         from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv, VecMonitor
     except ImportError as exc:
         raise RuntimeError('Install RL dependencies with: pip install -e ".[rl]"') from exc
 
     from .env import SapAutoBattlerEnv
+    from .evaluation import evaluate_policy, file_digest
     from .opponents import SnapshotLeague
 
+    torch.set_num_threads(config.torch_threads)
     catalog_id = SapAutoBattlerEnv().engine.catalog.catalog_id
     manifest = {
         "config": asdict(config),
         "catalog_id": catalog_id,
+        "training_league_sha256": file_digest(config.opponent_league)
+        if config.opponent_league
+        else None,
+        "validation_league_sha256": file_digest(config.validation_league)
+        if config.validation_league
+        else None,
+        "initial_model_sha256": file_digest(config.initialize_from)
+        if config.initialize_from
+        else None,
+        "initialization": "policy_weights_only_fresh_optimizer"
+        if config.initialize_from
+        else "from_scratch",
         "python": sys.version,
         "platform": platform.platform(),
         "packages": {
@@ -95,7 +132,11 @@ def train(config: TrainingConfig) -> Path:
             opponent_provider = (
                 SnapshotLeague.load(config.opponent_league) if config.opponent_league else None
             )
-            return SapAutoBattlerEnv(opponent_provider=opponent_provider)
+            return SapAutoBattlerEnv(
+                opponent_provider=opponent_provider,
+                action_cost=config.action_cost,
+                forfeit_on_limit=config.forfeit_on_limit,
+            )
 
         return factory
 
@@ -117,16 +158,81 @@ def train(config: TrainingConfig) -> Path:
         batch_size=config.batch_size,
         gamma=config.gamma,
         gae_lambda=config.gae_lambda,
+        ent_coef=config.entropy_coefficient,
         device=config.device,
         verbose=1,
     )
+    if config.initialize_from:
+        initial = MaskablePPO.load(config.initialize_from, device=config.device)
+        model.policy.load_state_dict(initial.policy.state_dict())
+        del initial
+        # Loading the reference model can reseed global RNGs. Restore this
+        # experiment's seed after copying weights, before collecting rollouts.
+        model.set_random_seed(config.seed)
     checkpoint = CheckpointCallback(
         save_freq=max(config.timesteps // max(config.environments * 10, 1), 1),
         save_path=str(output / "checkpoints"),
         name_prefix="sap_ppo",
     )
+
+    class ValidationCallback(BaseCallback):
+        def __init__(self):
+            super().__init__()
+            self.next_evaluation = config.evaluation_interval
+            self.best_score = (-1.0, float("-inf"))
+            self.history: List[Dict[str, Any]] = []
+
+        def evaluate(self) -> None:
+            # Deterministic batched inference does not sample Torch's RNG. The
+            # evaluator uses independent environments and episode-policy RNGs.
+            result = evaluate_policy(
+                self.model,
+                episodes=config.validation_episodes,
+                seed=config.validation_seed,
+                opponent_league=config.validation_league,
+            )
+            result["timesteps"] = self.num_timesteps
+            score = (result["success_rate"], result["mean_return"])
+            result["selected"] = score > self.best_score
+            if result["selected"]:
+                self.best_score = score
+                self.model.save(str(output / "best_model"))
+            self.history.append(
+                {
+                    k: v
+                    for k, v in result.items()
+                    if k not in {"episode_results", "failure_examples"}
+                }
+            )
+            (output / f"validation_{self.num_timesteps}.json").write_text(
+                json.dumps(result, indent=2) + "\n", encoding="utf-8"
+            )
+            (output / "validation_history.json").write_text(
+                json.dumps(self.history, indent=2) + "\n", encoding="utf-8"
+            )
+            print(
+                f"validation step={self.num_timesteps} success={score[0]:.3f} "
+                f"return={score[1]:.3f} selected={result['selected']}",
+                flush=True,
+            )
+
+        def _on_training_start(self) -> None:
+            self.evaluate()
+
+        def _on_step(self) -> bool:
+            if self.num_timesteps >= self.next_evaluation:
+                self.evaluate()
+                self.next_evaluation += config.evaluation_interval
+            return True
+
+        def _on_training_end(self) -> None:
+            self.evaluate()
+
+    callbacks = [checkpoint]
+    if config.validation_league:
+        callbacks.append(ValidationCallback())
     try:
-        model.learn(total_timesteps=config.timesteps, callback=checkpoint, progress_bar=False)
+        model.learn(total_timesteps=config.timesteps, callback=callbacks, progress_bar=False)
         model_path = output / "final_model"
         model.save(str(model_path))
     finally:
@@ -219,6 +325,15 @@ def _parser() -> argparse.ArgumentParser:
     train_parser.add_argument("--batch-size", type=int, default=256)
     train_parser.add_argument("--gamma", type=float, default=1.0)
     train_parser.add_argument("--gae-lambda", type=float, default=0.95)
+    train_parser.add_argument("--initialize-from", default="")
+    train_parser.add_argument("--action-cost", type=float, default=0.0)
+    train_parser.add_argument("--forfeit-on-limit", action="store_true")
+    train_parser.add_argument("--entropy-coefficient", type=float, default=0.0)
+    train_parser.add_argument("--torch-threads", type=int, default=1)
+    train_parser.add_argument("--validation-league", default="")
+    train_parser.add_argument("--validation-episodes", type=int, default=200)
+    train_parser.add_argument("--validation-seed", type=int, default=30000)
+    train_parser.add_argument("--evaluation-interval", type=int, default=100_000)
     eval_parser = subparsers.add_parser("evaluate")
     eval_parser.add_argument("model")
     eval_parser.add_argument("--episodes", type=int, default=100)
@@ -246,6 +361,15 @@ def main() -> None:
                 batch_size=args.batch_size,
                 gamma=args.gamma,
                 gae_lambda=args.gae_lambda,
+                initialize_from=args.initialize_from,
+                action_cost=args.action_cost,
+                forfeit_on_limit=args.forfeit_on_limit,
+                entropy_coefficient=args.entropy_coefficient,
+                torch_threads=args.torch_threads,
+                validation_league=args.validation_league,
+                validation_episodes=args.validation_episodes,
+                validation_seed=args.validation_seed,
+                evaluation_interval=args.evaluation_interval,
             )
         )
         print(path)
