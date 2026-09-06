@@ -9,6 +9,18 @@ rollable tier-1 pets, two curriculum foods, one generated food, legal-action
 masks, seeded opponents, scripted baselines, a Gymnasium adapter, and a
 Maskable PPO training entrypoint.
 
+Phase 1, the eight-pet learning study, is complete, with residual looping documented.
+The ultimate goal remains **all 60 Turtle Pack pets and their associated mechanics**;
+see the [gated expansion roadmap](docs/ROADMAP.md). The next milestone is a correct
+tier-1/2 game, not another eight-pet hyperparameter sweep.
+Start with [the one-page conclusion](docs/ROUND5.md),
+[delivery and reproduction instructions](docs/DELIVERY.md), or the
+[private replay viewer](https://sap-rl-replay-lab.dcao2028.chatgpt.site/).
+Models and complete experiment records are available in the
+[public release](https://github.com/diannedaian/sap-rl-lab/releases/tag/v0.1.0-eight-pet);
+see [download and restore instructions](docs/ARTIFACTS.md). Viewer source and all
+38 selected replays are public in `viewer/` and can be run locally without an account.
+
 > This is not yet a frame-perfect reproduction of the live game. The catalog
 > records the target game version and verification date. Current tier-1 pet
 > mechanics are modeled; Apple and Honey are deliberately retained as simple
@@ -30,7 +42,7 @@ results in this domain come from the environment or evaluation, not PPO.
 
 ## Quick start
 
-The game engine and tests have no dependencies:
+The game engine has no dependencies; running the tests requires pytest:
 
 ```bash
 PYTHONPATH=src python -m sap_rl_lab.cli inspect
@@ -90,11 +102,17 @@ the same seed and action sequence still produce byte-for-byte equivalent data.
 
 ## Design documents
 
+- [Replay viewer, failure inspection, and Fish mechanics audit](docs/REPLAY_LAB.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [What was retained or replaced](docs/MIGRATION_PLAN.md)
 - [RL training guide](docs/RL_GUIDE.md)
 - [Reproducible baselines and first PPO result](docs/BASELINE_RESULTS.md)
 - [Second experiment: shop loops and reproducible continuation](docs/ROUND2.md)
+- [Third experiment: opponent diversity from scratch](docs/ROUND3.md)
+- [Fourth experiment: swap penalty versus success-only efficiency bonus](docs/ROUND4.md)
+- [Final confirmation: three paired seeds and equal training budgets](docs/ROUND5.md)
+- [Frozen model, replay controls, and reproduction](docs/DELIVERY.md)
+- [Five shop decisions: choose before revealing the policy](docs/round3-exercises/EXERCISES.md)
 - [Turtle Pack accuracy policy](docs/DATA_ACCURACY.md)
 - [Roadmap to all 60 pets](docs/ROADMAP.md)
 - [Portable Slurm workflow](cluster/README.md)

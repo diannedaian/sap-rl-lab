@@ -5,8 +5,8 @@ Pack compatible” must always name a game version.
 
 ## Current catalog
 
-- Catalog: `turtle-v0.46-tier1`
-- Checked: 2026-09-04
+- Catalog: `turtle-v0.46-tier1-rules-v2`
+- Checked: 2026-09-05
 - Pet scope: eight currently rollable tier-1 pets, plus battle tokens
 - Food scope: a deliberately small learning curriculum, not current-pack parity
 
@@ -15,6 +15,12 @@ the community wiki. Other tier-1 records were checked against the current pets
 listing. Community pages can be wrong; these records remain provisional until
 validated through controlled in-game examples or a maintained authoritative
 data export.
+
+Rules v2 corrects Fish's level-up indexing using Team Wood Games' official
+ability announcement. The old catalog remains frozen for historical replays.
+See the [eight-pet level audit](REPLAY_LAB.md) for source-backed rules,
+regression coverage, and the remaining parity limitations. This version suffix
+identifies a sandbox rules revision, not a new official game release.
 
 ## Rules for adding content
 
@@ -27,4 +33,3 @@ data export.
 
 The wiki is a useful factual reference, but this repository does not copy its
 articles or art. Game icons and screenshots are intentionally excluded.
-

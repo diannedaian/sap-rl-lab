@@ -7,6 +7,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
 
+from .catalog import load_catalog_by_id
 from .engine import AutoBattler, Transition
 
 
@@ -95,7 +96,7 @@ class ReplayRecorder:
 def verify_replay(replay: EpisodeReplay, engine: Optional[AutoBattler] = None) -> None:
     """Raise a useful error if rerunning a replay produces different output."""
 
-    candidate = engine or AutoBattler()
+    candidate = engine or AutoBattler(catalog=load_catalog_by_id(replay.catalog_id))
     if replay.schema_version != 1:
         raise ValueError(f"Unsupported replay schema: {replay.schema_version}")
     if candidate.catalog.catalog_id != replay.catalog_id:

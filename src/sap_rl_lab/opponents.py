@@ -20,6 +20,8 @@ class PetSnapshot:
     health: int
     experience: int = 1
     perk: Optional[str] = None
+    temporary_attack: int = 0
+    temporary_health: int = 0
 
     @classmethod
     def from_pet(cls, pet: Pet) -> PetSnapshot:
@@ -29,6 +31,8 @@ class PetSnapshot:
             health=pet.health,
             experience=pet.experience,
             perk=pet.perk,
+            temporary_attack=pet.temporary_attack,
+            temporary_health=pet.temporary_health,
         )
 
     def to_pet(self) -> Pet:
@@ -38,6 +42,8 @@ class PetSnapshot:
             health=self.health,
             experience=self.experience,
             perk=self.perk,
+            temporary_attack=self.temporary_attack,
+            temporary_health=self.temporary_health,
         )
 
 
@@ -102,7 +108,7 @@ class SnapshotLeague:
             for snapshot in self._by_turn[turn]
         ]
         payload = {
-            "schema_version": 1,
+            "schema_version": 2,
             "catalog_id": self.catalog_id,
             "snapshots": snapshots,
         }
@@ -113,7 +119,7 @@ class SnapshotLeague:
         cls, path: str | Path, fallback: OpponentProvider = default_opponent
     ) -> SnapshotLeague:
         data = json.loads(Path(path).read_text(encoding="utf-8"))
-        if int(data.get("schema_version", 1)) != 1:
+        if int(data.get("schema_version", 1)) not in {1, 2}:
             raise ValueError(f"Unsupported league schema: {data['schema_version']}")
         league = cls(fallback=fallback, catalog_id=data.get("catalog_id"))
         for item in data["snapshots"]:
@@ -125,15 +131,21 @@ class SnapshotLeague:
 def build_spend_gold_league(episodes: int, seed: int = 0) -> SnapshotLeague:
     """Capture round-indexed teams produced by the readable heuristic policy."""
 
+    return build_scripted_league("greedy", episodes, seed)
+
+
+def build_scripted_league(policy_name: str, episodes: int, seed: int = 0) -> SnapshotLeague:
+    """Capture only legally reached, pre-battle teams; never fabricate stats."""
+
     if episodes < 1:
         raise ValueError("episodes must be positive")
 
     from .actions import ActionKind
-    from .baselines import SpendGoldPolicy
+    from .baselines import scripted_policy
     from .engine import AutoBattler
 
     engine = AutoBattler()
-    policy = SpendGoldPolicy()
+    policy = scripted_policy(policy_name)
     league = SnapshotLeague(catalog_id=engine.catalog.catalog_id)
     for episode in range(episodes):
         episode_seed = seed + episode
@@ -145,7 +157,7 @@ def build_spend_gold_league(episodes: int, seed: int = 0) -> SnapshotLeague:
                 league.add(
                     engine.state.turn,
                     engine.state.team,
-                    label=f"spend-gold-seed-{episode_seed}",
+                    label=f"{policy_name}-seed-{episode_seed}",
                 )
             engine.step(action)
     return league

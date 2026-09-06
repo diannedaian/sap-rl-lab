@@ -1,0 +1,258 @@
+{
+  "catalog_id": "turtle-v0.46-tier1-rules-v2",
+  "game_version": "0.46",
+  "checked_on": "2026-09-05",
+  "scope": "Eight-pet educational sandbox; Fish level-up timing corrected. Not a claim of full live-game parity.",
+  "pets": [
+    {
+      "id": "ant",
+      "name": "Ant",
+      "tier": 1,
+      "attack": 2,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "buff_random_friend",
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "health_by_level": [
+            1,
+            2,
+            3
+          ],
+          "count_by_level": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cricket",
+      "name": "Cricket",
+      "tier": 1,
+      "attack": 1,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "summon",
+          "summon_id": "zombie_cricket",
+          "summon_attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "summon_health_by_level": [
+            1,
+            2,
+            3
+          ],
+          "count_by_level": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "tier": 1,
+      "attack": 2,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "level_up",
+          "effect": "buff_random_friend",
+          "attack_by_level": [
+            1,
+            2,
+            0
+          ],
+          "health_by_level": [
+            1,
+            2,
+            0
+          ],
+          "count_by_level": [
+            2,
+            2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse",
+      "name": "Horse",
+      "tier": 1,
+      "attack": 2,
+      "health": 1,
+      "abilities": [
+        {
+          "trigger": "friend_summoned",
+          "effect": "buff_subject",
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "health_by_level": [
+            0,
+            0,
+            0
+          ],
+          "temporary": true
+        }
+      ]
+    },
+    {
+      "id": "mosquito",
+      "name": "Mosquito",
+      "tier": 1,
+      "attack": 2,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "start_battle",
+          "effect": "damage_random_enemy",
+          "damage_by_level": [
+            1,
+            1,
+            1
+          ],
+          "count_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "otter",
+      "name": "Otter",
+      "tier": 1,
+      "attack": 1,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "buy",
+          "effect": "buff_random_friend",
+          "attack_by_level": [
+            0,
+            0,
+            0
+          ],
+          "health_by_level": [
+            1,
+            1,
+            1
+          ],
+          "count_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pig",
+      "name": "Pig",
+      "tier": 1,
+      "attack": 4,
+      "health": 1,
+      "abilities": [
+        {
+          "trigger": "sell",
+          "effect": "gain_gold",
+          "gold_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pigeon",
+      "name": "Pigeon",
+      "tier": 1,
+      "attack": 3,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "sell",
+          "effect": "stock_food",
+          "food_id": "bread_crumbs",
+          "count_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zombie_cricket",
+      "name": "Zombie Cricket",
+      "tier": 0,
+      "attack": 1,
+      "health": 1,
+      "token": true,
+      "abilities": []
+    },
+    {
+      "id": "bee",
+      "name": "Bee",
+      "tier": 0,
+      "attack": 1,
+      "health": 1,
+      "token": true,
+      "abilities": []
+    }
+  ],
+  "foods": [
+    {
+      "id": "apple",
+      "name": "Apple",
+      "tier": 1,
+      "cost": 3,
+      "effect": "buff",
+      "attack": 1,
+      "health": 1,
+      "curriculum_only": true
+    },
+    {
+      "id": "honey",
+      "name": "Honey",
+      "tier": 1,
+      "cost": 3,
+      "effect": "set_perk",
+      "perk": "honey",
+      "curriculum_only": true
+    },
+    {
+      "id": "bread_crumbs",
+      "name": "Bread Crumbs",
+      "tier": 0,
+      "cost": 0,
+      "effect": "buff",
+      "attack": 1,
+      "health": 0,
+      "token": true
+    }
+  ],
+  "rules_version": 2,
+  "sources": {
+    "fish_ant_otter": "https://steamcommunity.com/games/1714040/announcements/detail/3698065064748065722"
+  }
+}

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Watch Super Auto Pets RL decisions, compare failed and successful replays, and inspect policy probabilities and cutoff values.">
+  <meta name="color-scheme" content="light">
+  <title>SAP RL · Replay Lab</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">↔</span><div><h1>Replay Lab</h1><span>SAP RL · eight-pet sandbox</span></div></div>
+    <div class="collection"><label for="collection">Collection</label> <select id="collection"><option value="round5">Round 5 · Confirmation</option><option value="round3">Round 3 · Historical</option></select></div>
+  </header>
+  <main>
+    <section class="intro" aria-label="Replay context">
+      <div><h2>Watch the decisions. Find the failure.</h2><p>Two independent episodes side by side. Choose a pet to inspect its ability.</p></div>
+      <details class="context"><summary>Rules & what’s being measured</summary><div>
+        <p id="rules-note"></p>
+        <p>Action probabilities and critic values are reconstructed from each selected checkpoint. They are not the optimizer’s original training-buffer values. A high probability is a preference, not a win probability.</p>
+        <p id="selection-note"></p>
+        <p id="objective-note"></p>
+        <p>The bootstrap calculation shows what PPO would do at this checkpoint. It does not by itself establish why the policy loops.</p>
+        <p><a href="https://steamcommunity.com/games/1714040/announcements/detail/3698065064748065722" target="_blank" rel="noreferrer">Official Fish, Ant and Otter ability changes ↗</a></p>
+      </div></details>
+    </section>
+    <p id="benchmark-note" class="neutral-note" aria-live="polite"></p>
+    <p id="reliability-note" class="bootstrap-note" hidden></p>
+    <section class="transport" aria-label="Shared playback controls">
+      <div class="button-group"><button id="play-both" class="primary">▶ Play both</button><button id="pause-both">Pause</button><button id="start-both">From start</button><button id="ending-both">Watch endings</button></div>
+      <label class="speed">Speed <select id="speed"><option value="1200">0.5×</option><option value="600" selected>1×</option><option value="300">2×</option><option value="150">4×</option></select></label>
+    </section>
+    <div id="global-error" role="alert" hidden></div>
+    <section id="lanes" class="lanes" aria-label="Replay comparison"></section>
+    <footer><span id="collection-count">Loading collection…</span><span>Slot 0 fights first. Temporary buffs are shown separately.</span></footer>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,1385 @@
+{
+  "catalog_id": "turtle-v0.46-tier1",
+  "config": {
+    "food_shop_slots": 1,
+    "max_actions_per_turn": 30,
+    "max_shop_size": 5,
+    "max_team_size": 5,
+    "max_turns": 30,
+    "pet_cost": 3,
+    "pet_shop_slots": 4,
+    "starting_gold": 10,
+    "starting_lives": 5,
+    "target_wins": 10
+  },
+  "final_state": {
+    "actions_this_turn": 4,
+    "gold": 0,
+    "lives": 1,
+    "previous_outcome": 1,
+    "shop": [
+      {
+        "cost": 3,
+        "frozen": false,
+        "item_id": "fish",
+        "kind": "pet"
+      },
+      {
+        "cost": 3,
+        "frozen": false,
+        "item_id": "ant",
+        "kind": "pet"
+      },
+      {
+        "cost": 3,
+        "frozen": false,
+        "item_id": "ant",
+        "kind": "pet"
+      },
+      {
+        "cost": 3,
+        "frozen": false,
+        "item_id": "cricket",
+        "kind": "pet"
+      },
+      null
+    ],
+    "team": [
+      {
+        "attack": 19,
+        "experience": 6,
+        "health": 24,
+        "perk": null,
+        "spec_id": "fish",
+        "temporary_attack": 0,
+        "temporary_health": 0
+      },
+      {
+        "attack": 6,
+        "experience": 5,
+        "health": 7,
+        "perk": null,
+        "spec_id": "ant",
+        "temporary_attack": 0,
+        "temporary_health": 0
+      },
+      {
+        "attack": 9,
+        "experience": 6,
+        "health": 13,
+        "perk": null,
+        "spec_id": "ant",
+        "temporary_attack": 0,
+        "temporary_health": 0
+      },
+      {
+        "attack": 8,
+        "experience": 6,
+        "health": 12,
+        "perk": "honey",
+        "spec_id": "cricket",
+        "temporary_attack": 0,
+        "temporary_health": 0
+      },
+      {
+        "attack": 6,
+        "experience": 6,
+        "health": 8,
+        "perk": "honey",
+        "spec_id": "otter",
+        "temporary_attack": 0,
+        "temporary_health": 0
+      }
+    ],
+    "terminated": true,
+    "truncated": false,
+    "turn": 15,
+    "wins": 10
+  },
+  "schema_version": 1,
+  "seed": 700001,
+  "steps": [
+    {
+      "action": "buy_pet:3",
+      "action_id": 5,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_pet:3",
+      "action_id": 5,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_pet:2",
+      "action_id": 4,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:0,1",
+      "action_id": 62,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "loss",
+        "battle_trace": [
+          "you:Fish and opponent:Fish attack for 2/2",
+          "you:Fish and opponent:Fish attack for 2/2",
+          "you:Fish faints",
+          "opponent:Fish faints",
+          "you:Cricket and opponent:Ant attack for 1/2",
+          "you:Cricket and opponent:Ant attack for 1/2",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Ant faints",
+          "opponent:Ant buffs opponent:Ant",
+          "you:Zombie Cricket and opponent:Ant attack for 1/3",
+          "you:Zombie Cricket faints",
+          "you:Otter and opponent:Ant attack for 1/3",
+          "you:Otter faints",
+          "battle ends: loss"
+        ],
+        "opponent": [
+          "fish",
+          "ant",
+          "ant"
+        ]
+      },
+      "reward": -1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:3,0",
+      "action_id": 47,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:1,1",
+      "action_id": 38,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "loss",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Cricket",
+          "opponent:Mosquito deals 1 to you:Fish",
+          "you:Fish and opponent:Pigeon attack for 4/3",
+          "opponent:Pigeon faints",
+          "you:Fish and opponent:Otter attack for 4/2",
+          "you:Fish faints",
+          "opponent:Otter faints",
+          "you:Cricket and opponent:Pigeon attack for 2/3",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Pigeon faints",
+          "you:Zombie Cricket and opponent:Mosquito attack for 1/2",
+          "you:Zombie Cricket faints",
+          "you:Otter and opponent:Mosquito attack for 1/2",
+          "opponent:Mosquito faints",
+          "you:Otter and opponent:Mosquito attack for 1/2",
+          "you:Otter faints",
+          "battle ends: loss"
+        ],
+        "opponent": [
+          "pigeon",
+          "otter",
+          "pigeon",
+          "mosquito",
+          "mosquito"
+        ]
+      },
+      "reward": -1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_pet:3",
+      "action_id": 5,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:2,1",
+      "action_id": 43,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:2,3",
+      "action_id": 64,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_pet:3",
+      "action_id": 5,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:3,4",
+      "action_id": 65,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:2,3",
+      "action_id": 64,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:2,3",
+      "action_id": 64,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:2,3",
+      "action_id": 64,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:2,3",
+      "action_id": 64,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "draw",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Ant",
+          "you:Fish and opponent:Cricket attack for 4/4",
+          "you:Fish and opponent:Cricket attack for 4/4",
+          "you:Fish faints",
+          "opponent:Cricket faints",
+          "opponent:Cricket summons opponent:Zombie Cricket",
+          "you:Cricket and opponent:Zombie Cricket attack for 3/2",
+          "opponent:Zombie Cricket faints",
+          "you:Cricket and opponent:Fish attack for 3/2",
+          "you:Cricket and opponent:Fish attack for 3/2",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Fish faints",
+          "you:Zombie Cricket and opponent:Fish attack for 2/2",
+          "you:Zombie Cricket faints",
+          "you:Ant and opponent:Fish attack for 2/2",
+          "you:Ant faints",
+          "you:Ant buffs you:Ant",
+          "opponent:Fish faints",
+          "you:Ant and opponent:Otter attack for 3/2",
+          "you:Ant faints",
+          "you:Ant buffs you:Otter",
+          "you:Otter and opponent:Otter attack for 2/2",
+          "opponent:Otter faints",
+          "you:Otter and opponent:Mosquito attack for 2/2",
+          "you:Otter faints",
+          "opponent:Mosquito faints",
+          "battle ends: draw"
+        ],
+        "opponent": [
+          "cricket",
+          "fish",
+          "fish",
+          "otter",
+          "mosquito"
+        ]
+      },
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:1,2",
+      "action_id": 63,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:1,0",
+      "action_id": 37,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:0,2",
+      "action_id": 34,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:0,0",
+      "action_id": 32,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Otter",
+          "opponent:Mosquito deals 1 to you:Fish",
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Otter",
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Otter",
+          "you:Ant faints",
+          "you:Ant buffs you:Cricket",
+          "you:Otter faints",
+          "you:Fish and opponent:Mosquito attack for 6/5",
+          "opponent:Mosquito faints",
+          "you:Fish and opponent:Mosquito attack for 6/4",
+          "you:Fish faints",
+          "opponent:Mosquito faints",
+          "you:Cricket and opponent:Pigeon attack for 7/4",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Cricket and opponent:Bee attack for 7/1",
+          "opponent:Bee faints",
+          "you:Cricket and opponent:Mosquito attack for 7/2",
+          "opponent:Mosquito faints",
+          "you:Cricket and opponent:Mosquito attack for 7/2",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Mosquito faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "mosquito",
+          "mosquito",
+          "pigeon",
+          "mosquito",
+          "mosquito"
+        ]
+      },
+      "reward": 1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:0,3",
+      "action_id": 35,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:1,0",
+      "action_id": 37,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "loss",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Fish",
+          "opponent:Mosquito deals 1 to you:Ant",
+          "you:Ant faints",
+          "you:Ant buffs you:Ant",
+          "you:Fish and opponent:Mosquito attack for 8/10",
+          "you:Fish faints",
+          "you:Cricket and opponent:Mosquito attack for 6/10",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Mosquito faints",
+          "opponent:Mosquito summons opponent:Bee",
+          "you:Zombie Cricket and opponent:Bee attack for 2/1",
+          "opponent:Bee faints",
+          "you:Zombie Cricket and opponent:Fish attack for 2/4",
+          "you:Zombie Cricket faints",
+          "you:Ant and opponent:Fish attack for 6/4",
+          "opponent:Fish faints",
+          "opponent:Fish summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 6/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Fish attack for 6/4",
+          "you:Ant faints",
+          "you:Ant buffs you:Otter",
+          "opponent:Fish faints",
+          "you:Otter and opponent:Ant attack for 2/2",
+          "opponent:Ant faints",
+          "opponent:Ant buffs opponent:Mosquito",
+          "you:Otter and opponent:Mosquito attack for 2/3",
+          "you:Otter faints",
+          "battle ends: loss"
+        ],
+        "opponent": [
+          "mosquito",
+          "fish",
+          "fish",
+          "ant",
+          "mosquito"
+        ]
+      },
+      "reward": -1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:3,3",
+      "action_id": 50,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:2,0",
+      "action_id": 42,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Fish",
+          "opponent:Mosquito deals 1 to you:Ant",
+          "you:Fish and opponent:Pigeon attack for 10/7",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Fish and opponent:Bee attack for 10/1",
+          "opponent:Bee faints",
+          "you:Fish and opponent:Mosquito attack for 10/5",
+          "you:Fish faints",
+          "opponent:Mosquito faints",
+          "you:Ant and opponent:Pig attack for 2/6",
+          "you:Ant faints",
+          "you:Ant buffs you:Cricket",
+          "you:Cricket and opponent:Pig attack for 7/6",
+          "opponent:Pig faints",
+          "opponent:Pig summons opponent:Bee",
+          "you:Cricket and opponent:Bee attack for 7/1",
+          "opponent:Bee faints",
+          "you:Cricket and opponent:Ant attack for 7/3",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Ant faints",
+          "opponent:Ant buffs opponent:Pigeon",
+          "you:Zombie Cricket and opponent:Pigeon attack for 2/4",
+          "you:Zombie Cricket faints",
+          "you:Ant and opponent:Pigeon attack for 6/4",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 6/1",
+          "opponent:Bee faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "pigeon",
+          "mosquito",
+          "pig",
+          "ant",
+          "pigeon"
+        ]
+      },
+      "reward": 1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:0,3",
+      "action_id": 35,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:0,3",
+      "action_id": 35,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "loss",
+        "battle_trace": [
+          "you:Fish and opponent:Cricket attack for 10/8",
+          "you:Fish and opponent:Cricket attack for 10/8",
+          "you:Fish faints",
+          "opponent:Cricket faints",
+          "opponent:Cricket summons opponent:Zombie Cricket",
+          "you:Ant and opponent:Zombie Cricket attack for 2/2",
+          "you:Ant faints",
+          "you:Ant buffs you:Ant",
+          "opponent:Zombie Cricket faints",
+          "you:Cricket and opponent:Otter attack for 6/6",
+          "you:Cricket and opponent:Otter attack for 6/6",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Otter faints",
+          "you:Zombie Cricket and opponent:Cricket attack for 2/4",
+          "you:Zombie Cricket faints",
+          "you:Ant and opponent:Cricket attack for 9/4",
+          "opponent:Cricket faints",
+          "opponent:Cricket summons opponent:Zombie Cricket",
+          "you:Ant and opponent:Zombie Cricket attack for 9/1",
+          "opponent:Zombie Cricket faints",
+          "you:Ant and opponent:Fish attack for 9/4",
+          "you:Ant faints",
+          "you:Ant buffs you:Otter",
+          "opponent:Fish faints",
+          "opponent:Fish summons opponent:Bee",
+          "you:Otter and opponent:Bee attack for 3/1",
+          "opponent:Bee faints",
+          "you:Otter and opponent:Cricket attack for 3/3",
+          "you:Otter and opponent:Cricket attack for 3/3",
+          "you:Otter faints",
+          "battle ends: loss"
+        ],
+        "opponent": [
+          "cricket",
+          "otter",
+          "cricket",
+          "fish",
+          "cricket"
+        ]
+      },
+      "reward": -1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:1,4",
+      "action_id": 41,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Otter",
+          "opponent:Mosquito deals 1 to you:Cricket",
+          "opponent:Mosquito deals 1 to you:Fish",
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Otter",
+          "you:Fish and opponent:Mosquito attack for 12/8",
+          "opponent:Mosquito faints",
+          "opponent:Horse buffs summoned opponent:Bee",
+          "opponent:Mosquito summons opponent:Bee",
+          "you:Fish and opponent:Bee attack for 12/2",
+          "opponent:Bee faints",
+          "you:Fish and opponent:Pig attack for 12/9",
+          "you:Fish faints",
+          "opponent:Pig faints",
+          "you:Ant and opponent:Mosquito attack for 2/4",
+          "you:Ant faints",
+          "you:Ant buffs you:Cricket",
+          "you:Cricket and opponent:Mosquito attack for 7/4",
+          "opponent:Mosquito faints",
+          "you:Cricket and opponent:Otter attack for 7/3",
+          "opponent:Otter faints",
+          "opponent:Horse buffs summoned opponent:Bee",
+          "opponent:Otter summons opponent:Bee",
+          "you:Cricket and opponent:Bee attack for 7/2",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Bee faints",
+          "you:Zombie Cricket and opponent:Horse attack for 2/3",
+          "you:Zombie Cricket faints",
+          "you:Ant and opponent:Horse attack for 8/3",
+          "opponent:Horse faints",
+          "opponent:Horse summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 8/1",
+          "opponent:Bee faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "mosquito",
+          "pig",
+          "mosquito",
+          "otter",
+          "horse"
+        ]
+      },
+      "reward": 1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:1,3",
+      "action_id": 40,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:3,2",
+      "action_id": 49,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:0,4",
+      "action_id": 36,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Fish",
+          "you:Fish and opponent:Pigeon attack for 12/12",
+          "opponent:Pigeon faints",
+          "you:Fish and opponent:Ant attack for 12/9",
+          "you:Fish faints",
+          "opponent:Ant faints",
+          "opponent:Ant buffs opponent:Ant",
+          "you:Ant and opponent:Mosquito attack for 2/7",
+          "you:Ant faints",
+          "you:Ant buffs you:Otter",
+          "you:Cricket and opponent:Mosquito attack for 7/7",
+          "opponent:Mosquito faints",
+          "you:Cricket and opponent:Fish attack for 7/5",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Fish faints",
+          "you:Zombie Cricket and opponent:Ant attack for 2/7",
+          "you:Zombie Cricket faints",
+          "you:Ant and opponent:Ant attack for 9/7",
+          "opponent:Ant faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "pigeon",
+          "ant",
+          "mosquito",
+          "fish",
+          "ant"
+        ]
+      },
+      "reward": 1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:1,4",
+      "action_id": 41,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Fish",
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Cricket",
+          "opponent:Mosquito deals 1 to you:Otter",
+          "you:Fish and opponent:Otter attack for 14/9",
+          "opponent:Otter faints",
+          "you:Fish and opponent:Ant attack for 14/7",
+          "you:Fish faints",
+          "opponent:Ant faints",
+          "opponent:Ant buffs opponent:Cricket",
+          "you:Ant and opponent:Cricket attack for 2/9",
+          "you:Ant faints",
+          "you:Ant buffs you:Cricket",
+          "you:Cricket and opponent:Cricket attack for 8/9",
+          "you:Cricket and opponent:Cricket attack for 8/9",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Cricket faints",
+          "opponent:Cricket summons opponent:Bee",
+          "opponent:Cricket summons opponent:Zombie Cricket",
+          "you:Zombie Cricket and opponent:Zombie Cricket attack for 2/3",
+          "you:Zombie Cricket faints",
+          "you:Ant and opponent:Zombie Cricket attack for 9/3",
+          "opponent:Zombie Cricket faints",
+          "you:Ant and opponent:Bee attack for 9/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Mosquito attack for 9/5",
+          "opponent:Mosquito faints",
+          "opponent:Mosquito summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 9/1",
+          "you:Ant faints",
+          "you:Ant buffs you:Otter",
+          "opponent:Bee faints",
+          "you:Otter and opponent:Mosquito attack for 7/4",
+          "opponent:Mosquito faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "otter",
+          "ant",
+          "cricket",
+          "mosquito",
+          "mosquito"
+        ]
+      },
+      "reward": 1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:3,2",
+      "action_id": 49,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:2,4",
+      "action_id": 46,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:2,4",
+      "action_id": 46,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Otter",
+          "opponent:Mosquito deals 1 to you:Fish",
+          "you:Fish and opponent:Pigeon attack for 14/14",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Fish and opponent:Bee attack for 14/1",
+          "opponent:Bee faints",
+          "you:Fish and opponent:Mosquito attack for 14/7",
+          "you:Fish faints",
+          "opponent:Mosquito faints",
+          "opponent:Mosquito summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 2/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Pigeon attack for 2/7",
+          "you:Ant faints",
+          "you:Ant buffs you:Cricket",
+          "you:Cricket and opponent:Pigeon attack for 9/7",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Cricket and opponent:Bee attack for 9/1",
+          "opponent:Bee faints",
+          "you:Cricket and opponent:Ant attack for 9/4",
+          "opponent:Ant faints",
+          "opponent:Ant buffs opponent:Ant",
+          "opponent:Ant summons opponent:Bee",
+          "you:Cricket and opponent:Bee attack for 9/1",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Bee faints",
+          "you:Zombie Cricket and opponent:Ant attack for 3/4",
+          "you:Zombie Cricket faints",
+          "you:Ant and opponent:Ant attack for 9/4",
+          "opponent:Ant faints",
+          "opponent:Ant summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 9/1",
+          "opponent:Bee faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "pigeon",
+          "mosquito",
+          "pigeon",
+          "ant",
+          "ant"
+        ]
+      },
+      "reward": 1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:2,1",
+      "action_id": 43,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,4",
+      "action_id": 31,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Otter",
+          "opponent:Mosquito deals 1 to you:Fish",
+          "you:Fish and opponent:Fish attack for 15/13",
+          "opponent:Fish faints",
+          "opponent:Fish summons opponent:Bee",
+          "you:Fish and opponent:Bee attack for 15/1",
+          "opponent:Bee faints",
+          "you:Fish and opponent:Mosquito attack for 15/11",
+          "you:Fish faints",
+          "opponent:Mosquito faints",
+          "opponent:Mosquito summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 3/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Fish attack for 3/9",
+          "you:Ant faints",
+          "you:Ant buffs you:Otter",
+          "you:Cricket and opponent:Fish attack for 8/9",
+          "opponent:Fish faints",
+          "opponent:Fish summons opponent:Bee",
+          "you:Cricket and opponent:Bee attack for 8/1",
+          "opponent:Bee faints",
+          "you:Cricket and opponent:Pig attack for 8/6",
+          "you:Cricket faints",
+          "you:Cricket summons you:Zombie Cricket",
+          "opponent:Pig faints",
+          "opponent:Pig summons opponent:Bee",
+          "you:Zombie Cricket and opponent:Bee attack for 3/1",
+          "opponent:Bee faints",
+          "you:Zombie Cricket and opponent:Pig attack for 3/4",
+          "you:Zombie Cricket faints",
+          "opponent:Pig faints",
+          "opponent:Pig summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 9/1",
+          "opponent:Bee faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "fish",
+          "mosquito",
+          "fish",
+          "pig",
+          "pig"
+        ]
+      },
+      "reward": 1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:2,3",
+      "action_id": 64,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:2,3",
+      "action_id": 64,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "swap_adjacent:2,3",
+      "action_id": 64,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Ant",
+          "opponent:Mosquito deals 1 to you:Cricket",
+          "opponent:Mosquito deals 1 to you:Fish",
+          "you:Fish and opponent:Pigeon attack for 17/14",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Fish and opponent:Bee attack for 17/1",
+          "opponent:Bee faints",
+          "you:Fish and opponent:Mosquito attack for 17/7",
+          "you:Fish faints",
+          "opponent:Mosquito faints",
+          "opponent:Mosquito summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 3/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Pigeon attack for 3/7",
+          "you:Ant faints",
+          "you:Ant buffs you:Ant",
+          "you:Ant and opponent:Pigeon attack for 10/7",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 10/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Ant attack for 10/4",
+          "opponent:Ant faints",
+          "opponent:Ant buffs opponent:Ant",
+          "opponent:Ant summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 10/1",
+          "you:Ant faints",
+          "you:Ant buffs you:Otter",
+          "opponent:Bee faints",
+          "you:Cricket and opponent:Ant attack for 8/4",
+          "opponent:Ant faints",
+          "opponent:Ant summons opponent:Bee",
+          "you:Cricket and opponent:Bee attack for 8/1",
+          "opponent:Bee faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "pigeon",
+          "mosquito",
+          "pigeon",
+          "ant",
+          "ant"
+        ]
+      },
+      "reward": 1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,3",
+      "action_id": 30,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:3,1",
+      "action_id": 48,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:0,1",
+      "action_id": 33,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Cricket",
+          "opponent:Mosquito deals 1 to you:Otter",
+          "opponent:Mosquito deals 1 to you:Fish",
+          "you:Fish and opponent:Pigeon attack for 17/14",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Fish and opponent:Bee attack for 17/1",
+          "opponent:Bee faints",
+          "you:Fish and opponent:Mosquito attack for 17/7",
+          "you:Fish faints",
+          "opponent:Mosquito faints",
+          "opponent:Mosquito summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 5/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Pigeon attack for 5/7",
+          "you:Ant faints",
+          "you:Ant buffs you:Cricket",
+          "you:Ant and opponent:Pigeon attack for 9/7",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 9/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Ant attack for 9/4",
+          "opponent:Ant faints",
+          "opponent:Ant buffs opponent:Ant",
+          "opponent:Ant summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 9/1",
+          "you:Ant faints",
+          "you:Ant buffs you:Cricket",
+          "opponent:Bee faints",
+          "you:Cricket and opponent:Ant attack for 13/4",
+          "opponent:Ant faints",
+          "opponent:Ant summons opponent:Bee",
+          "you:Cricket and opponent:Bee attack for 13/1",
+          "opponent:Bee faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "pigeon",
+          "mosquito",
+          "pigeon",
+          "ant",
+          "ant"
+        ]
+      },
+      "reward": 1.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "merge:3,1",
+      "action_id": 48,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "roll",
+      "action_id": 1,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "buy_food:4,0",
+      "action_id": 27,
+      "info": {},
+      "reward": 0.0,
+      "terminated": false,
+      "truncated": false
+    },
+    {
+      "action": "end_turn",
+      "action_id": 0,
+      "info": {
+        "battle_outcome": "win",
+        "battle_trace": [
+          "opponent:Mosquito deals 1 to you:Fish",
+          "opponent:Mosquito deals 1 to you:Cricket",
+          "opponent:Mosquito deals 1 to you:Ant",
+          "you:Fish and opponent:Pigeon attack for 19/14",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Fish and opponent:Bee attack for 19/1",
+          "opponent:Bee faints",
+          "you:Fish and opponent:Mosquito attack for 19/7",
+          "opponent:Mosquito faints",
+          "opponent:Mosquito summons opponent:Bee",
+          "you:Fish and opponent:Bee attack for 19/1",
+          "you:Fish faints",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Pigeon attack for 6/7",
+          "you:Ant faints",
+          "you:Ant buffs you:Cricket",
+          "opponent:Pigeon faints",
+          "opponent:Pigeon summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 9/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Ant attack for 9/4",
+          "opponent:Ant faints",
+          "opponent:Ant buffs opponent:Ant",
+          "opponent:Ant summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 9/1",
+          "opponent:Bee faints",
+          "you:Ant and opponent:Ant attack for 9/4",
+          "opponent:Ant faints",
+          "opponent:Ant summons opponent:Bee",
+          "you:Ant and opponent:Bee attack for 9/1",
+          "opponent:Bee faints",
+          "battle ends: win"
+        ],
+        "opponent": [
+          "pigeon",
+          "mosquito",
+          "pigeon",
+          "ant",
+          "ant"
+        ],
+        "success": true
+      },
+      "reward": 1.0,
+      "terminated": true,
+      "truncated": false
+    }
+  ]
+}

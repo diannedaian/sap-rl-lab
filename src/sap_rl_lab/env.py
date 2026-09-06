@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from typing import Any, Dict, Optional
 
 try:
@@ -13,6 +14,7 @@ except ImportError as exc:  # pragma: no cover - exercised only without the opti
         'The RL adapter needs optional packages. Install with: pip install -e ".[rl]"'
     ) from exc
 
+from .actions import ActionKind
 from .catalog import Catalog, load_catalog
 from .domain import GameConfig
 from .engine import AutoBattler, InvalidAction, OpponentProvider
@@ -31,14 +33,26 @@ class SapAutoBattlerEnv(gym.Env):
         render_mode: Optional[str] = None,
         action_cost: float = 0.0,
         forfeit_on_limit: bool = False,
+        swap_cost: float = 0.0,
+        success_bonus_max: float = 0.0,
+        success_action_cost: float = 0.0,
+        observe_episode_actions: bool = False,
     ) -> None:
         super().__init__()
         self.engine = AutoBattler(catalog or load_catalog(), config, opponent_provider)
         self.render_mode = render_mode
-        if action_cost < 0:
-            raise ValueError("action_cost must be nonnegative")
+        costs = (action_cost, swap_cost, success_bonus_max, success_action_cost)
+        if any(not math.isfinite(x) or x < 0 for x in costs):
+            raise ValueError("reward coefficients must be finite and nonnegative")
+        if success_bonus_max and (not success_action_cost or not observe_episode_actions):
+            raise ValueError("success bonus requires a positive action cost and observed count")
         self.action_cost = action_cost
         self.forfeit_on_limit = forfeit_on_limit
+        self.swap_cost = swap_cost
+        self.success_bonus_max = success_bonus_max
+        self.success_action_cost = success_action_cost
+        self.observe_episode_actions = observe_episode_actions
+        self.episode_actions = 0
         self.action_space = spaces.Discrete(self.engine.codec.size)
 
         pet_count = len(self.engine.catalog.pets)
@@ -47,7 +61,9 @@ class SapAutoBattlerEnv(gym.Env):
         shop_width = pet_count + food_count + 6
         self.observation_space = spaces.Dict(
             {
-                "global": spaces.Box(0.0, 1.0, shape=(8,), dtype=np.float32),
+                "global": spaces.Box(
+                    0.0, 1.0, shape=(8 + int(observe_episode_actions),), dtype=np.float32
+                ),
                 "team": spaces.Box(
                     0.0,
                     1.0,
@@ -77,12 +93,14 @@ class SapAutoBattlerEnv(gym.Env):
         # episode seeds from this environment's persistent seeded Gym RNG.
         episode_seed = seed if seed is not None else int(self.np_random.integers(0, 2**63 - 1))
         self.engine.reset(seed=episode_seed)
+        self.episode_actions = 0
         return self._observation(), {
             "seed": episode_seed,
             "catalog_id": self.engine.catalog.catalog_id,
         }
 
     def step(self, action: int) -> tuple[Dict[str, np.ndarray], float, bool, bool, Dict[str, Any]]:
+        self.episode_actions += 1
         try:
             transition = self.engine.step_id(int(action))
         except InvalidAction as exc:
@@ -110,6 +128,12 @@ class SapAutoBattlerEnv(gym.Env):
         reward = transition.reward - self.action_cost
         terminated, truncated = transition.terminated, transition.truncated
         info["game_reward"] = transition.reward
+        info["episode_actions"] = self.episode_actions
+        swap_penalty = (
+            self.swap_cost if self.engine.codec.decode(int(action)).kind is ActionKind.SWAP else 0.0
+        )
+        reward -= swap_penalty
+        info["swap_penalty"] = swap_penalty
         if truncated and self.forfeit_on_limit:
             # A deliberate safety-limit failure forfeits remaining lives. It is
             # an absorbing failure for training: no optimistic value bootstrap.
@@ -119,6 +143,17 @@ class SapAutoBattlerEnv(gym.Env):
             reward += penalty_already_paid - self.engine.state.lives
             terminated, truncated = True, False
             info["training_forfeit"] = True
+        bonus = 0.0
+        if (
+            terminated
+            and not truncated
+            and self.engine.state.wins >= self.engine.config.target_wins
+        ):
+            bonus = max(
+                0.0, self.success_bonus_max - self.success_action_cost * self.episode_actions
+            )
+            reward += bonus
+        info["success_efficiency_bonus"] = bonus
         return (
             self._observation(),
             reward,
@@ -147,6 +182,11 @@ class SapAutoBattlerEnv(gym.Env):
             ],
             dtype=np.float32,
         )
+        if self.observe_episode_actions:
+            # The success bonus depends on the whole episode, not just this shop.
+            # Expose its sufficient statistic instead of hiding reward-relevant history.
+            maximum = config.max_turns * config.max_actions_per_turn
+            global_obs = np.append(global_obs, np.float32(min(self.episode_actions / maximum, 1.0)))
 
         team = np.zeros(self.observation_space["team"].shape, dtype=np.float32)
         pet_count = len(self._pet_index)

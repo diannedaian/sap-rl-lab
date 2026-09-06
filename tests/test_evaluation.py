@@ -4,6 +4,32 @@ import unittest
 
 @unittest.skipUnless(importlib.util.find_spec("gymnasium"), "RL extra is not installed")
 class EvaluationTests(unittest.TestCase):
+    def test_suite_is_equal_family_average_and_compacts_nested_rows(self):
+        from unittest.mock import patch
+
+        from sap_rl_lab.evaluation import compact_evaluation, evaluate_suite
+
+        def fake(policy, **kwargs):
+            score = {"a.json": 1.0, "b.json": 0.0, "c.json": 0.2}[kwargs["opponent_league"]]
+            return {
+                "success_rate": score,
+                "mean_return": score,
+                "mean_wins": score,
+                "truncation_rate": 0.0,
+                "mean_episode_actions": 1.0,
+                "episode_results": [{"seed": kwargs["seed"]}],
+                "failure_examples": [],
+            }
+
+        with patch("sap_rl_lab.evaluation.evaluate_policy", side_effect=fake) as evaluator:
+            suite = evaluate_suite(
+                "greedy", {"a": "a.json", "b": "b.json", "c": "c.json"}, episodes=7, seed=99
+            )
+        self.assertAlmostEqual(suite["success_rate"], 0.4)
+        self.assertEqual(evaluator.call_count, 3)
+        self.assertEqual(suite["families"]["a"]["episode_results"], [{"seed": 99}])
+        self.assertNotIn("episode_results", compact_evaluation(suite)["families"]["a"])
+
     def test_batch_size_does_not_change_baseline_episodes(self):
         from sap_rl_lab.evaluation import evaluate_policy
 

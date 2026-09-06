@@ -28,6 +28,8 @@ class AbilitySpec:
     params: Mapping[str, Any]
 
     def at_level(self, key: str, level: int, default: int = 0) -> int:
+        if level not in {1, 2, 3}:
+            raise ValueError("Ability level must be 1, 2, or 3")
         values = self.params.get(f"{key}_by_level")
         if values is None:
             return int(self.params.get(key, default))
@@ -64,6 +66,7 @@ class Catalog:
     checked_on: str
     pets: Mapping[str, PetSpec]
     foods: Mapping[str, FoodSpec]
+    rules_version: int = 1
 
     @property
     def rollable_pet_ids(self) -> Tuple[str, ...]:
@@ -106,6 +109,9 @@ def _ability(raw: Mapping[str, Any]) -> AbilitySpec:
 
 
 def catalog_from_dict(raw: Mapping[str, Any]) -> Catalog:
+    rules_version = int(raw.get("rules_version", 1))
+    if rules_version not in {1, 2}:
+        raise ValueError(f"Unsupported rules version: {rules_version}")
     raw_pets = list(raw["pets"])
     raw_foods = list(raw["foods"])
     _unique_ids(raw_pets, "Pet")
@@ -171,10 +177,22 @@ def catalog_from_dict(raw: Mapping[str, Any]) -> Catalog:
         checked_on=str(raw["checked_on"]),
         pets=pets,
         foods=foods,
+        rules_version=rules_version,
     )
 
 
-def load_catalog(name: str = "turtle_v0_46_tier1.json") -> Catalog:
+def load_catalog(name: str = "turtle_v0_46_tier1_rules_v2.json") -> Catalog:
     catalog_file = resources.files("sap_rl_lab").joinpath("catalogs", name)
     with catalog_file.open("r", encoding="utf-8") as handle:
         return catalog_from_dict(json.load(handle))
+
+
+def load_catalog_by_id(catalog_id: str) -> Catalog:
+    """Resolve recorded rules explicitly; never replay old data under new rules."""
+    names = {
+        "turtle-v0.46-tier1": "turtle_v0_46_tier1.json",
+        "turtle-v0.46-tier1-rules-v2": "turtle_v0_46_tier1_rules_v2.json",
+    }
+    if catalog_id not in names:
+        raise ValueError(f"Unknown recorded catalog: {catalog_id}")
+    return load_catalog(names[catalog_id])

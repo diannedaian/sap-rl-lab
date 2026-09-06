@@ -35,6 +35,77 @@ class TrainingConfigTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, "validation league must differ"):
                 TrainingConfig(opponent_league=str(first), validation_league=str(second)).validate()
 
+    def test_mixture_validation_overlap_rejected(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            a, b = root / "a.json", root / "b.json"
+            a.write_text("a")
+            b.write_text("b")
+            with self.assertRaisesRegex(ValueError, "validation league must differ"):
+                TrainingConfig(
+                    opponent_leagues=(str(a), str(b)), validation_leagues={"same": str(a)}
+                ).validate()
+
+    @unittest.skipUnless(importlib.util.find_spec("sb3_contrib"), "RL extra is not installed")
+    def test_fresh_pair_initialization_and_macro_validation(self):
+        from sb3_contrib import MaskablePPO
+
+        from sap_rl_lab.evaluation import evaluate_suite
+        from sap_rl_lab.opponents import build_scripted_league
+        from sap_rl_lab.training import train
+
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            pools = {}
+            for i, name in enumerate(("greedy", "stats", "summon")):
+                path = root / f"{name}.json"
+                build_scripted_league(name, 2, seed=1100 + i * 100).save(path)
+                pools[name] = str(path)
+            validation = {"stats": pools["stats"], "summon": pools["summon"]}
+            extra = root / "extra_training.json"
+            build_scripted_league("stats", 2, seed=9000).save(extra)
+            configs = dict(
+                timesteps=32,
+                environments=2,
+                rollout_steps=16,
+                batch_size=16,
+                device="cpu",
+                validation_leagues=validation,
+                validation_episodes=2,
+                evaluation_interval=16,
+            )
+            initial_hash = ""
+            for arm in ("single", "mixed"):
+                train_pools = (
+                    (pools["greedy"],) if arm == "single" else (pools["greedy"], str(extra))
+                )
+                train(
+                    TrainingConfig(
+                        **configs,
+                        opponent_leagues=train_pools,
+                        output_dir=str(root / arm),
+                        expected_initial_policy_sha256=initial_hash,
+                    )
+                )
+                manifest = json.loads((root / arm / "run_manifest.json").read_text())
+                initial_hash = manifest["initial_policy_sha256"]
+                self.assertEqual(manifest["initialization"], "from_scratch")
+                history = json.loads((root / arm / "validation_history.json").read_text())
+                winner = [r for r in history if r["selected"]][-1]
+                model = MaskablePPO.load(str(root / arm / "best_model.zip"), device="cpu")
+                result = evaluate_suite(model, validation, episodes=2, seed=30000)
+                self.assertEqual(result["success_rate"], winner["success_rate"])
+                self.assertEqual(result["mean_return"], winner["mean_return"])
+                self.assertNotIn("episode_results", winner["families"]["stats"])
+            with self.assertRaisesRegex(ValueError, "initial policy weights"):
+                train(
+                    TrainingConfig(
+                        **configs,
+                        output_dir=str(root / "bad_pair"),
+                        expected_initial_policy_sha256="wrong",
+                    )
+                )
+
     @unittest.skipUnless(importlib.util.find_spec("sb3_contrib"), "RL extra is not installed")
     def test_continuation_validation_save_load_and_original_weights_are_preserved(self):
         from sb3_contrib import MaskablePPO

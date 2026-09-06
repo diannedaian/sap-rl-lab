@@ -208,30 +208,37 @@ class AutoBattler:
         target.experience = min(6, target.experience + incoming.experience)
         self._run_shop_trigger(target, "buy", subject=target)
         if target.level > previous_level:
-            self._run_shop_trigger(target, "level_up", subject=target)
+            # A level-up ability belongs to the departing level. Other triggers
+            # (buy, sell, faint, summon, battle) retain the owner's current level.
+            # v1 is intentionally preserved for exact historical replay.
+            ability_level = previous_level if self.catalog.rules_version >= 2 else target.level
+            self._run_shop_trigger(target, "level_up", subject=target, ability_level=ability_level)
 
     def _sell(self, team_index: int) -> None:
         pet = self.state.team.pop(team_index)
         self.state.gold += pet.level
         self._run_shop_trigger(pet, "sell", subject=pet)
 
-    def _run_shop_trigger(self, owner: Pet, trigger: str, subject: Pet) -> None:
+    def _run_shop_trigger(
+        self, owner: Pet, trigger: str, subject: Pet, ability_level: Optional[int] = None
+    ) -> None:
         spec = self.catalog.pets[owner.spec_id]
+        level = owner.level if ability_level is None else ability_level
         for ability in spec.abilities:
             if ability.trigger != trigger:
                 continue
             if ability.effect == "gain_gold":
-                self.state.gold += ability.at_level("gold", owner.level)
+                self.state.gold += ability.at_level("gold", level)
             elif ability.effect == "stock_food":
-                count = ability.at_level("count", owner.level, 1)
+                count = ability.at_level("count", level, 1)
                 for _ in range(count):
                     self._stock_food(str(ability.params["food_id"]))
             elif ability.effect == "buff_random_friend":
                 friends = [pet for pet in self.state.team if pet is not subject]
-                count = min(len(friends), ability.at_level("count", owner.level, 1))
+                count = min(len(friends), ability.at_level("count", level, 1))
                 for friend in self.rng.sample(friends, count):
-                    friend.attack = min(50, friend.attack + ability.at_level("attack", owner.level))
-                    friend.health = min(50, friend.health + ability.at_level("health", owner.level))
+                    friend.attack = min(50, friend.attack + ability.at_level("attack", level))
+                    friend.health = min(50, friend.health + ability.at_level("health", level))
             else:
                 raise RuntimeError(
                     f"Effect {ability.effect} is not valid for shop trigger {trigger}"

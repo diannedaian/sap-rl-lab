@@ -12,3 +12,4 @@ runs/
 models/
 cluster_results/
 cluster/local_*.env
+artifact_staging/

@@ -35,7 +35,7 @@ def evaluate_policy(
     import numpy as np
 
     from .actions import ActionKind
-    from .baselines import RandomPolicy, SpendGoldPolicy
+    from .baselines import scripted_policy
     from .env import SapAutoBattlerEnv
     from .opponents import SnapshotLeague
 
@@ -43,9 +43,15 @@ def evaluate_policy(
         raise ValueError("episodes and batch_size must be positive")
     baseline = None
     if isinstance(policy, str):
-        if policy not in {"random", "greedy"}:
-            raise ValueError("unknown baseline")
-        baseline = RandomPolicy() if policy == "random" else SpendGoldPolicy()
+        baseline = scripted_policy(policy)
+    # Observation compatibility is separate from reward shaping: evaluation
+    # retains zero costs/bonuses unless explicitly overridden by its caller.
+    environment_options = dict(env_kwargs or {})
+    if baseline is None and hasattr(policy, "observation_space"):
+        width = policy.observation_space["global"].shape
+        if width not in {(8,), (9,)}:
+            raise ValueError(f"unsupported global observation shape: {width}")
+        environment_options.setdefault("observe_episode_actions", width == (9,))
     provider = SnapshotLeague.load(opponent_league) if opponent_league else None
     rows = []
     total_actions: Counter = Counter()
@@ -54,7 +60,7 @@ def evaluate_policy(
     examples = []
     for start in range(0, episodes, batch_size):
         envs = [
-            SapAutoBattlerEnv(opponent_provider=provider, **(env_kwargs or {}))
+            SapAutoBattlerEnv(opponent_provider=provider, **environment_options)
             for _ in range(min(batch_size, episodes - start))
         ]
         episode_seeds = [seed + start + i for i in range(len(envs))]
@@ -172,6 +178,44 @@ def evaluate_policy(
     }
 
 
+def compact_evaluation(result: Dict[str, Any]) -> Dict[str, Any]:
+    """Keep per-family summaries but omit episode rows from learning histories."""
+    return {
+        key: (
+            {name: compact_evaluation(value) for name, value in item.items()}
+            if key == "families"
+            else item
+        )
+        for key, item in result.items()
+        if key not in {"episode_results", "failure_examples"}
+    }
+
+
+def evaluate_suite(policy: Any, leagues: Dict[str, str], *, episodes: int, seed: int):
+    """Equal-family macro average; the stress-test family is supplied separately."""
+    if not leagues:
+        raise ValueError("suite needs at least one league")
+    families = {
+        name: evaluate_policy(policy, episodes=episodes, seed=seed, opponent_league=path)
+        for name, path in leagues.items()
+    }
+    return {
+        "families": families,
+        "episodes_per_family": episodes,
+        "seed_start": seed,
+        **{
+            metric: fmean(result[metric] for result in families.values())
+            for metric in (
+                "success_rate",
+                "mean_return",
+                "mean_wins",
+                "truncation_rate",
+                "mean_episode_actions",
+            )
+        },
+    }
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("policy", help="Model zip, random, or greedy")
@@ -186,7 +230,7 @@ def main() -> None:
     if output.exists():
         raise FileExistsError(output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    if args.policy in {"random", "greedy"}:
+    if args.policy in {"random", "greedy", "stats", "summon"}:
         policy = args.policy
     else:
         import torch
