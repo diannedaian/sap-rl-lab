@@ -64,8 +64,7 @@ or files outside this project are part of this cleanup.
 
 The release bundles above document the historical **eight-pet milestone**.
 The completed 60-pet release is described in [PROJECT_WRAPUP](PROJECT_WRAPUP.md)
-and [MODEL_CARD](MODEL_CARD.md). Its three final checkpoints are prepared for
-[Hugging Face](https://huggingface.co/DianneDaian/sap-rl-turtle-pack) (upload pending
-browser file permission), and compact
+and [MODEL_CARD](MODEL_CARD.md). Its three final checkpoints are published on
+[Hugging Face](https://huggingface.co/DianneDaian/sap-rl-turtle-pack), and compact
 final evaluation evidence lives in `docs/evidence/fullpack-v1`. The full local
 training history remains intact; this wrap-up performs no additional cleanup.

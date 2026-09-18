@@ -16,8 +16,8 @@ perks and summon tokens. This is not a certified reproduction of the official cl
 
 The hosted demo may require the owner's ChatGPT login; the complete browser demo
 is also in this repository and runs locally without an account.
-The public Hugging Face repository is created; checkpoint upload is currently
-pending browser file-access permission. See the final report for release status.
+The final A/B/C checkpoints are publicly downloadable on Hugging Face. All seven
+release files were downloaded without authentication and checksum-verified.
 
 ## Results
 

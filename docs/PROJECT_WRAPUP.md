@@ -59,7 +59,9 @@ exports passed archive privacy checks, byte-identical tensor/optimizer checks,
 and 128 legal inference steps matching the original checkpoints. The public
 evidence retains numeric rows and records original versus redacted checksums.
 
-Publication status: the public Hugging Face repository has been created; its
-file upload is pending Chrome's user-controlled file-access permission. The
-prepared exports are not yet downloadable. No additional training or deletion
-is part of this wrap-up.
+Publication completed on 2026-09-18: all three checkpoint ZIPs, the model card,
+license, manifest and checksum list are publicly downloadable on Hugging Face at
+[release e6d62e9](https://huggingface.co/DianneDaian/sap-rl-turtle-pack/commit/e6d62e9a0c769bc689a7dabfa7c09752037f48c3).
+All seven files were downloaded without authentication and their SHA-256 hashes
+matched the prepared exports. Original local checkpoints remain unchanged.
+No additional training or deletion is part of this wrap-up.
