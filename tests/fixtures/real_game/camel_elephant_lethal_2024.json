@@ -1,0 +1,43 @@
+{
+  "case_id": "camel-elephant-simultaneous-lethal-components",
+  "source": "https://www.youtube.com/watch?v=_bvUkiIKkDY&t=510s",
+  "creator": "Ninjin Plays",
+  "title": "Camel Still Good in 2024! | Ranked Turtle Pack | (Super Auto Pets)",
+  "inspected": "2026-09-07",
+  "version_limit": "2024 is in the title; public listing says two years ago. Exact publication date and client build are not certified. Ranked mode economy is not used as an arena fixture.",
+  "evidence_kind": "Public browser-played video frames, including sub-second frames; no video download",
+  "scope": "A single lethal exchange's ability components. Bison and Blowfish are replaced by passive supported recipients; armor has already been deducted from the supplied observed damage. Not a full recorded battle or proof of every current-version interaction.",
+  "timeline": [
+    {"actual_seconds": 510.609506, "observation": "Camel L2 23/13; immediately behind Bison 8/15. Enemy Elephant L2 20/3; immediately behind Blowfish 3/4. The earlier nonlethal Camel buff has resolved."},
+    {"actual_seconds": 510.911018, "observation": "Simultaneous attack: Camel takes visible 18 and reaches -5; Elephant takes visible 21 and reaches -18. Bison remains 8/15 and Blowfish 3/4."},
+    {"actual_seconds": 511.517126, "observation": "Dead Elephant still performs its after-attack animation toward the pet behind; both fainting bodies remain."},
+    {"actual_seconds": 512.518843, "observation": "Blowfish is now 3/2 after the two one-damage hits; Camel's +2/+4 buff animation reaches Bison."},
+    {"actual_seconds": 513.005055, "observation": "Bison reads 10/19; Camel remains at -5 before removal. Blowfish Hurt projectiles affect other friends; those out-of-curriculum abilities are excluded."}
+  ],
+  "friendly": {
+    "owner": {"spec_id": "camel", "attack": 23, "health": 13, "experience": 3},
+    "observed_recipient_species": "bison",
+    "recipient_before": {"attack": 8, "health": 15},
+    "net_attack_damage": 18,
+    "owner_health_after": -5,
+    "recipient_after": {"attack": 10, "health": 19}
+  },
+  "enemy": {
+    "owner": {"spec_id": "elephant", "attack": 20, "health": 3, "experience": 3},
+    "observed_recipient_species": "blowfish",
+    "recipient_before": {"attack": 3, "health": 4},
+    "net_attack_damage": 21,
+    "owner_health_after": -18,
+    "recipient_after": {"attack": 3, "health": 2}
+  },
+  "observed_order": ["simultaneous lethal attack", "dead Elephant after-attack damage", "dead Camel Hurt buff", "faint removal"],
+  "capture_root": "runs/expanded-rule-video-audit-v3",
+  "capture_directories": ["sap-native-frames-pFx7nQ", "sap-native-frames-PnyMus", "sap-native-frames-vGchA3"],
+  "key_capture_sha256": {
+    "sap-native-frames-vGchA3/frame-510.6.png": "4fb523844af7a34ae480220c531d8b96bc889169f68f3bb855cdb1f83681dd80",
+    "sap-native-frames-vGchA3/frame-510.9.png": "3c43161509aa0f86d471126cc578d446c7930b5b76e9b9176b3b2658847da9d1",
+    "sap-native-frames-vGchA3/frame-511.5.png": "8d518d215350b132b4b83a3493d890a997a4229776f9b071df9b7158e2c4b4c6",
+    "sap-native-frames-vGchA3/frame-512.5.png": "15faed534709e2f057755ffd5e996a70e17c2be4dcdeeba3c94ee42ee72cfb71",
+    "sap-native-frames-PnyMus/frame-513.png": "28128d1decc8ef4a49956b4023b0da8e0bddd9658956686dfcf6bdafdcc3db39"
+  }
+}

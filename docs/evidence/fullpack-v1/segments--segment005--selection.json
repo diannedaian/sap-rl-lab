@@ -1,0 +1,177 @@
+{
+  "selected": {
+    "85101": {
+      "checkpoint": {
+        "path": "runs/fullpack-tier6-h40-v1/segments/segment004/candidate-85101/eval004-step1048576.zip",
+        "sha256": "0afbbec0ae31911f22f6efc85b4249f3d60915a46acfeefdcc7f58c697c21a0b",
+        "policy_sha256": "6a1e7ac88f8ce2102022b0618eae6658c07c3e73abbde13dc4c11d65b46b036a",
+        "timesteps": 1048576
+      },
+      "score": [
+        0.8375,
+        0.805,
+        0.905,
+        -0.01,
+        7.226000000000001
+      ],
+      "families": {
+        "full_stats": {
+          "success": 0.91,
+          "forcing": 0.01,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.63,
+          "mean_return": 7.41
+        },
+        "full_summon": {
+          "success": 0.98,
+          "forcing": 0.005,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.915,
+          "mean_return": 7.785
+        },
+        "full_tempo": {
+          "success": 0.96,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.865,
+          "mean_return": 8.055
+        },
+        "validation_balanced": {
+          "success": 0.805,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.28,
+          "mean_return": 6.235
+        },
+        "validation_stats_tempo": {
+          "success": 0.87,
+          "forcing": 0.005,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.385,
+          "mean_return": 6.645
+        }
+      }
+    },
+    "85201": {
+      "checkpoint": {
+        "path": "runs/fullpack-tier6-h40-v1/segments/segment005/candidate-85201/eval002-step524288.zip",
+        "sha256": "ba4f57c1b722572335d7ee9a09c9ab9089545dede7abc0270195aa40404a2796",
+        "policy_sha256": "97c259283c1b8950a372c952c319f6568362c64947dec6d813a3c11da0dba268",
+        "timesteps": 524288
+      },
+      "score": [
+        0.8175,
+        0.8,
+        0.8870000000000001,
+        -0.005,
+        7.122
+      ],
+      "families": {
+        "full_stats": {
+          "success": 0.93,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.77,
+          "mean_return": 7.64
+        },
+        "full_summon": {
+          "success": 0.96,
+          "forcing": 0.005,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.875,
+          "mean_return": 7.715
+        },
+        "full_tempo": {
+          "success": 0.91,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.65,
+          "mean_return": 7.28
+        },
+        "validation_balanced": {
+          "success": 0.835,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.315,
+          "mean_return": 6.64
+        },
+        "validation_stats_tempo": {
+          "success": 0.8,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.16,
+          "mean_return": 6.335
+        }
+      }
+    },
+    "85301": {
+      "checkpoint": {
+        "path": "runs/fullpack-tier6-h40-v1/segments/segment005/candidate-85301/eval004-step1048576.zip",
+        "sha256": "09b14d1052466a5f29f687b2b9f069b6e52fbc100d670c5dcc0c73379aa83bac",
+        "policy_sha256": "be5aef179560103972857932507c60fb8596f03a396cb54346f4c0d5caa6641e",
+        "timesteps": 1048576
+      },
+      "score": [
+        0.7675000000000001,
+        0.74,
+        0.8560000000000001,
+        -0.005,
+        6.904999999999999
+      ],
+      "families": {
+        "full_stats": {
+          "success": 0.885,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.6,
+          "mean_return": 7.345
+        },
+        "full_summon": {
+          "success": 0.935,
+          "forcing": 0.005,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.7,
+          "mean_return": 7.78
+        },
+        "full_tempo": {
+          "success": 0.925,
+          "forcing": 0.005,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.69,
+          "mean_return": 7.605
+        },
+        "validation_balanced": {
+          "success": 0.74,
+          "forcing": 0.005,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 8.855,
+          "mean_return": 5.72
+        },
+        "validation_stats_tempo": {
+          "success": 0.795,
+          "forcing": 0.005,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.09,
+          "mean_return": 6.075
+        }
+      }
+    }
+  },
+  "test_scores_opened_for_these_selections": false,
+  "selection_uses_validation_only": true
+}

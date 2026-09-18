@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 
 from .baselines import RandomPolicy, SpendGoldPolicy, play_episode
+from .catalog import load_catalog_by_id
 from .engine import AutoBattler
 from .opponents import SnapshotLeague, build_spend_gold_league
 
@@ -18,7 +19,15 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=7)
     parser.add_argument("--opponent-league")
     parser.add_argument("--output", default="data/leagues/spend_gold.json")
+    parser.add_argument(
+        "--ruleset", choices=["eight-pet", "tier12-curriculum"], default="eight-pet"
+    )
     args = parser.parse_args()
+    if args.episodes < 1:
+        parser.error("--episodes must be positive")
+    expanded = args.ruleset == "tier12-curriculum"
+    if expanded and (args.command == "build-league" or args.opponent_league):
+        parser.error("New curriculum opponent-pool generation/validation is not implemented yet")
 
     if args.command == "build-league":
         output = Path(args.output)
@@ -29,7 +38,8 @@ def main() -> None:
         return
 
     provider = SnapshotLeague.load(args.opponent_league) if args.opponent_league else None
-    engine = AutoBattler(opponent_provider=provider)
+    catalog = load_catalog_by_id("turtle-v0.46-tier12-curriculum-v4") if expanded else None
+    engine = AutoBattler(catalog=catalog, opponent_provider=provider)
     if args.command == "inspect":
         engine.reset(seed=args.seed)
         print(

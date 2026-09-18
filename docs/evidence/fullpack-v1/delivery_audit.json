@@ -1,0 +1,510 @@
+{
+  "verified_utc": "2026-09-18T04:08:09.812874+00:00",
+  "goal_criteria_met": true,
+  "scope_audit_complete": true,
+  "scope": {
+    "catalog_id": "turtle-v0.46-full-v8",
+    "ordinary_pets": 60,
+    "ordinary_foods": 18,
+    "ordinary_shop_tier": 6,
+    "max_turns": 40
+  },
+  "test": {
+    "models": {
+      "85101": {
+        "learned_ten_win_rate": 0.847,
+        "families": {
+          "full_stats": {
+            "success": 0.92,
+            "forcing": 0.02,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.664,
+            "mean_return": 7.318
+          },
+          "full_summon": {
+            "success": 0.952,
+            "forcing": 0.006,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.744,
+            "mean_return": 7.686
+          },
+          "full_tempo": {
+            "success": 0.854,
+            "forcing": 0.016,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.488,
+            "mean_return": 6.96
+          },
+          "test_balanced": {
+            "success": 0.874,
+            "forcing": 0.004,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.336,
+            "mean_return": 6.478
+          },
+          "test_summon_tempo": {
+            "success": 0.82,
+            "forcing": 0.012,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.018,
+            "mean_return": 6.086
+          }
+        }
+      },
+      "85201": {
+        "learned_ten_win_rate": 0.81,
+        "families": {
+          "full_stats": {
+            "success": 0.916,
+            "forcing": 0,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.71,
+            "mean_return": 7.392
+          },
+          "full_summon": {
+            "success": 0.952,
+            "forcing": 0.002,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.714,
+            "mean_return": 7.672
+          },
+          "full_tempo": {
+            "success": 0.842,
+            "forcing": 0.002,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.546,
+            "mean_return": 6.99
+          },
+          "test_balanced": {
+            "success": 0.812,
+            "forcing": 0.002,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.05,
+            "mean_return": 6.12
+          },
+          "test_summon_tempo": {
+            "success": 0.808,
+            "forcing": 0,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.09,
+            "mean_return": 6.2
+          }
+        }
+      },
+      "85301": {
+        "learned_ten_win_rate": 0.811,
+        "families": {
+          "full_stats": {
+            "success": 0.882,
+            "forcing": 0.004,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.55,
+            "mean_return": 7.22
+          },
+          "full_summon": {
+            "success": 0.964,
+            "forcing": 0.002,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.804,
+            "mean_return": 7.83
+          },
+          "full_tempo": {
+            "success": 0.822,
+            "forcing": 0.004,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.494,
+            "mean_return": 6.902
+          },
+          "test_balanced": {
+            "success": 0.8,
+            "forcing": 0.002,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 8.974,
+            "mean_return": 5.952
+          },
+          "test_summon_tempo": {
+            "success": 0.822,
+            "forcing": 0.008,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.23,
+            "mean_return": 6.252
+          }
+        }
+      }
+    },
+    "learned_successes": 2468,
+    "learned_episodes": 3000,
+    "learned_ten_win_rate": 0.8226666666666667,
+    "all_families_reliable": true,
+    "passed": true
+  },
+  "confirmation": {
+    "models": {
+      "85101": {
+        "learned_ten_win_rate": 0.806,
+        "families": {
+          "full_stats": {
+            "success": 0.896,
+            "forcing": 0.008,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.548,
+            "mean_return": 7.118
+          },
+          "full_summon": {
+            "success": 0.956,
+            "forcing": 0.006,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.732,
+            "mean_return": 7.612
+          },
+          "full_tempo": {
+            "success": 0.818,
+            "forcing": 0.01,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.366,
+            "mean_return": 6.674
+          },
+          "test_balanced": {
+            "success": 0.816,
+            "forcing": 0.006,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.046,
+            "mean_return": 6.092
+          },
+          "test_summon_tempo": {
+            "success": 0.796,
+            "forcing": 0.008,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 8.91,
+            "mean_return": 5.826
+          }
+        }
+      },
+      "85201": {
+        "learned_ten_win_rate": 0.841,
+        "families": {
+          "full_stats": {
+            "success": 0.896,
+            "forcing": 0.002,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.59,
+            "mean_return": 7.13
+          },
+          "full_summon": {
+            "success": 0.968,
+            "forcing": 0.006,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.808,
+            "mean_return": 7.828
+          },
+          "full_tempo": {
+            "success": 0.84,
+            "forcing": 0,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.408,
+            "mean_return": 6.784
+          },
+          "test_balanced": {
+            "success": 0.854,
+            "forcing": 0,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.316,
+            "mean_return": 6.436
+          },
+          "test_summon_tempo": {
+            "success": 0.828,
+            "forcing": 0,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.236,
+            "mean_return": 6.202
+          }
+        }
+      },
+      "85301": {
+        "learned_ten_win_rate": 0.809,
+        "families": {
+          "full_stats": {
+            "success": 0.894,
+            "forcing": 0.004,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.582,
+            "mean_return": 7.092
+          },
+          "full_summon": {
+            "success": 0.96,
+            "forcing": 0.012,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.792,
+            "mean_return": 7.718
+          },
+          "full_tempo": {
+            "success": 0.832,
+            "forcing": 0.014,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.472,
+            "mean_return": 6.902
+          },
+          "test_balanced": {
+            "success": 0.83,
+            "forcing": 0.002,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 9.182,
+            "mean_return": 6.1
+          },
+          "test_summon_tempo": {
+            "success": 0.788,
+            "forcing": 0.004,
+            "truncation": 0,
+            "no_purchase_loss": 0,
+            "mean_wins": 8.938,
+            "mean_return": 5.868
+          }
+        }
+      }
+    },
+    "learned_successes": 2456,
+    "learned_episodes": 3000,
+    "learned_ten_win_rate": 0.8186666666666667,
+    "all_families_reliable": true,
+    "passed": true
+  },
+  "selected_models": {
+    "85101": {
+      "checkpoint": {
+        "path": "runs/fullpack-tier6-h40-v1/segments/segment004/candidate-85101/eval004-step1048576.zip",
+        "sha256": "0afbbec0ae31911f22f6efc85b4249f3d60915a46acfeefdcc7f58c697c21a0b",
+        "policy_sha256": "6a1e7ac88f8ce2102022b0618eae6658c07c3e73abbde13dc4c11d65b46b036a",
+        "timesteps": 1048576
+      },
+      "score": [
+        0.8375,
+        0.805,
+        0.905,
+        -0.01,
+        7.226000000000001
+      ],
+      "families": {
+        "full_stats": {
+          "success": 0.91,
+          "forcing": 0.01,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.63,
+          "mean_return": 7.41
+        },
+        "full_summon": {
+          "success": 0.98,
+          "forcing": 0.005,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.915,
+          "mean_return": 7.785
+        },
+        "full_tempo": {
+          "success": 0.96,
+          "forcing": 0,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.865,
+          "mean_return": 8.055
+        },
+        "validation_balanced": {
+          "success": 0.805,
+          "forcing": 0,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.28,
+          "mean_return": 6.235
+        },
+        "validation_stats_tempo": {
+          "success": 0.87,
+          "forcing": 0.005,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.385,
+          "mean_return": 6.645
+        }
+      }
+    },
+    "85201": {
+      "checkpoint": {
+        "path": "runs/fullpack-tier6-h40-v1/segments/segment005/candidate-85201/eval002-step524288.zip",
+        "sha256": "ba4f57c1b722572335d7ee9a09c9ab9089545dede7abc0270195aa40404a2796",
+        "policy_sha256": "97c259283c1b8950a372c952c319f6568362c64947dec6d813a3c11da0dba268",
+        "timesteps": 524288
+      },
+      "score": [
+        0.8175,
+        0.8,
+        0.8870000000000001,
+        -0.005,
+        7.122
+      ],
+      "families": {
+        "full_stats": {
+          "success": 0.93,
+          "forcing": 0,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.77,
+          "mean_return": 7.64
+        },
+        "full_summon": {
+          "success": 0.96,
+          "forcing": 0.005,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.875,
+          "mean_return": 7.715
+        },
+        "full_tempo": {
+          "success": 0.91,
+          "forcing": 0,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.65,
+          "mean_return": 7.28
+        },
+        "validation_balanced": {
+          "success": 0.835,
+          "forcing": 0,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.315,
+          "mean_return": 6.64
+        },
+        "validation_stats_tempo": {
+          "success": 0.8,
+          "forcing": 0,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.16,
+          "mean_return": 6.335
+        }
+      }
+    },
+    "85301": {
+      "checkpoint": {
+        "path": "runs/fullpack-tier6-h40-v1/segments/segment005/candidate-85301/eval004-step1048576.zip",
+        "sha256": "09b14d1052466a5f29f687b2b9f069b6e52fbc100d670c5dcc0c73379aa83bac",
+        "policy_sha256": "be5aef179560103972857932507c60fb8596f03a396cb54346f4c0d5caa6641e",
+        "timesteps": 1048576
+      },
+      "score": [
+        0.7675000000000001,
+        0.74,
+        0.8560000000000001,
+        -0.005,
+        6.904999999999999
+      ],
+      "families": {
+        "full_stats": {
+          "success": 0.885,
+          "forcing": 0,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.6,
+          "mean_return": 7.345
+        },
+        "full_summon": {
+          "success": 0.935,
+          "forcing": 0.005,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.7,
+          "mean_return": 7.78
+        },
+        "full_tempo": {
+          "success": 0.925,
+          "forcing": 0.005,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.69,
+          "mean_return": 7.605
+        },
+        "validation_balanced": {
+          "success": 0.74,
+          "forcing": 0.005,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 8.855,
+          "mean_return": 5.72
+        },
+        "validation_stats_tempo": {
+          "success": 0.795,
+          "forcing": 0.005,
+          "truncation": 0,
+          "no_purchase_loss": 0,
+          "mean_wins": 9.09,
+          "mean_return": 6.075
+        }
+      }
+    }
+  },
+  "validation_only_selection_replayed_exactly": true,
+  "separate_pool_roles_verified": true,
+  "all_candidate_recipe_contracts_verified": 15,
+  "final_regression_tests_passed": 1030,
+  "all_family_evaluation_episodes": 15000,
+  "candidate_ppo_decisions": 18874368,
+  "opponent_ppo_decisions": 7340032,
+  "independent_test_queries": 1,
+  "fresh_seed_confirmation_queries": 1,
+  "evidence_sha256": {
+    "runs/fullpack-final-gate-v1/summary.json": "3ada25b2daa20b6b8fd3b377a02dee662d4e6770e185b51b3927f04d6feae97d",
+    "runs/fullpack-final-gate-v1/pytest.log": "c5cf6280293c1450ec46fe0c71deb820f2ce8470a46a83ce73b095de3aece147",
+    "runs/fullpack-tier6-h40-v1/campaign.json": "55c1135ff354bdbf873a99b4f863c441e9e2d8424ca06ef91a7f50a6731694a9",
+    "runs/fullpack-tier6-h40-v1/segments/segment005/selection.json": "9c20ac8eb9d4037f15e44664e6512f810d4f50ecf3e5ad45e9eb41c1b9dc566f",
+    "runs/fullpack-tier6-h40-v1/reached80_screen.json": "da9e7a39e504ba96316240a6ab01d364195687d19ccf5a8a978e613d5ee511a8",
+    "runs/fullpack-tier6-h40-v1/confirmation171-v1/summary.json": "dba2c27e80fbcf4c251b4a0a1076224cc9f3508cd21e28e19de51ba134cc71e5",
+    "runs/fullpack-tier6-h40-v1/confirmation171-v1/protocol.json": "d61d0a963a4d2ac8a7487a81e4ff03cea5454277dec313f76c49e64097e53fa0",
+    "docs/FULLPACK_DELIVERY.md": "ac478026e4ab94d55a8076bb504877f76faa50cf152b4b25715090abd31f6fa3",
+    "docs/FULLPACK_RULES.md": "924e7a7b6b95da9fec05865ea246646eebf38a840b9a05847c1a99620d0bb15b",
+    "runs/fullpack-tier6-curves-final-v1/evidence.json": "25c40dba75e0e41f73496186e786128714e229af30d53061e399e5ef16cb62df",
+    "runs/fullpack-tier6-bc-curves-final-v1/evidence.json": "3cb4bf24eaf264957e1554b802e8d89ab3c991f7080694d9fde6ed60de3878a6",
+    "runs/fullpack-tier6-h40-v1/segments/segment005/test-85101.json": "8ac8e7fe0fa72ea2a38c57a894528e50384e094b0fbc6d9349476e47d4d84808",
+    "runs/fullpack-tier6-h40-v1/confirmation171-v1/model-85101.json": "8d81bce951fec3ef1594cba496c920440368ca2ff63461dd15c687a162efdd14",
+    "runs/fullpack-tier6-h40-v1/segments/segment004/candidate-85101/eval004-step1048576.zip": "0afbbec0ae31911f22f6efc85b4249f3d60915a46acfeefdcc7f58c697c21a0b",
+    "runs/fullpack-tier6-h40-v1/segments/segment005/test-85201.json": "0573d7386a04655b8d288924d4d52583a118a1d25ba1fd435dadd4b2f1adcaf6",
+    "runs/fullpack-tier6-h40-v1/confirmation171-v1/model-85201.json": "82d17280237bcf28dd079ba899ca9f832b2708cd3f2a58b1036f8a7c933a44a5",
+    "runs/fullpack-tier6-h40-v1/segments/segment005/candidate-85201/eval002-step524288.zip": "ba4f57c1b722572335d7ee9a09c9ab9089545dede7abc0270195aa40404a2796",
+    "runs/fullpack-tier6-h40-v1/segments/segment005/test-85301.json": "55d0d141b60c3666219f99cef336126bb81ec898111825fdcf9ab82b05fe10b6",
+    "runs/fullpack-tier6-h40-v1/confirmation171-v1/model-85301.json": "87f04d4b68b133751bd232f21e5c81b043b1710f6756bb70603c1085688d55d2",
+    "runs/fullpack-tier6-h40-v1/segments/segment005/candidate-85301/eval004-step1048576.zip": "09b14d1052466a5f29f687b2b9f069b6e52fbc100d670c5dcc0c73379aa83bac"
+  },
+  "limitations": [
+    "Frozen opponent-pool benchmark, not real Arena human win rate.",
+    "Fresh episode confirmation reuses the held-out opponent policies.",
+    "80% is a point-estimate criterion, not a confidence-interval lower bound.",
+    "Rule/client parity limitations remain documented in FULLPACK_RULES.md."
+  ]
+}

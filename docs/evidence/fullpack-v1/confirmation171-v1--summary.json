@@ -1,0 +1,148 @@
+{
+  "models": {
+    "85101": {
+      "learned_ten_win_rate": 0.806,
+      "families": {
+        "full_stats": {
+          "success": 0.896,
+          "forcing": 0.008,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.548,
+          "mean_return": 7.118
+        },
+        "full_summon": {
+          "success": 0.956,
+          "forcing": 0.006,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.732,
+          "mean_return": 7.612
+        },
+        "full_tempo": {
+          "success": 0.818,
+          "forcing": 0.01,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.366,
+          "mean_return": 6.674
+        },
+        "test_balanced": {
+          "success": 0.816,
+          "forcing": 0.006,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.046,
+          "mean_return": 6.092
+        },
+        "test_summon_tempo": {
+          "success": 0.796,
+          "forcing": 0.008,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 8.91,
+          "mean_return": 5.826
+        }
+      }
+    },
+    "85201": {
+      "learned_ten_win_rate": 0.841,
+      "families": {
+        "full_stats": {
+          "success": 0.896,
+          "forcing": 0.002,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.59,
+          "mean_return": 7.13
+        },
+        "full_summon": {
+          "success": 0.968,
+          "forcing": 0.006,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.808,
+          "mean_return": 7.828
+        },
+        "full_tempo": {
+          "success": 0.84,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.408,
+          "mean_return": 6.784
+        },
+        "test_balanced": {
+          "success": 0.854,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.316,
+          "mean_return": 6.436
+        },
+        "test_summon_tempo": {
+          "success": 0.828,
+          "forcing": 0.0,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.236,
+          "mean_return": 6.202
+        }
+      }
+    },
+    "85301": {
+      "learned_ten_win_rate": 0.809,
+      "families": {
+        "full_stats": {
+          "success": 0.894,
+          "forcing": 0.004,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.582,
+          "mean_return": 7.092
+        },
+        "full_summon": {
+          "success": 0.96,
+          "forcing": 0.012,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.792,
+          "mean_return": 7.718
+        },
+        "full_tempo": {
+          "success": 0.832,
+          "forcing": 0.014,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.472,
+          "mean_return": 6.902
+        },
+        "test_balanced": {
+          "success": 0.83,
+          "forcing": 0.002,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 9.182,
+          "mean_return": 6.1
+        },
+        "test_summon_tempo": {
+          "success": 0.788,
+          "forcing": 0.004,
+          "truncation": 0.0,
+          "no_purchase_loss": 0.0,
+          "mean_wins": 8.938,
+          "mean_return": 5.868
+        }
+      }
+    }
+  },
+  "learned_successes": 2456,
+  "learned_episodes": 3000,
+  "learned_ten_win_rate": 0.8186666666666667,
+  "all_families_reliable": true,
+  "passed": true,
+  "scope_audit_pending": true,
+  "goal_complete": false,
+  "protocol_sha256": "d61d0a963a4d2ac8a7487a81e4ff03cea5454277dec313f76c49e64097e53fa0",
+  "limitation": "Fresh episodes against existing frozen pools, not new opponent policies. The 80% criterion is a point estimate, not an 80% confidence lower bound."
+}

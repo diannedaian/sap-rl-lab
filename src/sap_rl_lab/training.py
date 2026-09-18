@@ -15,6 +15,22 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 
+def midgame_checkpoint_score(result):
+    """Pre-test v5 rule: win rate first, worst family next, then reliability.
+
+    Forced battle is a valid transition in this curriculum, not automatic failure.
+    There is no retrospective 1% eligibility threshold. Exact ties keep the
+    earlier checkpoint because the callback only replaces on a strict increase.
+    """
+    families = list(result.get("families", {}).values()) or [result]
+    return (
+        result["success_rate"],
+        min(f["success_rate"] for f in families),
+        -max(f.get("forced_episode_rate", 0.0) for f in families),
+        result["mean_return"],
+    )
+
+
 @dataclass(frozen=True)
 class TrainingConfig:
     timesteps: int = 100_000
@@ -46,8 +62,43 @@ class TrainingConfig:
     opponent_leagues: tuple[str, ...] = ()
     validation_leagues: Dict[str, str] = field(default_factory=dict)
     expected_initial_policy_sha256: str = ""
+    shop_action_limit_mode: str = "truncate"
+    max_actions_per_turn: int = 30
+    shop_pet_stats: bool = False
+    catalog_id: str = ""
+    allow_development: bool = False
+
+    def environment(self):
+        from .catalog import load_catalog, load_catalog_by_id
+        from .domain import GameConfig
+
+        catalog = load_catalog_by_id(self.catalog_id) if self.catalog_id else load_catalog()
+        options = dict(
+            shop_action_limit_mode=self.shop_action_limit_mode,
+            max_actions_per_turn=self.max_actions_per_turn,
+        )
+        if catalog.rules_version == 6:
+            game_config = GameConfig.turtle_tier4(**options)
+        elif catalog.rules_version == 5:
+            game_config = GameConfig.turtle_midgame(**options)
+        elif catalog.rules_version == 4:
+            game_config = GameConfig.turtle_curriculum(**options)
+        else:
+            game_config = GameConfig(shop_pet_stats=self.shop_pet_stats, **options)
+        if catalog.development_only and not self.allow_development:
+            raise ValueError("Development training requires explicit allow_development=True")
+        return catalog, game_config
 
     def validate(self) -> None:
+        from .domain import GameConfig
+
+        GameConfig(
+            shop_action_limit_mode=self.shop_action_limit_mode,
+            max_actions_per_turn=self.max_actions_per_turn,
+        )
+        self.environment()
+        if self.forfeit_on_limit and self.shop_action_limit_mode == "force_battle":
+            raise ValueError("force_battle cannot be combined with forfeit_on_limit")
         if self.timesteps < 1 or self.environments < 1 or self.rollout_steps < 1:
             raise ValueError("timesteps, environments, and rollout_steps must be positive")
         if self.batch_size < 1:
@@ -180,15 +231,31 @@ def train(config: TrainingConfig) -> Path:
     except ImportError as exc:
         raise RuntimeError('Install RL dependencies with: pip install -e ".[rl]"') from exc
 
+    from .catalog import catalog_digest
     from .env import SapAutoBattlerEnv
     from .evaluation import compact_evaluation, evaluate_policy, evaluate_suite, file_digest
     from .opponents import OpponentMixture, SnapshotLeague
 
     torch.set_num_threads(config.torch_threads)
-    catalog_id = SapAutoBattlerEnv().engine.catalog.catalog_id
+    catalog, game_config = config.environment()
+    catalog_id = catalog.catalog_id
+    contract = {
+        "schema_version": 1,
+        "catalog_id": catalog_id,
+        "game_config": asdict(game_config),
+    }
+    if catalog.development_only:
+        contract.update(allow_development=True, catalog_sha256=catalog_digest(catalog))
+        contract["masking_revision"] = "cached-probs-clear-v1"
     manifest = {
         "config": asdict(config),
         "catalog_id": catalog_id,
+        "environment_contract": contract,
+        "validation_selection": "win-first_worst-family_forcing_return-v1"
+        if catalog.rules_version == 5
+        else "unassisted_success_then_raw_return"
+        if catalog.development_only and game_config.shop_action_limit_mode == "force_battle"
+        else "success_then_raw_return",
         "training_league_sha256": file_digest(config.opponent_league)
         if config.opponent_league
         else None,
@@ -232,6 +299,9 @@ def train(config: TrainingConfig) -> Path:
                     [(1.0, SnapshotLeague.load(path)) for path in config.opponent_leagues]
                 )
             return SapAutoBattlerEnv(
+                catalog=catalog,
+                config=game_config,
+                allow_development=config.allow_development,
                 opponent_provider=opponent_provider,
                 action_cost=config.action_cost,
                 forfeit_on_limit=config.forfeit_on_limit,
@@ -252,8 +322,13 @@ def train(config: TrainingConfig) -> Path:
     # VecEnv seeds are consumed by its next reset. This is the authoritative
     # seed path; seeding a factory reset can be silently lost by model.learn().
     vec_env.seed(config.seed)
+    policy_class = "MultiInputPolicy"
+    if catalog.development_only:
+        from .stable_masking import StableMaskableMultiInputPolicy
+
+        policy_class = StableMaskableMultiInputPolicy
     model = MaskablePPO(
-        "MultiInputPolicy",
+        policy_class,
         vec_env,
         seed=config.seed,
         learning_rate=config.learning_rate,
@@ -265,8 +340,17 @@ def train(config: TrainingConfig) -> Path:
         device=config.device,
         verbose=1,
     )
+    # Observation shapes alone cannot identify transition semantics. SB3 saves
+    # this JSON-serializable attribute with every newly created checkpoint.
+    model.sap_environment_contract = contract
     if config.initialize_from:
         initial = MaskablePPO.load(config.initialize_from, device=config.device)
+        if (
+            catalog.development_only
+            and getattr(initial, "sap_environment_contract", None) != contract
+        ):
+            vec_env.close()
+            raise ValueError("Expanded initialization requires an identical environment contract")
         manifest["input_migration"] = copy_initial_policy(model, initial)
         del initial
         # Loading the reference model can reseed global RNGs. Restore this
@@ -317,7 +401,23 @@ def train(config: TrainingConfig) -> Path:
             result["evaluation_file"] = (
                 f"validation_{self.num_timesteps}_eval{len(self.history):03d}.json"
             )
-            score = (result["success_rate"], result["mean_return"])
+            selection_success = (
+                result["success_without_forcing_rate"]
+                if catalog.development_only and game_config.shop_action_limit_mode == "force_battle"
+                else result["success_rate"]
+            )
+            score = (selection_success, result["mean_return"])
+            if catalog.rules_version == 5:
+                score = midgame_checkpoint_score(result)
+            if catalog.development_only:
+                result["selection_metric"] = (
+                    "success_without_forcing_rate"
+                    if (game_config.shop_action_limit_mode == "force_battle")
+                    else "success_rate"
+                )
+            if catalog.rules_version == 5:
+                result["selection_metric"] = "win-first_worst-family_forcing_return-v1"
+                result["selection_score"] = list(score)
             result["selected"] = score > self.best_score
             if result["selected"]:
                 self.best_score = score
@@ -331,7 +431,7 @@ def train(config: TrainingConfig) -> Path:
             )
             print(
                 f"validation step={self.num_timesteps} success={score[0]:.3f} "
-                f"return={score[1]:.3f} selected={result['selected']}",
+                f"return={result['mean_return']:.3f} selected={result['selected']}",
                 flush=True,
             )
 
@@ -378,6 +478,7 @@ def evaluate_model(
         raise RuntimeError('Install RL dependencies with: pip install -e ".[rl]"') from exc
 
     from .env import SapAutoBattlerEnv
+    from .evaluation import policy_environment_options
     from .opponents import SnapshotLeague
 
     opponent_provider = SnapshotLeague.load(opponent_league) if opponent_league else None
@@ -385,6 +486,7 @@ def evaluate_model(
     env = SapAutoBattlerEnv(
         opponent_provider=opponent_provider,
         observe_episode_actions=model.observation_space["global"].shape == (9,),
+        **policy_environment_options(model),
     )
     returns: List[float] = []
     wins: List[int] = []
@@ -392,15 +494,18 @@ def evaluate_model(
     battle_counts = {"win": 0, "draw": 0, "loss": 0}
     successes = 0
     truncations = 0
+    forced_turns = forced_episodes = unassisted_successes = 0
     for episode in range(episodes):
         obs, _ = env.reset(seed=seed + episode)
         episode_return = 0.0
         episode_length = 0
+        episode_forced = 0
         while True:
             action, _ = model.predict(obs, action_masks=env.action_masks(), deterministic=True)
             obs, reward, terminated, truncated, info = env.step(int(action))
             episode_return += reward
             episode_length += 1
+            episode_forced += int(info.get("forced_end_turn", False))
             outcome = info.get("battle_outcome")
             if outcome in battle_counts:
                 battle_counts[outcome] += 1
@@ -411,9 +516,14 @@ def evaluate_model(
         wins.append(env.engine.state.wins)
         episode_lengths.append(episode_length)
         successes += int(env.engine.state.wins >= env.engine.config.target_wins)
+        forced_turns += episode_forced
+        forced_episodes += int(episode_forced > 0)
+        unassisted_successes += int(
+            env.engine.state.wins >= env.engine.config.target_wins and not episode_forced
+        )
     env.close()
     total_battles = max(sum(battle_counts.values()), 1)
-    return {
+    result = {
         "episodes": episodes,
         "mean_return": float(np.mean(returns)),
         "return_std": float(np.std(returns)),
@@ -428,6 +538,15 @@ def evaluate_model(
         "seed_start": seed,
         "opponent_league": opponent_league or None,
     }
+    if env.engine.config.shop_action_limit_mode == "force_battle":
+        result.update(
+            environment_contract=model.sap_environment_contract,
+            forced_end_turns=forced_turns,
+            forced_end_turn_rate=forced_turns / total_battles,
+            forced_episode_rate=forced_episodes / episodes,
+            success_without_forcing_rate=unassisted_successes / episodes,
+        )
+    return result
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -450,6 +569,13 @@ def _parser() -> argparse.ArgumentParser:
     train_parser.add_argument("--initialize-from", default="")
     train_parser.add_argument("--action-cost", type=float, default=0.0)
     train_parser.add_argument("--forfeit-on-limit", action="store_true")
+    train_parser.add_argument(
+        "--shop-action-limit-mode", choices=["truncate", "force_battle"], default="truncate"
+    )
+    train_parser.add_argument("--max-actions-per-turn", type=int, default=30)
+    train_parser.add_argument("--shop-pet-stats", action="store_true")
+    train_parser.add_argument("--catalog-id", default="")
+    train_parser.add_argument("--allow-development", action="store_true")
     train_parser.add_argument("--swap-cost", type=float, default=0.0)
     train_parser.add_argument("--success-bonus-max", type=float, default=0.0)
     train_parser.add_argument("--success-action-cost", type=float, default=0.0)
@@ -490,6 +616,11 @@ def main() -> None:
                 initialize_from=args.initialize_from,
                 action_cost=args.action_cost,
                 forfeit_on_limit=args.forfeit_on_limit,
+                shop_action_limit_mode=args.shop_action_limit_mode,
+                max_actions_per_turn=args.max_actions_per_turn,
+                shop_pet_stats=args.shop_pet_stats,
+                catalog_id=args.catalog_id,
+                allow_development=args.allow_development,
                 swap_cost=args.swap_cost,
                 success_bonus_max=args.success_bonus_max,
                 success_action_cost=args.success_action_cost,

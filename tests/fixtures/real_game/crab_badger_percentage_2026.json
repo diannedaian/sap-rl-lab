@@ -1,0 +1,57 @@
+{
+  "case_id": "distinct-crab-badger-percentage-rounding",
+  "inspected": "2026-09-07",
+  "crab": {
+    "source": "https://www.youtube.com/watch?v=vHpyTVkNphc&t=70s",
+    "creator": "FanboyOchi",
+    "title": "Super Auto Pets: Everything is Crab",
+    "date_listing": "3 months ago, visible YouTube search on 2026-09-07; exact upload/client build not certified",
+    "before_seconds": 70.5,
+    "after_seconds": 71,
+    "level": 1,
+    "attack": 4,
+    "health_before": 1,
+    "highest_friend_health": 6,
+    "observed_health_gain": 2,
+    "health_after": 3,
+    "limits": "Actual +2 heart animation observed before combat. Rules out floor for 6*25%; does not alone distinguish ceiling from all nearest-rounding algorithms. Other recorded pets/toys are outside the curriculum, so only this numeric component is replayed."
+  },
+  "crab_non_half": {
+    "source": "https://www.youtube.com/watch?v=vHpyTVkNphc&t=348s",
+    "creator": "FanboyOchi",
+    "title": "Super Auto Pets: Everything is Crab",
+    "date_listing": "Same public recording as the level-one Crab case; exact upload/client build not certified",
+    "before_seconds": 348.012452,
+    "trigger_seconds": 349.514129,
+    "after_seconds": 350,
+    "level": 3,
+    "attack": 17,
+    "health_before": 14,
+    "other_friend_healths": [8, 9, 19, 6],
+    "highest_friend_health": 19,
+    "observed_health_gain": 15,
+    "health_after": 29,
+    "raw_evidence": "runs/expanded-rule-video-audit-v4",
+    "key_capture_sha256": {
+      "sap-native-frames-h6yUst/frame-348.png": "6a5cbff7096e9911280ce2e8796a55a20da02af6a92d08824b80dbf6d8c8252e",
+      "sap-native-frames-h6yUst/frame-349.5.png": "36a51edfe2348a3dbc8154f834c40e33403eccce2548d00f649ca7936a011516",
+      "sap-native-frames-jhUU1i/frame-350.png": "c79a15aba82e06ba4686fc5e837bf7c97dce6f485df1e733190640c5e733c0d9"
+    },
+    "limits": "Visible +15 heart and 17/29 before the attack distinguish ceiling from floor and nearest rounding: 19*75%=14.25. Later attack damage, toys, relocation, food reactions and out-of-curriculum pets are excluded. Other friends are replaced by passive supported recipients with the observed health values; not a full battle replay."
+  },
+  "badger": {
+    "source": "https://www.youtube.com/watch?v=zziq0UPkzH0&t=360s",
+    "creator": "TheNorthernWind",
+    "title": "Five of a Kind Badger (Super Auto Pets)",
+    "date_listing": "3 months ago, visible YouTube search on 2026-09-07; exact upload/client build not certified",
+    "before_seconds": 360,
+    "after_seconds": 360.419,
+    "level": 1,
+    "attack": 23,
+    "friend_health_before": 4,
+    "observed_friend_damage": 11,
+    "friend_health_after": -7,
+    "limits": "Direct red 11 and friendly 4->-7 are visible. Enemy damage is separately mitigated, so it is not used to infer raw damage. The friendly pet's subsequent summon and other unsupported pets/perks are not simulated by this component. 11.5->11 distinguishes floor from ceiling and ties-to-even."
+  },
+  "raw_evidence": "runs/expanded-rule-video-audit-v2"
+}

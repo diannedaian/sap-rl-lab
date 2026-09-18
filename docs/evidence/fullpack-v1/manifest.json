@@ -1,0 +1,93 @@
+{
+  "note": "Personal workspace prefixes removed from public JSON only. Numerical rows unchanged. Recorded historical hashes refer to original files, not redacted copies. This is final-result evidence, not the complete training archive.",
+  "files": [
+    {
+      "source": "runs/fullpack-tier6-h40-v1/delivery_audit.json",
+      "public_file": "delivery_audit.json",
+      "original_sha256": "5a89707c6c6f6ac977b54cd6525a455de0aa1e7c513883d894cb2cc99774d253",
+      "redacted_json_sha256": "bec54b341625505b7ba31889dbfe9ac5ac4bbd6b4b4221cfa4da7ca155b6425c",
+      "public_file_sha256": "bec54b341625505b7ba31889dbfe9ac5ac4bbd6b4b4221cfa4da7ca155b6425c",
+      "compressed": false
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/reached80_screen.json",
+      "public_file": "reached80_screen.json",
+      "original_sha256": "da9e7a39e504ba96316240a6ab01d364195687d19ccf5a8a978e613d5ee511a8",
+      "redacted_json_sha256": "948bff976287ab6ca712f158a2297a269970aa284df0c65850dabdf9f88179b0",
+      "public_file_sha256": "948bff976287ab6ca712f158a2297a269970aa284df0c65850dabdf9f88179b0",
+      "compressed": false
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/segments/segment005/selection.json",
+      "public_file": "segments--segment005--selection.json",
+      "original_sha256": "9c20ac8eb9d4037f15e44664e6512f810d4f50ecf3e5ad45e9eb41c1b9dc566f",
+      "redacted_json_sha256": "722a5a3a76c31c9781fa90cb758dbf691c6a4a18c9857b6948d204ff6b04df50",
+      "public_file_sha256": "722a5a3a76c31c9781fa90cb758dbf691c6a4a18c9857b6948d204ff6b04df50",
+      "compressed": false
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/confirmation171-v1/summary.json",
+      "public_file": "confirmation171-v1--summary.json",
+      "original_sha256": "dba2c27e80fbcf4c251b4a0a1076224cc9f3508cd21e28e19de51ba134cc71e5",
+      "redacted_json_sha256": "dba2c27e80fbcf4c251b4a0a1076224cc9f3508cd21e28e19de51ba134cc71e5",
+      "public_file_sha256": "dba2c27e80fbcf4c251b4a0a1076224cc9f3508cd21e28e19de51ba134cc71e5",
+      "compressed": false
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/confirmation171-v1/protocol.json",
+      "public_file": "confirmation171-v1--protocol.json",
+      "original_sha256": "d61d0a963a4d2ac8a7487a81e4ff03cea5454277dec313f76c49e64097e53fa0",
+      "redacted_json_sha256": "c16c61a6cec0171614afb2f1bd12e6f04f47f3622afa4881e38611d6f4523b16",
+      "public_file_sha256": "c16c61a6cec0171614afb2f1bd12e6f04f47f3622afa4881e38611d6f4523b16",
+      "compressed": false
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/segments/segment005/test-85101.json",
+      "public_file": "segments--segment005--test-85101.json.gz",
+      "original_sha256": "8ac8e7fe0fa72ea2a38c57a894528e50384e094b0fbc6d9349476e47d4d84808",
+      "redacted_json_sha256": "60e12269f2c01c2093928f83f17a08cf211bd4e4eb81faf9214b961674b45955",
+      "public_file_sha256": "149701940823f0ca980c5f03f96f561f071724826090c966e72e87bf91a0e169",
+      "compressed": true
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/segments/segment005/test-85201.json",
+      "public_file": "segments--segment005--test-85201.json.gz",
+      "original_sha256": "0573d7386a04655b8d288924d4d52583a118a1d25ba1fd435dadd4b2f1adcaf6",
+      "redacted_json_sha256": "ed653a3d85ee420b2dfc0d6e9ccac587c85a415af75cca09af9b7ae3de4f9b02",
+      "public_file_sha256": "d7848fb84c96ce964f58b9f25f93ec189936572ba110bf3f98a828d213fdcd36",
+      "compressed": true
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/segments/segment005/test-85301.json",
+      "public_file": "segments--segment005--test-85301.json.gz",
+      "original_sha256": "55d0d141b60c3666219f99cef336126bb81ec898111825fdcf9ab82b05fe10b6",
+      "redacted_json_sha256": "77440156377c8d0da2e6a991851b853c79923181b744e1822ed723639f2febaa",
+      "public_file_sha256": "03fe9cb9df47148126df5d07a6bb12fd6dec94581d8bc731925ad098261a936a",
+      "compressed": true
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/confirmation171-v1/model-85101.json",
+      "public_file": "confirmation171-v1--model-85101.json.gz",
+      "original_sha256": "8d81bce951fec3ef1594cba496c920440368ca2ff63461dd15c687a162efdd14",
+      "redacted_json_sha256": "54f71f0d856f4b3661e471f789e4a24bb32a5d4fa58c7545bf457cf023295cca",
+      "public_file_sha256": "9cff17e105f62df7f8dd2d204c4bf86ed35ac5bb1c8994039a127fd308a049c4",
+      "compressed": true
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/confirmation171-v1/model-85201.json",
+      "public_file": "confirmation171-v1--model-85201.json.gz",
+      "original_sha256": "82d17280237bcf28dd079ba899ca9f832b2708cd3f2a58b1036f8a7c933a44a5",
+      "redacted_json_sha256": "36fa82feed866933d13a6976c31cda5d884b69ddaddb03d3235e668fa991d8c0",
+      "public_file_sha256": "228a247e930f2b2fa15bb0a2dde0c8a47580b98e980b4f3bb1c570f4370fa8ca",
+      "compressed": true
+    },
+    {
+      "source": "runs/fullpack-tier6-h40-v1/confirmation171-v1/model-85301.json",
+      "public_file": "confirmation171-v1--model-85301.json.gz",
+      "original_sha256": "87f04d4b68b133751bd232f21e5c81b043b1710f6756bb70603c1085688d55d2",
+      "redacted_json_sha256": "5cfa1a0ad1db60c87f9aa2aec49c460363ad94dbe84ca724c73565757758d8fc",
+      "public_file_sha256": "12e9753fd43fe6ed3921c22673d49c3b04d6f68667f910aa209408340f1c0bd0",
+      "compressed": true
+    }
+  ]
+}

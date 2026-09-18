@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "model": "A \u00b7 85101",
+  "checkpoint_sha256": "0afbbec0ae31911f22f6efc85b4249f3d60915a46acfeefdcc7f58c697c21a0b",
+  "catalog_id": "turtle-v0.46-full-v8",
+  "catalog_sha256": "4c999629eb047f78d356bb47dc6577f8868e094de7e5f7e5cc6cdf3c8776b2dd",
+  "config": {
+    "max_team_size": 5,
+    "max_shop_size": 9,
+    "starting_gold": 10,
+    "starting_lives": 5,
+    "target_wins": 10,
+    "max_turns": 40,
+    "max_actions_per_turn": 30,
+    "pet_cost": 3,
+    "pet_shop_slots": 5,
+    "food_shop_slots": 2,
+    "shop_action_limit_mode": "force_battle",
+    "shop_pet_stats": true,
+    "shop_rules": "turtle_full",
+    "max_shop_tier": 6
+  },
+  "observation_order": [
+    "global",
+    "shop",
+    "team"
+  ],
+  "observation_shapes": {
+    "global": [
+      10
+    ],
+    "shop": [
+      9,
+      194
+    ],
+    "team": [
+      5,
+      155
+    ]
+  },
+  "rule_sha256": {
+    "actions": "aa338ea436decf3265ced252eddd3b54f0f07e3a80045d6a21a2d2b69e590fd1",
+    "catalog": "ea54ef1fd1cf355436e0905b2980b779f60bf2b8b94870cffc44df70ad27ed8d",
+    "domain": "bbd64eb6f8739c752da214b5b8f803d27dc166881a46fe03bb326fcd19c24861",
+    "engine": "a666ab3598a5accd3b2434c61b77bb2aeae444a3251cda021b68053738717492",
+    "shop": "4ff42b666ffb0e9e40a04ce6c44be4d808370ff01aeed3a313a0a5441bf54704",
+    "events": "9022f2609cd169dc57da32bc9ea4237bb0535a3570b9164573e49d270214f544",
+    "midgame_events": "de4d5660cb75c557b2bc7c9223257721983f046e249d5cbe4e1ae7290924a7c3",
+    "tier4_events": "2b05bc39e1f5c3724aa8b5deca4e0ba0f56047628e4de5dfe4db9885492c4060",
+    "late_events": "4cbe8525ee8588ac86fc35d481aaae2cda5a9329239dae3b49429e2dceacc145"
+  },
+  "parameters": 341516,
+  "inference": "float32 NumPy, Tanh MLP, legal-action mask, deterministic argmax",
+  "validation_ten_win_rate": 0.8375,
+  "notice": "Frozen 0.46 sandbox, not official-client parity. Duel is not Arena evaluation.",
+  "files": {
+    "model.npz": "bea26ef331664c2770901e6a33d711901a88cc81ae0060c409c4f206a57e15bb",
+    "catalog.json": "ba2b2355b724f61e751080d873ebde93c8330932e3f4d161dc8ce93682447eb0",
+    "runtime.zip": "ec69aa8d1b8aeb3538e5990c54dc66172e81caa1be5ce437c83ba8ae491e1ad8",
+    "parity.npz": "1175dae398d541f492737b3c7f67795403ac813b16c950b6a25dddf34435df3d"
+  }
+}

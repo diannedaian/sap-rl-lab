@@ -7,6 +7,7 @@ import hashlib
 import json
 import random
 from collections import Counter
+from dataclasses import asdict
 from pathlib import Path
 from statistics import fmean, pstdev
 from typing import Any, Dict
@@ -14,6 +15,28 @@ from typing import Any, Dict
 
 def file_digest(path: str) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def policy_environment_options(policy: Any, overrides=None):
+    """Restore the saved transition contract, with deliberate diagnostic overrides."""
+    from .catalog import catalog_digest, load_catalog_by_id
+    from .domain import GameConfig
+
+    options = {}
+    contract = getattr(policy, "sap_environment_contract", None)
+    if contract is not None:
+        if contract.get("schema_version") != 1:
+            raise ValueError("Unsupported saved environment contract")
+        options["config"] = GameConfig(**contract["game_config"])
+        options["catalog"] = load_catalog_by_id(contract["catalog_id"])
+        if contract.get("catalog_sha256") and (
+            catalog_digest(options["catalog"]) != contract["catalog_sha256"]
+        ):
+            raise ValueError("Saved model catalog content or observation vocabulary changed")
+        if contract.get("allow_development"):
+            options["allow_development"] = True
+    options.update(overrides or {})
+    return options
 
 
 def evaluate_policy(
@@ -46,12 +69,18 @@ def evaluate_policy(
         baseline = scripted_policy(policy)
     # Observation compatibility is separate from reward shaping: evaluation
     # retains zero costs/bonuses unless explicitly overridden by its caller.
-    environment_options = dict(env_kwargs or {})
+    environment_options = policy_environment_options(policy, env_kwargs)
     if baseline is None and hasattr(policy, "observation_space"):
         width = policy.observation_space["global"].shape
-        if width not in {(8,), (9,)}:
+        base_width = (
+            10
+            if environment_options.get("catalog")
+            and environment_options["catalog"].rules_version == 6
+            else 8
+        )
+        if width not in {(base_width,), (base_width + 1,)}:
             raise ValueError(f"unsupported global observation shape: {width}")
-        environment_options.setdefault("observe_episode_actions", width == (9,))
+        environment_options.setdefault("observe_episode_actions", width == (base_width + 1,))
     provider = SnapshotLeague.load(opponent_league) if opponent_league else None
     rows = []
     total_actions: Counter = Counter()
@@ -80,6 +109,14 @@ def evaluate_policy(
             }
             for s in episode_seeds
         ]
+        force_mode = envs[0].engine.config.shop_action_limit_mode == "force_battle"
+        track_attack_limit = envs[0].engine.catalog.battle_attack_limit is not None
+        if track_attack_limit:
+            for record in records:
+                record["battle_attack_limit_draws"] = 0
+        if force_mode:
+            for record in records:
+                record["forced_end_turns"] = 0
         active = list(range(len(envs)))
         try:
             while active:
@@ -112,9 +149,15 @@ def evaluate_policy(
                             env.engine.state.team
                         )
                     observations[i], reward, terminated, truncated, info = env.step(action_id)
+                    if info.get("forced_end_turn"):
+                        record["forced_end_turns"] += 1
+                        record["gold_at_end_turn"] += info["gold_before_battle"]
+                        record["empty_slots_at_end_turn"] += info["empty_slots_before_battle"]
                     record["return"] += reward
                     record["actions"] += 1
                     outcome = info.get("battle_outcome")
+                    if info.get("battle_attack_limit_reached"):
+                        record["battle_attack_limit_draws"] += 1
                     if outcome:
                         record["battle_counts"][outcome] += 1
                         record["battles"] += 1
@@ -150,7 +193,7 @@ def evaluate_policy(
                 env.close()
     rows.sort(key=lambda row: row["seed"])
     battle_total = sum(total_battles.values())
-    return {
+    result = {
         "episodes": episodes,
         "seed_start": seed,
         "deterministic": deterministic,
@@ -176,6 +219,38 @@ def evaluate_policy(
         "failure_examples": examples,
         "episode_results": rows,
     }
+    if track_attack_limit:
+        limit_draws = sum(row["battle_attack_limit_draws"] for row in rows)
+        result.update(
+            battle_attack_limit=envs[0].engine.catalog.battle_attack_limit,
+            battle_attack_limit_draws=limit_draws,
+            battle_attack_limit_draw_rate=limit_draws / max(battle_total, 1),
+            battle_attack_limit_episode_rate=fmean(
+                row["battle_attack_limit_draws"] > 0 for row in rows
+            ),
+        )
+    if force_mode:
+        forced = sum(row["forced_end_turns"] for row in rows)
+        result.update(
+            environment_contract={
+                "schema_version": 1,
+                "catalog_id": envs[0].engine.catalog.catalog_id,
+                "game_config": asdict(envs[0].engine.config),
+            },
+            forced_end_turns=forced,
+            forced_end_turn_rate=forced / max(battle_total, 1),
+            forced_episode_rate=fmean(row["forced_end_turns"] > 0 for row in rows),
+            success_without_forcing_rate=fmean(
+                row["success"] and not row["forced_end_turns"] for row in rows
+            ),
+        )
+        if envs[0].engine.catalog.development_only:
+            from .catalog import catalog_digest
+
+            result["environment_contract"]["catalog_sha256"] = catalog_digest(
+                envs[0].engine.catalog
+            )
+    return result
 
 
 def compact_evaluation(result: Dict[str, Any]) -> Dict[str, Any]:
@@ -191,15 +266,19 @@ def compact_evaluation(result: Dict[str, Any]) -> Dict[str, Any]:
     }
 
 
-def evaluate_suite(policy: Any, leagues: Dict[str, str], *, episodes: int, seed: int):
+def evaluate_suite(
+    policy: Any, leagues: Dict[str, str], *, episodes: int, seed: int, env_kwargs=None
+):
     """Equal-family macro average; the stress-test family is supplied separately."""
     if not leagues:
         raise ValueError("suite needs at least one league")
     families = {
-        name: evaluate_policy(policy, episodes=episodes, seed=seed, opponent_league=path)
+        name: evaluate_policy(
+            policy, episodes=episodes, seed=seed, opponent_league=path, env_kwargs=env_kwargs
+        )
         for name, path in leagues.items()
     }
-    return {
+    result = {
         "families": families,
         "episodes_per_family": episodes,
         "seed_start": seed,
@@ -214,6 +293,20 @@ def evaluate_suite(policy: Any, leagues: Dict[str, str], *, episodes: int, seed:
             )
         },
     }
+    values = list(families.values())
+    if all("forced_end_turns" in value for value in values):
+        forced = sum(value["forced_end_turns"] for value in values)
+        battles = sum(sum(value["battle_counts"].values()) for value in values)
+        result.update(
+            environment_contract=values[0]["environment_contract"],
+            forced_end_turns=forced,
+            forced_end_turn_rate=forced / max(battles, 1),
+            forced_episode_rate=fmean(value["forced_episode_rate"] for value in values),
+            success_without_forcing_rate=fmean(
+                value["success_without_forcing_rate"] for value in values
+            ),
+        )
+    return result
 
 
 def main() -> None:

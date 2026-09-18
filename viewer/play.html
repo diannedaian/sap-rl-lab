@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Play the complete 60-pet SAP sandbox against our trained PPO model with live browser inference.">
+  <title>SAP RL · You vs Model</title>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="play.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="brand"><span class="brand-mark" aria-hidden="true">⚔</span><div><h1>You vs Model</h1><span>60 pets · Turtle Pack · Tier 1–6</span></div></div>
+    <nav aria-label="Modes"><a href="index.html">历史回放</a><span class="badge success">LIVE INFERENCE</span></nav>
+  </header>
+  <main class="duel-main">
+    <div class="duel-toolbar"><div><h2 id="round-title">准备你的第一支队伍</h2><p id="status" role="status">正在加载规则和模型。首次打开需要下载浏览器运行环境…</p></div><button id="new-game" disabled>重新开一局</button></div>
+    <div id="error" role="alert" hidden></div>
+    <section id="match" class="duel-grid" hidden>
+      <div class="play-area">
+        <section class="lane board" aria-labelledby="your-title">
+          <div class="board-heading"><h2 id="your-title">你的队伍</h2><div id="your-score" class="score-chips"></div></div>
+          <div class="section-label"><span>← 最先出战</span><span id="action-count"></span></div>
+          <div id="your-team" class="pet-row"></div>
+          <div id="shop-area">
+            <div class="section-label"><h3>商店</h3><span id="tier-label"></span></div><div id="shop" class="shop-grid"></div>
+            <div class="shop-controls"><button id="roll">刷新 · 1 金币</button><span id="budget-note"></span><button id="end-turn" class="primary">结束回合 → 战斗</button></div>
+          </div>
+        </section>
+        <section class="lane board opponent-board" aria-labelledby="opponent-title">
+          <div class="board-heading"><h2 id="opponent-title">模型 A</h2><div id="ai-score" class="score-chips"></div></div>
+          <p class="small-note" id="opponent-note">独立商店，不看你的当前队伍。战斗开始后揭晓。</p><div id="ai-team" class="pet-row"></div>
+        </section>
+        <section id="battle-panel" class="lane board" hidden aria-label="Battle replay">
+          <div class="board-heading"><h2 id="battle-result"></h2><button id="next-round" class="primary">下一回合 →</button></div>
+          <p id="battle-event" class="stage-message"></p>
+          <div class="playback"><button id="battle-start" aria-label="回到战斗开始">|◀</button><button id="battle-prev" aria-label="上一步">←</button><button id="battle-play">▶ 播放</button><button id="battle-next" aria-label="下一步">→</button><label>速度 <select id="battle-speed"><option value="700">1×</option><option value="300">2×</option><option value="120">4×</option></select></label><span id="frame-count" class="frame-count"></span></div>
+          <input id="battle-slider" class="scrubber" type="range" min="0" value="0" aria-label="战斗进度">
+          <p class="small-note">画面来自真实战斗状态快照，永久队伍不会因战斗受伤。可暂停、逐步查看。</p>
+        </section>
+      </div>
+      <aside>
+        <section class="lane inspect-panel"><h2 id="selection-title">选择一个宠物或食物</h2><div id="selection-detail"><p>点击商店卡片购买；食物和合成会让你选择目标。点击队伍卡片可以卖出、换位或合成。</p></div><div id="selection-actions" class="action-list"></div></section>
+        <details class="lane rules-panel"><summary>对战规则与模型</summary><div>
+          <p>双方从 5 点生命、10 金币开始，用各自独立的商店。输一场扣 1 点生命，平局不扣；第 3 回合最多回复 1 点生命。任一方生命归零或达到 10 胜，整局结束。</p>
+          <p>每回合最多 30 个购物动作，达到上限强制战斗；整局最多 40 回合，届时记为上限结束，不算获胜。</p>
+          <p>模型 A（85101）：原检查点的 341,516 个参数，不再训练。浏览器里运行同一套规则与合法动作 mask，选概率最高的动作。CPU 即可。</p>
+          <p>这是冻结的 0.46 版规则沙盒，不是官方客户端。连续与你交手是新的对战模式，之前 82.27% 是三个模型平均的对手池十胜率，不是对你的胜率。</p>
+          <p>当前对局只留在此页面，刷新会丢失。AI 当前商店不展示；上一轮决策可在战斗后查看。</p>
+          <p id="model-evidence"></p><p><a href="https://pyodide.org/en/0.28.3/usage/webworker.html" target="_blank" rel="noreferrer">浏览器 Python 运行环境：Pyodide</a></p>
+        </div></details>
+        <details class="lane decisions-panel" id="decisions-panel"><summary>查看模型上一轮如何买宠物</summary><div id="ai-decisions"><p>第一场战斗后显示。</p></div></details>
+      </aside>
+    </section>
+    <noscript>请开启 JavaScript 以运行游戏。</noscript>
+  </main>
+  <script type="module" src="play.js"></script>
+</body></html>

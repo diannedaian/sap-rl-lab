@@ -1,0 +1,31 @@
+{
+  "catalog_id": "turtle-v0.46-tier4-v6",
+  "extends": "turtle_v0_46_midgame_v5.json",
+  "rules_version": 6,
+  "game_version": "0.46",
+  "checked_on": "2026-09-14",
+  "development_only": true,
+  "implemented_shop_tiers": [1, 2, 3, 4, 5],
+  "scope": "Fifty-pet curriculum: normal shops through Tier4, complete Tier5 reward pool. Community specification; not certified official-client parity.",
+  "pets": [
+    {"id":"armadillo","name":"Armadillo","tier":5,"attack":4,"health":8,"abilities":[{"trigger":"start_battle","effect":"buff_all_pets","health_by_level":[8,16,24]}]},
+    {"id":"cow","name":"Cow","tier":5,"attack":4,"health":6,"abilities":[{"trigger":"buy","effect":"replace_milk","food_id_by_level":["milk","better_milk","best_milk"]}]},
+    {"id":"crocodile","name":"Crocodile","tier":5,"attack":8,"health":4,"abilities":[{"trigger":"start_battle","effect":"damage_last_enemy","damage":8,"repeats_by_level":[1,2,3]}]},
+    {"id":"monkey","name":"Monkey","tier":5,"attack":1,"health":2,"abilities":[{"trigger":"end_turn","effect":"buff_front_pet","attack_by_level":[2,4,6],"health_by_level":[2,4,6]}]},
+    {"id":"rhino","name":"Rhino","tier":5,"attack":6,"health":7,"abilities":[{"trigger":"knock_out","effect":"rhino_snipe","damage_by_level":[4,8,12]}]},
+    {"id":"rooster","name":"Rooster","tier":5,"attack":6,"health":5,"abilities":[{"trigger":"faint","effect":"rooster_chicks","summon_id":"chick","count_by_level":[1,2,3]}]},
+    {"id":"scorpion","name":"Scorpion","tier":5,"attack":1,"health":3,"abilities":[{"trigger":"summoned","effect":"gain_peanut"}]},
+    {"id":"seal","name":"Seal","tier":5,"attack":3,"health":8,"abilities":[{"trigger":"friendly_ate_food","effect":"buff_random_friend","eater_is_owner":true,"prefer_nonmaxed":true,"attack_by_level":[1,2,3],"count":3}]},
+    {"id":"shark","name":"Shark","tier":5,"attack":2,"health":2,"abilities":[{"trigger":"friend_faints","effect":"buff_self","attack_by_level":[2,4,6],"health_by_level":[2,4,6]}]},
+    {"id":"turkey","name":"Turkey","tier":5,"attack":3,"health":4,"abilities":[{"trigger":"friend_summoned","effect":"buff_subject","attack_by_level":[3,6,9],"health_by_level":[1,2,3]}]},
+    {"id":"chick","name":"Chick","tier":1,"attack":1,"health":1,"token":true,"abilities":[]}
+  ],
+  "foods": [
+    {"id":"bread","name":"Bread","tier":4,"cost":3,"effect":"set_perk","perk":"bread"},
+    {"id":"pear","name":"Pear","tier":4,"cost":3,"effect":"buff","attack":2,"health":2},
+    {"id":"canned_food","name":"Canned Food","tier":4,"cost":3,"effect":"buff_future_shop","attack":1,"health":1},
+    {"id":"milk","name":"Milk","tier":1,"cost":0,"effect":"buff","attack":1,"health":2,"token":true},
+    {"id":"better_milk","name":"Better Milk","tier":1,"cost":0,"effect":"buff","attack":2,"health":4,"token":true},
+    {"id":"best_milk","name":"Best Milk","tier":1,"cost":0,"effect":"buff","attack":3,"health":6,"token":true}
+  ]
+}

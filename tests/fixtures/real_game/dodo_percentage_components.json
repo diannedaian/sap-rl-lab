@@ -1,0 +1,33 @@
+{
+  "case_id": "dodo-percentage-floor-components",
+  "inspected": "2026-09-07",
+  "scope": "Numeric and chaining components only, not full recorded-team simulation or exact v0.46 client certification.",
+  "chain": {
+    "source": "https://www.youtube.com/watch?v=OahKDiOjQi8&t=241s",
+    "creator": "Haps",
+    "date_listing": "29 December 2022, Grounded SAP",
+    "before_seconds": 241,
+    "after_seconds": 243,
+    "front_to_back": [
+      {"species": "scorpion", "attack": 1, "health": 1, "level": 1},
+      {"species": "dodo", "attack": 5, "health": 6, "level": 1, "perk": "meat_bone"},
+      {"species": "dodo", "attack": 12, "health": 13, "level": 1, "perk": "melon"},
+      {"species": "dodo", "attack": 29, "health": 31, "level": 2, "perk": "melon"}
+    ],
+    "observed_attack_front_to_back": [13, 25, 41, 29],
+    "limits": "Only Dodo numeric chain is transferred to supported pets. The recording's Scorpion and Crocodile are not implemented here. Half-values 20.5 and 12.5 rule out ceiling but alone do not distinguish floor from ties-to-even."
+  },
+  "tooltip": {
+    "source": "https://www.youtube.com/watch?v=F7NE_7yl41k&t=314s",
+    "creator": "Flame96",
+    "title": "The Dodo Tree Team Gives Free Coconut In Super Auto Pets",
+    "date_listing": "YouTube search showed 2 years ago on 2026-09-07; exact upload/build date not certified",
+    "seconds": 314,
+    "attack": 9,
+    "level": 3,
+    "percent": 150,
+    "observed_current_ability_value": 13,
+    "limits": "Visible in-game tooltip, not a damage log; 13.5->13 distinguishes floor from ceiling and ties-to-even. Exact target build and all low-value boundaries remain unobserved."
+  },
+  "raw_evidence": "runs/expanded-rule-video-audit-v2"
+}

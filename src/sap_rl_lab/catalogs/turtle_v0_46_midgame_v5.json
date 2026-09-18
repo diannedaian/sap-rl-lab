@@ -1,0 +1,1029 @@
+{
+  "catalog_id": "turtle-v0.46-midgame-v5",
+  "game_version": "0.46",
+  "checked_on": "2026-09-07",
+  "battle_attack_limit": 30,
+  "battle_attack_limit_evidence": "Provisional interpretation of community reports, not a verified v0.46 client constant. See docs/LONG_BATTLE_RULE.md. Count simultaneous front-pet exchanges, not skill triggers.",
+  "scope": "Thirty-pet curriculum: normal shop capped at Tier 2; full Turtle Tier 3 reward/summon pool. Specification-tested, target-client parity not certified.",
+  "pets": [
+    {
+      "id": "ant",
+      "name": "Ant",
+      "tier": 1,
+      "attack": 2,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "buff_random_friend",
+          "prefer_nonmaxed": true,
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "health_by_level": [
+            1,
+            2,
+            3
+          ],
+          "count_by_level": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cricket",
+      "name": "Cricket",
+      "tier": 1,
+      "attack": 1,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "summon",
+          "summon_id": "zombie_cricket",
+          "match_level": true,
+          "summon_attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "summon_health_by_level": [
+            1,
+            2,
+            3
+          ],
+          "count_by_level": [
+            1,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "tier": 1,
+      "attack": 2,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "level_up",
+          "effect": "buff_random_friend",
+          "prefer_nonmaxed": true,
+          "attack_by_level": [
+            1,
+            2,
+            0
+          ],
+          "health_by_level": [
+            1,
+            2,
+            0
+          ],
+          "count_by_level": [
+            2,
+            2,
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "horse",
+      "name": "Horse",
+      "tier": 1,
+      "attack": 2,
+      "health": 1,
+      "abilities": [
+        {
+          "trigger": "friend_summoned",
+          "effect": "buff_subject",
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "health_by_level": [
+            0,
+            0,
+            0
+          ],
+          "temporary": true
+        }
+      ]
+    },
+    {
+      "id": "mosquito",
+      "name": "Mosquito",
+      "tier": 1,
+      "attack": 2,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "start_battle",
+          "effect": "damage_random_enemy",
+          "damage_by_level": [
+            1,
+            1,
+            1
+          ],
+          "count_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "otter",
+      "name": "Otter",
+      "tier": 1,
+      "attack": 1,
+      "health": 4,
+      "abilities": [
+        {
+          "trigger": "buy",
+          "effect": "buff_random_friend",
+          "prefer_nonmaxed": true,
+          "attack_by_level": [
+            0,
+            0,
+            0
+          ],
+          "health_by_level": [
+            1,
+            1,
+            1
+          ],
+          "count_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pig",
+      "name": "Pig",
+      "tier": 1,
+      "attack": 4,
+      "health": 1,
+      "abilities": [
+        {
+          "trigger": "sell",
+          "effect": "gain_gold",
+          "gold_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pigeon",
+      "name": "Pigeon",
+      "tier": 1,
+      "attack": 3,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "sell",
+          "effect": "stock_food",
+          "food_id": "bread_crumbs",
+          "count_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "duck",
+      "name": "Duck",
+      "tier": 1,
+      "attack": 2,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "sell",
+          "effect": "buff_shop_pets",
+          "health_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beaver",
+      "name": "Beaver",
+      "tier": 1,
+      "attack": 3,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "sell",
+          "effect": "buff_random_friend",
+          "prefer_nonmaxed": true,
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "count": 2
+        }
+      ]
+    },
+    {
+      "id": "snail",
+      "name": "Snail",
+      "tier": 2,
+      "attack": 2,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "end_turn",
+          "effect": "buff_position",
+          "direction": "ahead",
+          "count": 3,
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "requires_previous_loss": true
+        }
+      ]
+    },
+    {
+      "id": "crab",
+      "name": "Crab",
+      "tier": 2,
+      "attack": 4,
+      "health": 1,
+      "abilities": [
+        {
+          "trigger": "start_battle",
+          "effect": "gain_health_percent",
+          "rounding": "ceil",
+          "percent_by_level": [
+            25,
+            50,
+            75
+          ]
+        }
+      ]
+    },
+    {
+      "id": "swan",
+      "name": "Swan",
+      "tier": 2,
+      "attack": 1,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "start_turn",
+          "effect": "gain_gold",
+          "gold_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rat",
+      "name": "Rat",
+      "tier": 2,
+      "attack": 3,
+      "health": 6,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "summon_enemy",
+          "summon_id": "dirty_rat",
+          "count_by_level": [
+            1,
+            2,
+            3
+          ],
+          "notify_summon": false
+        }
+      ]
+    },
+    {
+      "id": "hedgehog",
+      "name": "Hedgehog",
+      "tier": 2,
+      "attack": 4,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "damage_all",
+          "damage_by_level": [
+            2,
+            4,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peacock",
+      "name": "Peacock",
+      "tier": 2,
+      "attack": 2,
+      "health": 5,
+      "abilities": [
+        {
+          "trigger": "hurt",
+          "effect": "buff_self",
+          "attack_by_level": [
+            3,
+            6,
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flamingo",
+      "name": "Flamingo",
+      "tier": 2,
+      "attack": 3,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "buff_position",
+          "direction": "behind",
+          "count": 2,
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "health_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "worm",
+      "name": "Worm",
+      "tier": 2,
+      "attack": 1,
+      "health": 4,
+      "abilities": [
+        {
+          "trigger": "start_turn",
+          "effect": "stock_food",
+          "food_id_by_level": [
+            "apple",
+            "better_apple",
+            "best_apple"
+          ],
+          "cost": 2,
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "kangaroo",
+      "name": "Kangaroo",
+      "tier": 2,
+      "attack": 2,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "friend_ahead_attacks",
+          "effect": "buff_self",
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "health_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "spider",
+      "name": "Spider",
+      "tier": 2,
+      "attack": 2,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "summon_tier",
+          "tier": 3,
+          "summon_attack_by_level": [
+            2,
+            4,
+            6
+          ],
+          "summon_health_by_level": [
+            2,
+            4,
+            6
+          ],
+          "match_level": true
+        }
+      ]
+    },
+    {
+      "id": "dodo",
+      "name": "Dodo",
+      "tier": 3,
+      "attack": 4,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "start_battle",
+          "effect": "share_attack",
+          "rounding": "floor",
+          "percent_by_level": [
+            50,
+            100,
+            150
+          ]
+        }
+      ]
+    },
+    {
+      "id": "badger",
+      "name": "Badger",
+      "tier": 3,
+      "attack": 6,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "damage_adjacent",
+          "rounding": "floor",
+          "percent_by_level": [
+            50,
+            100,
+            150
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dolphin",
+      "name": "Dolphin",
+      "tier": 3,
+      "attack": 4,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "start_battle",
+          "effect": "damage_lowest_enemy",
+          "damage": 4,
+          "repeats_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giraffe",
+      "name": "Giraffe",
+      "tier": 3,
+      "attack": 1,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "start_turn",
+          "effect": "buff_position",
+          "direction": "ahead",
+          "count_by_level": [
+            1,
+            2,
+            3
+          ],
+          "attack": 1,
+          "health": 1
+        }
+      ]
+    },
+    {
+      "id": "elephant",
+      "name": "Elephant",
+      "tier": 3,
+      "attack": 3,
+      "health": 7,
+      "abilities": [
+        {
+          "trigger": "after_attack",
+          "effect": "damage_behind",
+          "damage": 1,
+          "repeats_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "camel",
+      "name": "Camel",
+      "tier": 3,
+      "attack": 3,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "hurt",
+          "effect": "buff_position",
+          "direction": "behind",
+          "count": 1,
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "health_by_level": [
+            2,
+            4,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rabbit",
+      "name": "Rabbit",
+      "tier": 3,
+      "attack": 1,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "friendly_ate_food",
+          "effect": "buff_eater",
+          "health_by_level": [
+            1,
+            2,
+            3
+          ],
+          "max_uses": 3,
+          "merge_trigger_rule": "target-reset-on-level-up"
+        }
+      ]
+    },
+    {
+      "id": "ox",
+      "name": "Ox",
+      "tier": 3,
+      "attack": 1,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "friend_ahead_faints",
+          "effect": "gain_melon",
+          "attack": 1,
+          "merge_trigger_rule": "target-reset-on-level-up",
+          "perk_counts_as_food": true,
+          "max_uses_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dog",
+      "name": "Dog",
+      "tier": 3,
+      "attack": 3,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "friend_summoned",
+          "effect": "buff_self",
+          "attack_by_level": [
+            2,
+            4,
+            6
+          ],
+          "health_by_level": [
+            1,
+            2,
+            3
+          ],
+          "temporary": true
+        }
+      ]
+    },
+    {
+      "id": "sheep",
+      "name": "Sheep",
+      "tier": 3,
+      "attack": 2,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "summon",
+          "summon_id": "ram",
+          "match_level": true,
+          "count": 2,
+          "summon_attack_by_level": [
+            2,
+            4,
+            6
+          ],
+          "summon_health_by_level": [
+            2,
+            4,
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": "zombie_cricket",
+      "name": "Zombie Cricket",
+      "tier": 0,
+      "attack": 1,
+      "health": 1,
+      "token": true,
+      "abilities": []
+    },
+    {
+      "id": "bee",
+      "name": "Bee",
+      "tier": 0,
+      "attack": 1,
+      "health": 1,
+      "token": true,
+      "abilities": []
+    },
+    {
+      "id": "dirty_rat",
+      "name": "Dirty Rat",
+      "tier": 0,
+      "attack": 1,
+      "health": 1,
+      "token": true,
+      "abilities": []
+    },
+    {
+      "id": "ram",
+      "name": "Ram",
+      "tier": 0,
+      "attack": 2,
+      "health": 2,
+      "token": true,
+      "abilities": []
+    },
+    {
+      "id": "skunk",
+      "name": "Skunk",
+      "tier": 4,
+      "attack": 3,
+      "health": 5,
+      "abilities": [
+        {
+          "trigger": "start_battle",
+          "effect": "reduce_highest_health",
+          "percent_by_level": [
+            33,
+            66,
+            99
+          ],
+          "rounding": "ceil"
+        }
+      ]
+    },
+    {
+      "id": "hippo",
+      "name": "Hippo",
+      "tier": 4,
+      "attack": 4,
+      "health": 6,
+      "abilities": [
+        {
+          "trigger": "knock_out",
+          "effect": "buff_self",
+          "attack_by_level": [
+            3,
+            6,
+            9
+          ],
+          "health_by_level": [
+            3,
+            6,
+            9
+          ],
+          "max_uses": 3
+        }
+      ]
+    },
+    {
+      "id": "bison",
+      "name": "Bison",
+      "tier": 4,
+      "attack": 4,
+      "health": 4,
+      "abilities": [
+        {
+          "trigger": "end_turn",
+          "effect": "buff_if_level_friend",
+          "attack_by_level": [
+            2,
+            4,
+            6
+          ],
+          "health_by_level": [
+            2,
+            4,
+            6
+          ],
+          "friend_level": 3,
+          "team_limit_group": "bison"
+        }
+      ]
+    },
+    {
+      "id": "blowfish",
+      "name": "Blowfish",
+      "tier": 4,
+      "attack": 3,
+      "health": 6,
+      "abilities": [
+        {
+          "trigger": "hurt",
+          "effect": "damage_random_enemy",
+          "damage_by_level": [
+            3,
+            6,
+            9
+          ],
+          "count": 1
+        }
+      ]
+    },
+    {
+      "id": "turtle",
+      "name": "Turtle",
+      "tier": 4,
+      "attack": 2,
+      "health": 5,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "perk_position",
+          "direction": "behind",
+          "count_by_level": [
+            1,
+            2,
+            3
+          ],
+          "perk": "melon"
+        }
+      ]
+    },
+    {
+      "id": "squirrel",
+      "name": "Squirrel",
+      "tier": 4,
+      "attack": 3,
+      "health": 5,
+      "abilities": [
+        {
+          "trigger": "start_turn",
+          "effect": "discount_shop_food",
+          "discount_by_level": [
+            1,
+            2,
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": "penguin",
+      "name": "Penguin",
+      "tier": 4,
+      "attack": 2,
+      "health": 3,
+      "abilities": [
+        {
+          "trigger": "start_turn",
+          "effect": "buff_level_friends",
+          "attack_by_level": [
+            1,
+            2,
+            3
+          ],
+          "health_by_level": [
+            1,
+            2,
+            3
+          ],
+          "count": 2,
+          "friend_level": 2
+        }
+      ]
+    },
+    {
+      "id": "deer",
+      "name": "Deer",
+      "tier": 4,
+      "attack": 2,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "faint",
+          "effect": "summon",
+          "summon_id": "bus",
+          "summon_attack_by_level": [
+            5,
+            10,
+            15
+          ],
+          "summon_health_by_level": [
+            3,
+            6,
+            9
+          ],
+          "match_level": true,
+          "summon_perk": "chili"
+        }
+      ]
+    },
+    {
+      "id": "whale",
+      "name": "Whale",
+      "tier": 4,
+      "attack": 3,
+      "health": 7,
+      "abilities": [
+        {
+          "trigger": "start_battle",
+          "effect": "swallow_ahead"
+        }
+      ]
+    },
+    {
+      "id": "parrot",
+      "name": "Parrot",
+      "tier": 4,
+      "attack": 4,
+      "health": 2,
+      "abilities": [
+        {
+          "trigger": "end_turn",
+          "effect": "copy_ahead_ability"
+        }
+      ]
+    },
+    {
+      "id": "bus",
+      "name": "Bus",
+      "tier": 0,
+      "attack": 5,
+      "health": 3,
+      "token": true,
+      "abilities": []
+    }
+  ],
+  "foods": [
+    {
+      "id": "apple",
+      "name": "Apple",
+      "tier": 1,
+      "cost": 3,
+      "effect": "buff",
+      "attack": 1,
+      "health": 1
+    },
+    {
+      "id": "honey",
+      "name": "Honey",
+      "tier": 1,
+      "cost": 3,
+      "effect": "set_perk",
+      "perk": "honey"
+    },
+    {
+      "id": "bread_crumbs",
+      "name": "Bread Crumbs",
+      "tier": 0,
+      "cost": 0,
+      "effect": "buff",
+      "attack": 1,
+      "health": 0,
+      "token": true
+    },
+    {
+      "id": "cupcake",
+      "name": "Cupcake",
+      "tier": 2,
+      "cost": 3,
+      "effect": "buff",
+      "attack": 3,
+      "health": 3,
+      "temporary": true
+    },
+    {
+      "id": "meat_bone",
+      "name": "Meat Bone",
+      "tier": 2,
+      "cost": 3,
+      "effect": "set_perk",
+      "perk": "meat_bone"
+    },
+    {
+      "id": "sleeping_pill",
+      "name": "Sleeping Pill",
+      "tier": 2,
+      "cost": 1,
+      "effect": "faint_pet"
+    },
+    {
+      "id": "better_apple",
+      "name": "Better Apple",
+      "tier": 1,
+      "cost": 2,
+      "effect": "buff",
+      "attack": 2,
+      "health": 2,
+      "token": true
+    },
+    {
+      "id": "best_apple",
+      "name": "Best Apple",
+      "tier": 1,
+      "cost": 2,
+      "effect": "buff",
+      "attack": 3,
+      "health": 3,
+      "token": true
+    },
+    {
+      "id": "garlic",
+      "name": "Garlic",
+      "tier": 3,
+      "cost": 3,
+      "effect": "set_perk",
+      "perk": "garlic"
+    },
+    {
+      "id": "salad_bowl",
+      "name": "Salad Bowl",
+      "tier": 3,
+      "cost": 3,
+      "effect": "buff_random_team",
+      "attack": 1,
+      "health": 1,
+      "count": 2
+    },
+    {
+      "id": "cake",
+      "name": "Cake",
+      "tier": 3,
+      "cost": 3,
+      "effect": "set_perk",
+      "perk": "cake"
+    }
+  ],
+  "rules_version": 5,
+  "sources": {
+    "fish_ant_otter": "https://steamcommunity.com/games/1714040/announcements/detail/3698065064748065722",
+    "midgame_ledger": "docs/MIDGAME_RULES.md"
+  },
+  "development_only": true,
+  "implemented_shop_tiers": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "notes": "Experimental midgame specification: normal shop cap 3 and exact Tier-4 reward dependencies. Not official-client parity certified. See docs/MIDGAME_RULES.md for evidence and gates before training."
+}

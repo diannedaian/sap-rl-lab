@@ -1,0 +1,28 @@
+{
+  "case_id": "giraffe-worm-turn-four-to-five-observed",
+  "source": "https://www.youtube.com/watch?v=tYDluMIOgjI&t=143s",
+  "creator": "micahwzowski",
+  "published": "2026-08-23",
+  "inspected": "2026-09-07",
+  "evidence_kind": "browser-observed gameplay with frame stepping",
+  "scope": "Recent Turtle component fixture; client build number not visible. Normal Tier-3 shop contents are outside our cap-two curriculum and are excluded from this component assertion.",
+  "timeline": {
+    "2:23": "Turn 4, front Ant level 2 6/6, Giraffe level 1 1/2 immediately behind; rear Worm level 1 2/5.",
+    "2:28": "Battle entry still shows front Ant 6/6: no end-turn Giraffe buff.",
+    "2:43": "Turn 5, 10 gold; Ant still 6/6. Worm starts glowing; tooltip says Start of turn, stock one 2-gold Apple.",
+    "2:44": "Apple appears with red 2 cost badge. Giraffe glows; tooltip says Start of turn, give nearest friend ahead +1 attack and +1 health.",
+    "2:45": "Front Ant becomes 7/7. Other four team members unchanged; stock Apple remains."
+  },
+  "team_front_to_back": [
+    {"spec_id": "ant", "attack": 6, "health": 6, "experience": 3},
+    {"spec_id": "giraffe", "attack": 1, "health": 2, "experience": 1},
+    {"spec_id": "ant", "attack": 3, "health": 2, "experience": 1},
+    {"spec_id": "ant", "attack": 2, "health": 2, "experience": 1},
+    {"spec_id": "worm", "attack": 2, "health": 5, "experience": 1}
+  ],
+  "observed_result": {
+    "front_ant": {"attack": 7, "health": 7},
+    "stock_food": {"item_id": "apple", "cost": 2},
+    "trigger_order": ["worm", "giraffe"]
+  }
+}

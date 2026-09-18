@@ -3,7 +3,16 @@
 The target is the 60-pet Turtle Pack, but game data changes over time. “Turtle
 Pack compatible” must always name a game version.
 
-## Current catalog
+## Final delivered scope — 2026-09-18
+
+The delivered model uses the separate full-pack runtime: all 60 pets, normal
+Tier 1–6 shops, 18 ordinary foods, and seven battle tokens. See
+[full-pack rules](FULLPACK_RULES.md) and [model limitations](MODEL_CARD.md).
+This is a version-pinned v0.46-inspired sandbox, not certified official-client
+parity. The older catalogs below remain available for historical experiments;
+they do not describe the final model's scope.
+
+## Historical default catalog
 
 - Catalog: `turtle-v0.46-tier1-rules-v2`
 - Checked: 2026-09-05
@@ -33,3 +42,23 @@ identifies a sandbox rules revision, not a new official game release.
 
 The wiki is a useful factual reference, but this repository does not copy its
 articles or art. Game icons and screenshots are intentionally excluded.
+
+## Tier 1–2 work in progress
+
+The eight-pet milestone omits Duck and Beaver: complete Turtle Tier 1 has ten
+ordinary pets, and Tier 2 adds ten more. See [the coverage and implementation
+record](TIER12.md). The explicitly gated v4 curriculum implements all thirty
+Tier 1–3 pets, with normal shops capped at Tier 2 and Tier 3 reserved for rewards
+and summons. The default training catalog is unchanged. Otter's historical
+1/4 stats are corrected only in v4, not retroactively in released catalogs.
+Most new tests are specification tests. Four limited observed-video component
+fixtures now cover Cricket/Ox, Giraffe/Worm, linked Ant upgrade offers and a
+historical thirty-exchange survivor draw; they
+are not complete official-game episode fixtures. See [case provenance](REAL_GAME_CASES.md).
+Unreleased v4 draft revisions are distinguished by the catalog SHA-256 plus
+their archived source, not the development ID alone. Models and new expanded
+replays reject a changed catalog fingerprint; published eight-pet catalogs are
+not edited. Earlier pilot scores refer only to their archived draft revision.
+The
+[current source/status ledger](TIER12_RULES.md) separates implemented behavior
+from provisional details and the remaining client-fixture gates.

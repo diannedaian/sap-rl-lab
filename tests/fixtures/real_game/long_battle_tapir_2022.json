@@ -1,0 +1,40 @@
+{
+  "case_id": "historical-tapir-thirty-exchange-draw",
+  "source": "https://www.youtube.com/watch?v=Z2xB3Sgo6Uk&t=563s",
+  "creator": "Skoottie",
+  "published": "2022-03-29",
+  "inspected": "2026-09-07",
+  "client_context": "Historical new-pack test server, identified in the video description; not a v0.46 build fixture.",
+  "evidence_kind": "Browser-played video screenshots, candidate attack pulses visually reviewed; no downloaded video.",
+  "scope": "Global exchange-limit and post-attack-summon ordering component only. Tapir and other recorded pets are outside the thirty-pet curriculum, so this is not a full simulated replay of the recorded teams.",
+  "observed_result": {
+    "attack_exchanges": 30,
+    "outcome": "draw",
+    "survivors_on_both_sides": true,
+    "last_attack_summons_resolved": true,
+    "trophies_before": 8,
+    "trophies_after": 8,
+    "lives_before": 6,
+    "lives_after": 6
+  },
+  "approximate_attack_frame_seconds": [
+    566.250, 567.451, 569.605, 571.697, 573.886, 578.440,
+    580.516, 582.001, 583.302, 584.384, 585.469, 586.692,
+    587.711, 588.945, 589.962, 591.164, 592.214, 593.233,
+    594.467, 595.568, 596.606, 597.644, 598.864, 599.899,
+    600.948, 602.165, 603.362, 604.362, 605.614, 606.648
+  ],
+  "timeline": {
+    "560": "Turn 12 shop ends with eight trophies and six lives.",
+    "562-565": "Transition into battle; before first exchange.",
+    "566.25": "First front-pet exchange, including Pepper survival; not a start-of-battle ability shot.",
+    "575-578": "Player opens game menus. Menu text creates false positive red-pixel pulses; these were excluded by visual inspection.",
+    "578.44": "Sixth exchange, initially merged with a menu pulse by the rough detector; separately replayed at 578-580 and visually confirmed.",
+    "606.65": "Thirtieth and final exchange; both front Tapirs faint.",
+    "608": "Both front replacements exist, with the opponent's summon buff resolved to 5/4; no further exchange.",
+    "613": "Draw overlay, pets alive on both sides, eight trophies and six lives unchanged.",
+    "620": "Next shop, turn 13, same trophies and lives."
+  },
+  "local_raw_evidence": "runs/expanded-rule-video-audit-v1",
+  "method_limits": "Frame times are approximate (~0.2-second screenshot cadence), not exact animation onsets. The initial 75-pixel detector returned 31 candidates: two were menus and one real attack was merged into a menu pulse. All remaining candidate images and the separately captured missing attack were visually inspected. Thresholds 150/250/400/500 independently extract the same thirty pulses from the recorded metrics. Initial playback failed near the end; 606-613 was separately replayed through the visible Draw result. This does not establish the current client version, or natural win/loss precedence on exchange 30."
+}

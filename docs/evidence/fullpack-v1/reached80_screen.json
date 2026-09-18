@@ -1,0 +1,14 @@
+{
+  "learned_successes": 2468,
+  "learned_episodes": 3000,
+  "learned_ten_win_rate": 0.8226666666666667,
+  "all_families_reliable": true,
+  "screen_passed": true,
+  "ordinary_shop_tier": 6,
+  "pets": 60,
+  "max_turns": 40,
+  "confirmation_pending": true,
+  "goal_complete": false,
+  "segment": 5,
+  "selection": "runs/fullpack-tier6-h40-v1/segments/segment005/selection.json"
+}

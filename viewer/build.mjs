@@ -12,7 +12,7 @@ for (const folder of ['./data/', './data/round5/']) {
   total += manifest.episodes.length;
 }
 await mkdir(new URL('./dist', import.meta.url), { recursive: true });
-for (const name of ['index.html', 'styles.css', 'app.js', 'model.js', 'data']) {
+for (const name of ['index.html', 'styles.css', 'app.js', 'model.js', 'data', 'play.html', 'play.css', 'play.js', 'duel-worker.js', 'duel']) {
   await cp(new URL(`./${name}`, import.meta.url), new URL(`./dist/${name}`, import.meta.url), { recursive: true });
 }
 console.log(`Built replay viewer with ${total} verified episodes in two collections`);

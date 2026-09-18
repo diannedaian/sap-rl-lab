@@ -1,0 +1,28 @@
+{
+  "case_id": "cricket-ox-pill-historical-component",
+  "source": "https://www.youtube.com/watch?v=bnet27L5aFg&t=80s",
+  "creator": "SuperAutoGaming",
+  "published": "2022-11-09",
+  "inspected": "2026-09-07",
+  "evidence_kind": "browser-observed gameplay, not transcript alone",
+  "scope": "Historical component fixture; not complete 0.46 client parity",
+  "timeline": {
+    "1:20": "Cricket level 2, 3/4; Ox behind it level 1, 1/3. Pill animation starts.",
+    "1:22": "Ox gains Melon and attack before the Cricket token appears.",
+    "1:22.5-1:23": "Zombie Cricket displays level 2 and 2/2; Ox displays 2/3 with Melon.",
+    "1:25": "Player has rearranged the Ant and Ox; do not use that order as pill output."
+  },
+  "team_front_to_back": [
+    {"spec_id": "fish", "attack": 2, "health": 2, "experience": 1},
+    {"spec_id": "fish", "attack": 2, "health": 2, "experience": 1},
+    {"spec_id": "cricket", "attack": 3, "health": 4, "experience": 3},
+    {"spec_id": "ox", "attack": 1, "health": 3, "experience": 1},
+    {"spec_id": "ant", "attack": 2, "health": 1, "experience": 1}
+  ],
+  "action": {"kind": "sleeping_pill", "target": 2},
+  "observed_result": {
+    "zombie_cricket": {"attack": 2, "health": 2, "level": 2},
+    "ox": {"attack": 2, "health": 3, "level": 1, "perk": "melon"},
+    "trigger_order": ["friend_ahead_faints", "summon"]
+  }
+}

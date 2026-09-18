@@ -1,0 +1,1035 @@
+{
+  "run_directory": "runs/kl-80-v1",
+  "curves": {
+    "kl-seed17301": {
+      "source_seed": 17301,
+      "continuation_rng_seed": 98301,
+      "selected_steps": 0,
+      "points": [
+        {
+          "steps": 0,
+          "macro_success": 0.9625,
+          "hard_success": 0.86,
+          "scripted_success": 0.9966666666666667,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 86,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 262144,
+          "macro_success": 0.9199999999999999,
+          "hard_success": 0.75,
+          "scripted_success": 0.9766666666666666,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 96,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 75,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 524288,
+          "macro_success": 0.9425,
+          "hard_success": 0.78,
+          "scripted_success": 0.9966666666666667,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 78,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 786432,
+          "macro_success": 0.925,
+          "hard_success": 0.78,
+          "scripted_success": 0.9733333333333333,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 96,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 78,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1048576,
+          "macro_success": 0.95,
+          "hard_success": 0.83,
+          "scripted_success": 0.9899999999999999,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 83,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1310720,
+          "macro_success": 0.9275,
+          "hard_success": 0.77,
+          "scripted_success": 0.98,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 97,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 77,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1572864,
+          "macro_success": 0.9175,
+          "hard_success": 0.71,
+          "scripted_success": 0.9866666666666667,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 96,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 71,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1835008,
+          "macro_success": 0.9199999999999999,
+          "hard_success": 0.74,
+          "scripted_success": 0.98,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 96,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 74,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 2097152,
+          "macro_success": 0.9475,
+          "hard_success": 0.83,
+          "scripted_success": 0.9866666666666667,
+          "forced_episode_rate": 0.0025,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 1
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 83,
+              "forced": 0
+            }
+          }
+        }
+      ]
+    },
+    "kl-seed204101": {
+      "source_seed": 204101,
+      "continuation_rng_seed": 98302,
+      "selected_steps": 0,
+      "points": [
+        {
+          "steps": 0,
+          "macro_success": 0.96,
+          "hard_success": 0.85,
+          "scripted_success": 0.9966666666666667,
+          "forced_episode_rate": 0.005,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 2
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 85,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 262144,
+          "macro_success": 0.95,
+          "hard_success": 0.84,
+          "scripted_success": 0.9866666666666667,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 97,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 84,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 524288,
+          "macro_success": 0.955,
+          "hard_success": 0.84,
+          "scripted_success": 0.9933333333333333,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 84,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 786432,
+          "macro_success": 0.9525,
+          "hard_success": 0.84,
+          "scripted_success": 0.9899999999999999,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 84,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1048576,
+          "macro_success": 0.9299999999999999,
+          "hard_success": 0.77,
+          "scripted_success": 0.9833333333333334,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 97,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 77,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1310720,
+          "macro_success": 0.9175,
+          "hard_success": 0.75,
+          "scripted_success": 0.9733333333333333,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 97,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 96,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 75,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1572864,
+          "macro_success": 0.9375,
+          "hard_success": 0.8,
+          "scripted_success": 0.9833333333333334,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 97,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 80,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1835008,
+          "macro_success": 0.95,
+          "hard_success": 0.81,
+          "scripted_success": 0.9966666666666667,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 81,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 2097152,
+          "macro_success": 0.9525,
+          "hard_success": 0.83,
+          "scripted_success": 0.9933333333333333,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 83,
+              "forced": 0
+            }
+          }
+        }
+      ]
+    },
+    "kl-seed204201": {
+      "source_seed": 204201,
+      "continuation_rng_seed": 98303,
+      "selected_steps": 2097152,
+      "points": [
+        {
+          "steps": 0,
+          "macro_success": 0.95,
+          "hard_success": 0.84,
+          "scripted_success": 0.9866666666666667,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 84,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 262144,
+          "macro_success": 0.935,
+          "hard_success": 0.8,
+          "scripted_success": 0.98,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 96,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 80,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 524288,
+          "macro_success": 0.955,
+          "hard_success": 0.85,
+          "scripted_success": 0.9899999999999999,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 85,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 786432,
+          "macro_success": 0.955,
+          "hard_success": 0.85,
+          "scripted_success": 0.9899999999999999,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 85,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1048576,
+          "macro_success": 0.95,
+          "hard_success": 0.83,
+          "scripted_success": 0.9899999999999999,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 83,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1310720,
+          "macro_success": 0.94,
+          "hard_success": 0.77,
+          "scripted_success": 0.9966666666666667,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 77,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1572864,
+          "macro_success": 0.9525,
+          "hard_success": 0.82,
+          "scripted_success": 0.9966666666666667,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 82,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 1835008,
+          "macro_success": 0.9475,
+          "hard_success": 0.81,
+          "scripted_success": 0.9933333333333333,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 98,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 81,
+              "forced": 0
+            }
+          }
+        },
+        {
+          "steps": 2097152,
+          "macro_success": 0.9675,
+          "hard_success": 0.88,
+          "scripted_success": 0.9966666666666667,
+          "forced_episode_rate": 0.0,
+          "family_counts": {
+            "midgame_stats": {
+              "episodes": 100,
+              "successes": 99,
+              "forced": 0
+            },
+            "midgame_summon": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "midgame_tempo": {
+              "episodes": 100,
+              "successes": 100,
+              "forced": 0
+            },
+            "validation_balanced": {
+              "episodes": 100,
+              "successes": 88,
+              "forced": 0
+            }
+          }
+        }
+      ]
+    }
+  },
+  "formal_test_endpoints": {
+    "kl-seed17301-initial": {
+      "learned_successes": 703,
+      "learned_episodes": 1000,
+      "learned_success": 0.703,
+      "episodes": 2500,
+      "forced_episodes": 1,
+      "forced_episode_rate": 0.0004,
+      "worst_family_forced_episode_rate": 0.002,
+      "truncations": 0,
+      "no_purchase_zero_win_losses": 0,
+      "swap_freeze_actions_per_battle": 2.6382888091036327,
+      "mean_episode_actions": 107.6332,
+      "family_success": {
+        "midgame_stats": 0.962,
+        "midgame_summon": 0.984,
+        "midgame_tempo": 0.972,
+        "fresh_stats": 0.542,
+        "fresh_mix": 0.864
+      }
+    },
+    "kl-seed17301-final": {
+      "learned_successes": 774,
+      "learned_episodes": 1000,
+      "learned_success": 0.774,
+      "episodes": 2500,
+      "forced_episodes": 1,
+      "forced_episode_rate": 0.0004,
+      "worst_family_forced_episode_rate": 0.002,
+      "truncations": 0,
+      "no_purchase_zero_win_losses": 0,
+      "swap_freeze_actions_per_battle": 2.256054729255108,
+      "mean_episode_actions": 100.59,
+      "family_success": {
+        "midgame_stats": 0.986,
+        "midgame_summon": 0.994,
+        "midgame_tempo": 0.986,
+        "fresh_stats": 0.652,
+        "fresh_mix": 0.896
+      }
+    },
+    "kl-seed17301-selected": {
+      "learned_successes": 703,
+      "learned_episodes": 1000,
+      "learned_success": 0.703,
+      "episodes": 2500,
+      "forced_episodes": 1,
+      "forced_episode_rate": 0.0004,
+      "worst_family_forced_episode_rate": 0.002,
+      "truncations": 0,
+      "no_purchase_zero_win_losses": 0,
+      "swap_freeze_actions_per_battle": 2.6382888091036327,
+      "mean_episode_actions": 107.6332,
+      "family_success": {
+        "midgame_stats": 0.962,
+        "midgame_summon": 0.984,
+        "midgame_tempo": 0.972,
+        "fresh_stats": 0.542,
+        "fresh_mix": 0.864
+      }
+    },
+    "kl-seed204101-initial": {
+      "learned_successes": 766,
+      "learned_episodes": 1000,
+      "learned_success": 0.766,
+      "episodes": 2500,
+      "forced_episodes": 9,
+      "forced_episode_rate": 0.0036,
+      "worst_family_forced_episode_rate": 0.006,
+      "truncations": 0,
+      "no_purchase_zero_win_losses": 0,
+      "swap_freeze_actions_per_battle": 3.280186608122942,
+      "mean_episode_actions": 113.9776,
+      "family_success": {
+        "midgame_stats": 0.97,
+        "midgame_summon": 0.982,
+        "midgame_tempo": 0.962,
+        "fresh_stats": 0.662,
+        "fresh_mix": 0.87
+      }
+    },
+    "kl-seed204101-final": {
+      "learned_successes": 764,
+      "learned_episodes": 1000,
+      "learned_success": 0.764,
+      "episodes": 2500,
+      "forced_episodes": 1,
+      "forced_episode_rate": 0.0004,
+      "worst_family_forced_episode_rate": 0.002,
+      "truncations": 0,
+      "no_purchase_zero_win_losses": 0,
+      "swap_freeze_actions_per_battle": 2.584997699033594,
+      "mean_episode_actions": 103.1596,
+      "family_success": {
+        "midgame_stats": 0.976,
+        "midgame_summon": 0.988,
+        "midgame_tempo": 0.982,
+        "fresh_stats": 0.646,
+        "fresh_mix": 0.882
+      }
+    },
+    "kl-seed204101-selected": {
+      "learned_successes": 766,
+      "learned_episodes": 1000,
+      "learned_success": 0.766,
+      "episodes": 2500,
+      "forced_episodes": 9,
+      "forced_episode_rate": 0.0036,
+      "worst_family_forced_episode_rate": 0.006,
+      "truncations": 0,
+      "no_purchase_zero_win_losses": 0,
+      "swap_freeze_actions_per_battle": 3.280186608122942,
+      "mean_episode_actions": 113.9776,
+      "family_success": {
+        "midgame_stats": 0.97,
+        "midgame_summon": 0.982,
+        "midgame_tempo": 0.962,
+        "fresh_stats": 0.662,
+        "fresh_mix": 0.87
+      }
+    },
+    "kl-seed204201-initial": {
+      "learned_successes": 782,
+      "learned_episodes": 1000,
+      "learned_success": 0.782,
+      "episodes": 2500,
+      "forced_episodes": 0,
+      "forced_episode_rate": 0.0,
+      "worst_family_forced_episode_rate": 0.0,
+      "truncations": 0,
+      "no_purchase_zero_win_losses": 0,
+      "swap_freeze_actions_per_battle": 1.34912005896987,
+      "mean_episode_actions": 86.1776,
+      "family_success": {
+        "midgame_stats": 0.982,
+        "midgame_summon": 0.996,
+        "midgame_tempo": 0.97,
+        "fresh_stats": 0.68,
+        "fresh_mix": 0.884
+      }
+    },
+    "kl-seed204201-final": {
+      "learned_successes": 828,
+      "learned_episodes": 1000,
+      "learned_success": 0.828,
+      "episodes": 2500,
+      "forced_episodes": 1,
+      "forced_episode_rate": 0.0004,
+      "worst_family_forced_episode_rate": 0.002,
+      "truncations": 0,
+      "no_purchase_zero_win_losses": 0,
+      "swap_freeze_actions_per_battle": 1.6078364670954972,
+      "mean_episode_actions": 90.2004,
+      "family_success": {
+        "midgame_stats": 0.988,
+        "midgame_summon": 0.994,
+        "midgame_tempo": 0.984,
+        "fresh_stats": 0.734,
+        "fresh_mix": 0.922
+      }
+    },
+    "kl-seed204201-selected": {
+      "learned_successes": 828,
+      "learned_episodes": 1000,
+      "learned_success": 0.828,
+      "episodes": 2500,
+      "forced_episodes": 1,
+      "forced_episode_rate": 0.0004,
+      "worst_family_forced_episode_rate": 0.002,
+      "truncations": 0,
+      "no_purchase_zero_win_losses": 0,
+      "swap_freeze_actions_per_battle": 1.6078364670954972,
+      "mean_episode_actions": 90.2004,
+      "family_success": {
+        "midgame_stats": 0.988,
+        "midgame_summon": 0.994,
+        "midgame_tempo": 0.984,
+        "fresh_stats": 0.734,
+        "fresh_mix": 0.922
+      }
+    }
+  },
+  "input_sha256": {
+    "protocol.json": "bc9dc8a268aee4277d3511329f428777296490fc4019cf3f910fdb89dd876a85",
+    "kl-seed17301/complete.json": "aac8e1fe1581118cc73056537175911fafc03aa221c6c9a240360a950057c256",
+    "kl-seed17301/eval000-step0.json": "cbbf379c771e44f2246d0582bdf7a3a0c415cc1847c30da0e66069b3ff24885a",
+    "kl-seed17301/eval001-step262144.json": "ef283f2215e7005cedf481bbce824ad152b9a1fe0db15a4f713ca9b194824a51",
+    "kl-seed17301/eval002-step524288.json": "991fc3c1006e460121f0645a22bc5b3ab1a7d2e35ae6677922d4079ea64cca3c",
+    "kl-seed17301/eval003-step786432.json": "d69fbd2a4fd831ac0e56fa8acc6f3421e173baaf9c55f273d040b77f7175fb63",
+    "kl-seed17301/eval004-step1048576.json": "c709900cde16007031a1cc08517c636acfe2a3145d427d167ae1e597c6721407",
+    "kl-seed17301/eval005-step1310720.json": "3a4b4ac764f262033726ead1092f139f85ac3a76a73176607b0e95d2ef230930",
+    "kl-seed17301/eval006-step1572864.json": "4e0f02c890a1fe681d3cfe87a03c65d0bc109a813c6f285f46c39b0e6ed4b188",
+    "kl-seed17301/eval007-step1835008.json": "fbf91960b7f59c0fc46defcab7d70dec801630cd619b88360721032735771824",
+    "kl-seed17301/eval008-step2097152.json": "2f099639311eb9009a74bc1d1bdc1e50e67f66b44a4cba2e38e9e555ad6340d9",
+    "kl-seed204101/complete.json": "8fedbb06de794605df46821ab27aade28c0f1f173ffab992368aa1b79bd31007",
+    "kl-seed204101/eval000-step0.json": "ea44121bdff44a314155617746290310108b6327d4a1269156fb145a757558e1",
+    "kl-seed204101/eval001-step262144.json": "9363633e4cf59ba346d9fedd3c73518ba916d132680546e080eec1668983c3f6",
+    "kl-seed204101/eval002-step524288.json": "e85f3e167f0b4acc25fc528cc1283f0fb3e034ec78f1c8d1e801f55c734f0d64",
+    "kl-seed204101/eval003-step786432.json": "6a7b11548e2695743639c1d78304863b9e31f2ed121752a9b305197450e9b3d1",
+    "kl-seed204101/eval004-step1048576.json": "06c76362621cc386a8d9c76ae15378efc2d9bbe9282aa56077b2ed7a4b451a0c",
+    "kl-seed204101/eval005-step1310720.json": "41c2d36e8d41e590657faaba09a38b932e20a9859a7acfc0bbc20f0f4a20b1bc",
+    "kl-seed204101/eval006-step1572864.json": "b0ec3ab9d56b3df6ba67303eb51ac189a646e1fd61b255812837d4d6a270673b",
+    "kl-seed204101/eval007-step1835008.json": "180a84a2e1b43040682376eb1b484e0fa78d870531be8690ea9f0faaa1a463cb",
+    "kl-seed204101/eval008-step2097152.json": "b6876b9777bc96a59712bc1b8046a37f06a0847d42265c260c632877ba97b997",
+    "kl-seed204201/complete.json": "a81f4172497a79880e86fced46ec39e3494c61f0ec2f5b9dec06dfba365e2c23",
+    "kl-seed204201/eval000-step0.json": "30c5f8921ed970f1fec4d34dc6cd033da649f73e3c2e9d2fdcd19355fb5652a3",
+    "kl-seed204201/eval001-step262144.json": "c58c98dd80ba4f10c4d241980fc815374ca952d93942085e99d166d04632fe6d",
+    "kl-seed204201/eval002-step524288.json": "04f35210ce869b1e8daeb653eb78712b7dd50a339e0e0a6b6bc543cba796b30f",
+    "kl-seed204201/eval003-step786432.json": "664b80e13221a7c706a6435553f59ae5b2d5e6b8a87090e7d05d6999fc9b654e",
+    "kl-seed204201/eval004-step1048576.json": "fd0055118d51293683189da5f7c213684118ea9662cac6f80cd38b1a3634a2e7",
+    "kl-seed204201/eval005-step1310720.json": "d559163b59514b5e50cd3b8ce197a828b1b24d3af9fa5027f8e78770e6e5ed5d",
+    "kl-seed204201/eval006-step1572864.json": "e4e6b6ee8ee0c3a65d982e2d925bbe0b5539a3316b368369b7a543eb15d085dc",
+    "kl-seed204201/eval007-step1835008.json": "e663e6761bb1a49dbc9fc0a3c0f85a921c1680bbec7c45428fb12ae1475d889d",
+    "kl-seed204201/eval008-step2097152.json": "c8194e0749dd5bd2916630a3f651ce87e6b67feac2fe72629445d5929db7e265",
+    "final_review.json": "94811b5795247eca7d274b79931ea3346a68adbf3ce0291a037a1e33e3bd0fea"
+  },
+  "notes": [
+    "Validation only: fixed cases at each checkpoint, raw unsmoothed rates.",
+    "Each point: four families x 100 episodes; validation_balanced alone has 100.",
+    "10-win episode success is not single-battle win rate.",
+    "Forced episode rate counts episodes with at least one forced battle, not turns.",
+    "X is additional decisions this round; zero is already a trained policy.",
+    "Source-seed labels identify lineages, not fresh continuation RNG seeds.",
+    "Formal learned-opponent test is different; endpoints are not a dense curve.",
+    "No smoothing, test-based checkpoint reselection, new training or evaluation."
+  ]
+}

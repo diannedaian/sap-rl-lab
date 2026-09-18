@@ -62,5 +62,10 @@ available; intermediate checkpoints and old trial outputs can be recovered from
 the attachments. Build outputs and caches are regenerable. No shared cluster data
 or files outside this project are part of this cleanup.
 
-This is the completed **eight-pet milestone**, not a completed full-pack agent.
-The [roadmap](ROADMAP.md) still targets all 60 Turtle Pack pets.
+The release bundles above document the historical **eight-pet milestone**.
+The completed 60-pet release is described in [PROJECT_WRAPUP](PROJECT_WRAPUP.md)
+and [MODEL_CARD](MODEL_CARD.md). Its three final checkpoints are prepared for
+[Hugging Face](https://huggingface.co/DianneDaian/sap-rl-turtle-pack) (upload pending
+browser file permission), and compact
+final evaluation evidence lives in `docs/evidence/fullpack-v1`. The full local
+training history remains intact; this wrap-up performs no additional cleanup.

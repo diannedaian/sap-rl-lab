@@ -98,6 +98,18 @@ class FocusedPolicy:
 
 
 def scripted_policy(name: str):
+    if name.startswith("tier4_"):
+        from .tier4_baselines import Tier4Policy
+
+        return Tier4Policy(name.removeprefix("tier4_"))
+    if name.startswith("midgame_"):
+        from .midgame_baselines import MidgamePolicy
+
+        return MidgamePolicy(name.removeprefix("midgame_"))
+    if name.startswith("expanded_"):
+        from .expanded_baselines import ExpandedPolicy
+
+        return ExpandedPolicy(name.removeprefix("expanded_"))
     if name == "random":
         return RandomPolicy()
     if name == "greedy":

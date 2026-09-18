@@ -1,0 +1,26 @@
+{
+  "case_id": "ant-upgrade-linked-paid-tier-three-choices",
+  "source": "https://www.youtube.com/watch?v=tYDluMIOgjI&t=123s",
+  "creator": "micahwzowski",
+  "published": "2026-08-23",
+  "inspected": "2026-09-07",
+  "evidence_kind": "browser-observed, frame stepped at 2:03–2:06 and 2:18–2:23",
+  "scope": "Recorded shop component with fixed observed random offer identities; not a matching client RNG or exact UI slot-layout test.",
+  "timeline": {
+    "2:03-2:04": "Turn 4, ten gold, front level-1 Ant 3/3, two frozen shop Ants 2/2, Pig 4/1, Honey and a two-gold Apple.",
+    "2:05": "First shop Ant merged: seven gold, front Ant 4/4, still level 1.",
+    "2:06": "Second shop Ant merged: four gold, Ant level 2 5/5. Linked tier-3 Giraffe 1/2 and Dolphin 4/3 appear.",
+    "2:08": "After buying the two-gold Apple, two gold and Ant 6/6.",
+    "2:18": "Level-1 Otter sold, three gold; Giraffe tooltip shows price 3.",
+    "2:20-2:21": "Dragging Giraffe previews a red X over linked Dolphin.",
+    "2:23": "Giraffe purchased, zero gold. Both linked shop choices are gone; Pig remains."
+  },
+  "team_front_to_back": [
+    {"spec_id": "ant", "attack": 3, "health": 3, "experience": 1},
+    {"spec_id": "ant", "attack": 3, "health": 2, "experience": 1},
+    {"spec_id": "ant", "attack": 2, "health": 2, "experience": 1},
+    {"spec_id": "otter", "attack": 2, "health": 4, "experience": 1},
+    {"spec_id": "worm", "attack": 2, "health": 5, "experience": 1}
+  ],
+  "observed_choices": ["giraffe", "dolphin"]
+}
